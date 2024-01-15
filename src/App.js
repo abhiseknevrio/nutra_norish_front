@@ -1,18 +1,24 @@
-import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Header from './components/atom/Header';
-import Home from './components/organism/Home';
+import HeroSection from './components/organism/HeroSection';
 
 function App() {
+
+  const heroBg = {
+    backgroundImage: `url(${"/images/homeHeroSection.svg"})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    width: '100%',
+    height: '100%',
+  };
+
   return (
-    <>
-      <Header />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='*' element={<h1>Page is Not Found</h1>} />
-      </Routes>
-    </>
-  );
+    <div style={heroBg} className='absolute'>
+      <div>
+        <Header />
+        <HeroSection />
+      </div>
+    </div>);
 }
 
 export default App;
