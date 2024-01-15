@@ -13,12 +13,13 @@ function App() {
   };
 
   return (
-    <div style={heroBg} className='absolute'>
-      <div>
+    <>
+      <div style={heroBg} className='absolute'>
         <Header />
         <HeroSection />
       </div>
-    </div>);
+    </>
+  );
 }
 
 export default App;
