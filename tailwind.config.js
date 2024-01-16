@@ -18,6 +18,7 @@ module.exports = {
     },
     height: {
       header: '124px',
+      '259': '259px',
       '443': '443px'
     },
     margin: {
@@ -34,6 +35,7 @@ module.exports = {
       '222px': '222px',
     },
     width: {
+      '261': '261px',
       '435': '435px',
       '443': '443px',
       '690': '690px',
@@ -47,6 +49,7 @@ module.exports = {
     },
     fontSize: {
       '18px': '18px',
+      '20px': '20px',
       '25px': '25px',
       '28px': '28px',
       '30px': '30px',

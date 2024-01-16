@@ -6,6 +6,7 @@ import MediaSection from '../molecule/MediaSection';
 import HealthierHappierSection from '../molecule/HealthierHappierSection';
 import NewWorldSection from '../molecule/NewWorldSection';
 import HowItWorks from '../molecule/HowItWorks';
+import PremiumQuality from '../molecule/PremiumQuality';
 
 const HeroSection = () => {
 
@@ -49,6 +50,7 @@ const HeroSection = () => {
                 <HealthierHappierSection />
                 <NewWorldSection />
                 <HowItWorks />
+                <PremiumQuality />
             </section>
         </>
     )
