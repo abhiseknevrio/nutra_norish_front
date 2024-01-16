@@ -15,6 +15,7 @@ module.exports = {
       healthTextDark: "#121211",
       newWorldSection: "#FFF8EF",
       borderGreen: "#A2AE85",
+      contact: "#FBF5F0",
     },
     height: {
       header: '124px',
@@ -23,6 +24,7 @@ module.exports = {
     },
     margin: {
       'common': '170px',
+      '20px': '20px',
       '30px': '30px',
       '56px': '56px',
       '60px': '60px',
@@ -55,6 +57,7 @@ module.exports = {
       '30px': '30px',
       '40px': '40px',
       '42px': '42px',
+      '45px': '45px',
       '50px': '50px',
       '55px': '55px',
       '58px': '58px',
