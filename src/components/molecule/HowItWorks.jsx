@@ -49,7 +49,7 @@ const HowItWorks = () => {
                     {/* Bottom Border */}
                     <div className='border-b border-borderGreen mt-95px'></div>
 
-                    <div className='flex justify-center mt-56px'>
+                    <div className='flex justify-center mt-56px mb-100px'>
                         <Button text={"Take The Quiz"} />
                     </div>
                 </div>
