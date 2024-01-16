@@ -3,6 +3,9 @@ import QuizCard from '../molecule/QuizCard';
 import ClientGroup from '../molecule/ClientGroup';
 import DifferenceSection from '../molecule/DifferenceSection';
 import MediaSection from '../molecule/MediaSection';
+import HealthierHappierSection from '../molecule/HealthierHappierSection';
+import NewWorldSection from '../molecule/NewWorldSection';
+import HowItWorks from '../molecule/HowItWorks';
 
 const HeroSection = () => {
 
@@ -27,7 +30,7 @@ const HeroSection = () => {
                             <div className='font-bold text-25px'>
                                 {"Personalised Vitamins".toUpperCase()}
                             </div>
-                            <div className='font-bold text-65px pt-5 w-1160'>
+                            <div className='font-bold text-65px pt-5 md:w-1160'>
                                 Get the Nutrients You Need for Peak Performance
                             </div>
                             <p className='font-bold text-xl pt-8'>Instant access to expert designed personalised Supplement Plan made just For You</p>
@@ -43,6 +46,9 @@ const HeroSection = () => {
                 </div>
                 <DifferenceSection />
                 <MediaSection />
+                <HealthierHappierSection />
+                <NewWorldSection />
+                <HowItWorks />
             </section>
         </>
     )

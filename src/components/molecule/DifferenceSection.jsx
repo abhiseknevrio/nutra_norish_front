@@ -7,11 +7,11 @@ const DifferenceSection = () => {
             <div className='flex justify-center'>
                 <div className='mt-95px mb-106px'>
                     <div className='flex justify-center'>
-                        <h1 className='text-55px font-bold text-center w-1032'>
+                        <h1 className='text-55px font-bold text-center md:w-1032'>
                             Feel the difference, just like 10,000+ of our customers
                         </h1>
                     </div>
-                    <div className='mt-60px grid grid-cols-3 gap-x-14 text-center font-semibold text-25px'>
+                    <div className='mt-60px grid grid-cols-1 md:grid-cols-3 gap-x-14 text-center font-semibold text-25px'>
                         <div className='w-435'>
                             <div className='flex justify-center mb-30px'>
                                 <img src='/images/diff/frame.svg' alt='' />

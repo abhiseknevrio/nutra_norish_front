@@ -53,12 +53,14 @@ const MediaSection = () => {
     }
 
     return (
-        <section className='mx-common'>
+        <section className='mb-100px'>
             <div className='flex justify-center mt-60px'>
                 <h1 className='text-55px font-bold'>Media</h1>
             </div>
             <div className=''>
-                <img src='/images/leftArrow.svg' alt='' onClick={handlePrevious} />
+                <div>
+                    <img src='/images/leftArrow.svg' alt='' onClick={handlePrevious} />
+                </div>
                 <div>
                     <Carousel
                         ref={carouselRef}
@@ -78,12 +80,14 @@ const MediaSection = () => {
 
                         {items.map((item, index) => (
                             <div key={item.name + index} className='item'>
-                                <img src={item.icon} alt={item.name} />
+                                <img height={139} width={344} src={item.icon} alt={item.name} />
                             </div>
                         ))}
                     </Carousel>
                 </div>
-                <img src='/images/rightArrow.svg' alt='' onClick={handleNext} />
+                <div>
+                    <img src='/images/rightArrow.svg' alt='' onClick={handleNext} />
+                </div>
             </div>
         </section >
     )
