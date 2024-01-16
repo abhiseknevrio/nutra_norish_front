@@ -7,6 +7,7 @@ import HealthierHappierSection from '../molecule/HealthierHappierSection';
 import NewWorldSection from '../molecule/NewWorldSection';
 import HowItWorks from '../molecule/HowItWorks';
 import PremiumQuality from '../molecule/PremiumQuality';
+import ContactFormSection from '../molecule/ContactFormSection';
 
 const HeroSection = () => {
 
@@ -50,7 +51,8 @@ const HeroSection = () => {
                 <HealthierHappierSection />
                 <NewWorldSection />
                 <HowItWorks />
-                <PremiumQuality />
+                {/* <PremiumQuality /> */}
+                <ContactFormSection />
             </section>
         </>
     )
