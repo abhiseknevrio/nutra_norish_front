@@ -9,16 +9,16 @@ const HealthierHappierSection = () => {
     ];
 
     return (
-        <section className='bg-healthSection px-auto pb-24'>
+        <section className='healthSection'>
             <div className='flex justify-center'>
                 <div className='mt-106px font-bold text-58px'>A Healthier, Happier You</div>
             </div>
             <div className='mx-222px'>
-                <div className='grid grid-cols-1 md:grid-cols-3 mt-90px'>
+                <div className='grid grid-cols-1 md:grid-cols-3 mt-24'>
                     {statistics.map((stat, index) => (
                         <div key={index} className='text-center w-435'>
                             <div className='text-25px font-bold'>{stat.percentage} OF CUSTOMERS</div>
-                            <p className='text-25px font-semibold text-healthText pt-3'>{stat.text}</p>
+                            <p className='text-25px font-semibold text-healthText mt-3'>{stat.text}</p>
                         </div>
                     ))}
                 </div>

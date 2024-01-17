@@ -2,8 +2,8 @@ import React from 'react'
 
 const QualityCard = ({ image, text }) => {
     return (
-        <div className='w-261 h-259 bg-nutraWhite flex justify-center items-center hover:bg-btnBg hover:text-nutraWhite'>
-            <div>
+        <div className='qualityCard flex justify-center items-center'>
+            <div className=''>
                 <div className='flex justify-center'>
                     <img src={image} alt='' />
                 </div>

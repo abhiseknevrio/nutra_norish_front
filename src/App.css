@@ -1,3 +1,59 @@
+.mx-common {
+    margin: 0px 170px;
+}
+
+.left-border {
+    border-left: 5px solid;
+    height: 28px;
+    margin-right: 33px;
+}
+
+.padb-117 {
+    padding-bottom: 117px;
+}
+
+.differenceSec {
+    background: #E4E1CE;
+    padding: 100px 222px;
+}
+
+.mediaSec {
+    background: #FAF5EF;
+    padding: 65px 128px 100px;
+}
+
+.healthSection {
+    background: #F1E4DB;
+    padding: 100px 222px;
+}
+
+.newWorldSection {
+    background: #FFF8EF;
+    padding: 100px 169px;
+}
+
+.howItWorkSec {
+    background: #FFF;
+    padding: 34px 294px 100px;
+}
+
+.premiumSection {
+    background: #FFF8EF;
+    padding: 15px 169px 150px;
+}
+
+.mt-30 {
+    margin-top: 30px;
+}
+
+.mt-50 {
+    margin-top: 50px;
+}
+
+.mt-60 {
+    margin-top: 60px;
+}
+
 .items::-webkit-scrollbar {
     width: 0;
     display: none;
@@ -57,4 +113,27 @@
     border-radius: 5px;
     border: 1px solid rgba(18, 18, 17, 0.30);
     background: #FFF;
+}
+
+.qualityCard {
+    width: 261px;
+    height: 259px;
+    background: #FFF;
+    color: #121211;
+}
+
+.qualityCard:hover {
+    background: #1F4934;
+    color: #FFF
+}
+
+.feedbackSec {
+    background: #FFF;
+    padding: 60px 293px;
+}
+
+.personalisedSec {
+    background-color: #FFF8EF;
+    /* padding: 95px 169px; */
+    width: 1580px;
 }

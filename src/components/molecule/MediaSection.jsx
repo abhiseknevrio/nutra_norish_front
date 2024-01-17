@@ -53,12 +53,12 @@ const MediaSection = () => {
     }
 
     return (
-        <section className='mb-100px'>
-            <div className='flex justify-center mt-60px'>
+        <section className='mediaSec'>
+            <div className='flex justify-center'>
                 <h1 className='text-55px font-bold'>Media</h1>
             </div>
-            <div className=''>
-                <div>
+            <div className='mt-10'>
+                <div className=''>
                     <img src='/images/leftArrow.svg' alt='' onClick={handlePrevious} />
                 </div>
                 <div>
@@ -75,7 +75,7 @@ const MediaSection = () => {
                         customTransition="all .5"
                         transitionDuration={500}
                         containerClass="carousel-container"
-                        itemClass="carousel-item-padding-40-px"
+                    // itemClass="carousel-item-padding-40-px"
                     >
 
                         {items.map((item, index) => (
