@@ -38,15 +38,16 @@ const PremiumQuality = () => {
         backgroundRepeat: 'no-repeat',
         width: '100%',
         height: '313px',
+        marginBottom: "150px"
     };
 
     return (
-        <section className='bg-newWorldSection'>
+        <section className='premiumSection'>
             <div style={containerBg}>
-                <div className='flex justify-center pt-12'>
+                <div className='flex justify-center pt-16'>
                     <div className='text-55px font-bold'>Premium Quality</div>
                 </div>
-                <div className='grid grid-cols-5 pt-12 mx-common pb-28'>
+                <div className='grid grid-cols-5 mt-11'>
                     {quality.map((item) => (
                         <div key={item.id}>
                             <QualityCard image={item.image} text={item.text} />

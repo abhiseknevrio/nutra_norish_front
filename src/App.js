@@ -8,6 +8,7 @@ import NewWorldSection from './components/molecule/NewWorldSection'
 import PremiumQuality from './components/molecule/PremiumQuality'
 import HowItWorks from './components/molecule/HowItWorks'
 import ContactFormSection from './components/molecule/ContactFormSection'
+import FeedbackSectionByClient from './components/molecule/FeedbackSectionByClient';
 
 function App() {
 
@@ -29,8 +30,9 @@ function App() {
         <MediaSection />
         <HealthierHappierSection />
         <NewWorldSection />
-        {/* <HowItWorks /> */}
-        {/* <PremiumQuality /> */}
+        <HowItWorks />
+        <PremiumQuality />
+        <FeedbackSectionByClient />
         {/* <ContactFormSection /> */}
       </div>
     </>

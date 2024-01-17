@@ -32,12 +32,26 @@
     padding: 100px 169px;
 }
 
-.mt-60 {
-    margin-top: 60px;
+.howItWorkSec {
+    background: #FFF;
+    padding: 34px 294px 100px;
+}
+
+.premiumSection {
+    background: #FFF8EF;
+    padding: 15px 169px 150px;
 }
 
 .mt-30 {
     margin-top: 30px;
+}
+
+.mt-50 {
+    margin-top: 50px;
+}
+
+.mt-60 {
+    margin-top: 60px;
 }
 
 .items::-webkit-scrollbar {
@@ -99,4 +113,21 @@
     border-radius: 5px;
     border: 1px solid rgba(18, 18, 17, 0.30);
     background: #FFF;
+}
+
+.qualityCard {
+    width: 261px;
+    height: 259px;
+    background: #FFF;
+    color: #121211;
+}
+
+.qualityCard:hover {
+    background: #1F4934;
+    color: #FFF
+}
+
+.feedbackSec {
+    background: #FFF;
+    padding: 60px 293px;
 }
