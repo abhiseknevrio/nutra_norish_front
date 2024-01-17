@@ -22,6 +22,11 @@
     padding: 65px 128px 100px;
 }
 
+.healthSection {
+    background: #F1E4DB;
+    padding: 100px 222px;
+}
+
 .mt-60 {
     margin-top: 60px;
 }
