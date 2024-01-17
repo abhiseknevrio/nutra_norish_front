@@ -28,7 +28,7 @@ function App() {
         <DifferenceSection />
         <MediaSection />
         <HealthierHappierSection />
-        {/* <NewWorldSection /> */}
+        <NewWorldSection />
         {/* <HowItWorks /> */}
         {/* <PremiumQuality /> */}
         {/* <ContactFormSection /> */}
