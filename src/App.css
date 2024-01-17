@@ -1,3 +1,29 @@
+.mx-common {
+    margin: 0px 170px;
+}
+
+.left-border {
+    border-left: 5px solid;
+    height: 28px;
+    margin-right: 33px;
+}
+
+.padb-117 {
+    padding-bottom: 117px;
+}
+
+.differenceSec {
+    padding: 100px 222px;
+}
+
+.mt-60 {
+    margin-top: 60px;
+}
+
+.mt-30 {
+    margin-top: 30px;
+}
+
 .items::-webkit-scrollbar {
     width: 0;
     display: none;
