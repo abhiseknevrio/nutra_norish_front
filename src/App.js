@@ -26,7 +26,7 @@ function App() {
           <HeroSection />
         </div>
         <DifferenceSection />
-        {/* <MediaSection /> */}
+        <MediaSection />
         {/* <HealthierHappierSection /> */}
         {/* <NewWorldSection /> */}
         {/* <HowItWorks /> */}

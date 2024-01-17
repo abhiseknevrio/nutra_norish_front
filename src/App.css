@@ -13,7 +13,13 @@
 }
 
 .differenceSec {
+    background: #E4E1CE;
     padding: 100px 222px;
+}
+
+.mediaSec {
+    background: #FAF5EF;
+    padding: 65px 128px 100px;
 }
 
 .mt-60 {
