@@ -16,11 +16,11 @@ const ContactFormSection = () => {
 
     return (
         <section className='bg-contact' style={containerBg}>
-            <div className='mt-100px'>
+            <div className='mt-24'>
                 <div className='flex justify-center'>
                     <div className='text-45px font-bold w-1032 text-center'>Instead Of Removing Sensitive Foods Could Prevent Health Issues</div>
                 </div>
-                <div className='mt-30px flex justify-center'>
+                <div className='mt-30 flex justify-center'>
                     <div className='w-1320'>
                         <div className='grid grid-cols-2 gap-5'>
                             <Input type={"text"} label={"Your Name"} placeholder={"Enter Name"} />
@@ -29,8 +29,8 @@ const ContactFormSection = () => {
                             <Input type={"text"} label={"Question"} placeholder={"Enter Your Quetion"} />
                         </div>
                         {/* Bottom Border */}
-                        <div className='border-b border-borderGreen mt-95px'></div>
-                        <div className='flex justify-center mt-56px mb-100px'>
+                        <div className='border-b border-borderGreen mt-24'></div>
+                        <div className='flex justify-center mt-14 mb-24'>
                             <Button text={"SEND US MESSAGE"} />
                         </div>
                     </div>

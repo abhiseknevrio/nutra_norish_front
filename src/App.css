@@ -133,7 +133,12 @@
 }
 
 .personalisedSec {
-    background-color: #FFF8EF;
+    background: #FFF8EF;
     /* padding: 95px 169px; */
     width: 1580px;
+}
+
+.blogSec {
+    background: #FFF;
+    padding: 95px 296px;
 }

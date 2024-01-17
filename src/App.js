@@ -10,6 +10,7 @@ import HowItWorks from './components/molecule/HowItWorks'
 import ContactFormSection from './components/molecule/ContactFormSection'
 import FeedbackSectionByClient from './components/molecule/FeedbackSectionByClient';
 import PersonalisedSection from './components/molecule/PersonalisedSection';
+import BlogSection from './components/molecule/BlogSection';
 
 function App() {
 
@@ -35,7 +36,8 @@ function App() {
         <PremiumQuality />
         <FeedbackSectionByClient />
         <PersonalisedSection />
-        {/* <ContactFormSection /> */}
+        <BlogSection />
+        <ContactFormSection />
       </div>
     </>
   );
