@@ -3,7 +3,7 @@ import React from 'react'
 const VideosCard = ({ title, img, link }) => {
     return (
         <a href={link} target='_blank' rel="noreferrer">
-            <div className=''>
+            <div className='md:ml-10'>
                 <div className='flex justify-center'>
                     <img className='rounded-2xl' src={img} alt={title} />
                 </div>
