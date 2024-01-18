@@ -160,6 +160,28 @@
     padding: 95px 296px;
 }
 
+.react-multi-carousel-dot button {
+    width: 20px !important;
+    height: 20px !important;
+    border: none !important;
+    background: #CDD1E3;
+}
+
+.react-multi-carousel-dot--active button {
+    border-radius: 12px !important;
+    border: none !important;
+    width: 58px !important;
+    background: #1F4934;
+}
+
+.clientFeeedbackCard {
+    width: 586px;
+    height: 384px;
+    text-align: center;
+    padding: 40px;
+}
+
+
 @media screen and (max-width: 768px) {
 
     .mx-common {
@@ -177,11 +199,6 @@
     .personalisedSec {
         padding: 0px;
         width: 100%;
-    }
-
-    .feedbackSec {
-        background: #FFF;
-        padding: 0px;
     }
 
     .input {
@@ -219,7 +236,7 @@
 
     .premiumSection {
         background: #FFF8EF;
-        padding: 100px 15px;
+        padding: 100px 20px;
     }
 
     .qualityCard {
@@ -227,5 +244,14 @@
         height: 180px;
         background: #FFF;
         color: #121211;
+    }
+
+    .feedbackSec {
+        background: #FFF;
+        padding: 100px 20px;
+    }
+
+    .w-822px {
+        width: 100%;
     }
 }

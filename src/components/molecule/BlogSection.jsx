@@ -85,13 +85,12 @@ const BlogSection = () => {
                         containerClass="carousel-container"
                     >
                         {blogs.map(item => (
-                            <div key={item.id} className=''>
+                            <div key={item.id} className='mb-16'>
                                 <BlogCard title={item.title} img={item.image} link={item.redirectTo} date={item.date} by={item.by} bg={item.bgColor} />
                             </div>
                         ))}
                     </Carousel>
                 </div>
-                {/* <div className='mt-50'>dots...</div> */}
             </div>
             <div className='mt-24'>
                 <div className='text-55px font-bold text-center'> Nutra Nourish Videos</div>
