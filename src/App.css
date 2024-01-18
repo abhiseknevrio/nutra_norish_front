@@ -215,4 +215,9 @@
         padding: 100px 20px;
         text-align: center;
     }
+
+    .newWorldSection {
+        background: #FFF8EF;
+        padding: 100px 34px;
+    }
 }
