@@ -163,7 +163,11 @@
 @media screen and (max-width: 768px) {
 
     .mx-common {
-        margin: 0px auto;
+        margin: 0px 10px;
+    }
+
+    .padb-117 {
+        padding-bottom: 0px;
     }
 
     .blogSec {
