@@ -58,9 +58,6 @@ const MediaSection = () => {
                 <h1 className='text-55px font-bold'>Media</h1>
             </div>
             <div className='mt-10'>
-                {/* <div className=''>
-                    <img src='/images/leftArrow.svg' alt='' onClick={handlePrevious} />
-                </div> */}
                 <div>
                     <Carousel
                         ref={carouselRef}
@@ -75,19 +72,15 @@ const MediaSection = () => {
                         customTransition="all .5"
                         transitionDuration={500}
                         containerClass="carousel-container"
-                    // itemClass="carousel-item-padding-40-px"
                     >
 
                         {items.map((item, index) => (
-                            <div key={item.name + index} className='item'>
+                            <div key={item.name + index} className='mb-16'>
                                 <img height={139} width={344} src={item.icon} alt={item.name} />
                             </div>
                         ))}
                     </Carousel>
                 </div>
-                {/* <div>
-                    <img src='/images/rightArrow.svg' alt='' onClick={handleNext} />
-                </div> */}
             </div>
         </section >
     )
