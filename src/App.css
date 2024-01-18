@@ -254,4 +254,12 @@
     .w-822px {
         width: 100%;
     }
+
+    .clientFeeedbackCard {
+        width: 100%;
+        min-height: 423px;
+        height: 100%;
+        text-align: center;
+        padding: 20px;
+    }
 }
