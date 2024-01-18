@@ -32,7 +32,7 @@ function App() {
         <MediaSection />
         <HealthierHappierSection />
         <NewWorldSection />
-        <HowItWorks />
+        {/* <HowItWorks /> */}
         <PremiumQuality />
         <FeedbackSectionByClient />
         <PersonalisedSection />
