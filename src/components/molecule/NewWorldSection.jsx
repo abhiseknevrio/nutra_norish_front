@@ -1,4 +1,5 @@
 import React from 'react'
+import NewWorldCard from '../atom/NewWorldCard'
 
 const NewWorldSection = () => {
 
@@ -42,30 +43,13 @@ const NewWorldSection = () => {
     return (
         <section className='newWorldSection'>
             <div className='flex justify-center'>
-                <div className='text-58px font-bold md:w-1032 text-center'>Welcome to a Whole New World of Personalised Health & Wellness</div>
+                <div className='text-40px md:text-58px font-bold md:w-1032 text-center'>Welcome To A Whole New World Of Personalised Health & Wellness</div>
             </div>
-            <div className='mt-14 w-1580'>
+            <div className='mt-14'>
                 {
                     data.map((item, index) => (
-                        <div key={item.id} className={`mt-16 flex ${(index % 2 !== 0) ? 'flex-row-reverse' : ''}`} style={{ background: item.bgRightColor }}>
-                            <div className='w-706 flex justify-center items-center' style={{ background: item.bgLeftColor }}>
-                                <div>
-                                    <img className='rounded-full' src={item.image} alt='' />
-                                    {item.name &&
-                                        <div className='text-30px font-bold text-center'>Dr Menka Gupta</div>
-                                    }
-                                    {item.designation &&
-                                        <div className='text-30px font-semibold text-healthText text-center'>MD, IFMCP</div>
-                                    }
-                                </div>
-                            </div>
-                            <div className='w-874 my-24'>
-                                <div className='w-690 mx-auto'>
-                                    <div className='text-40px font-medium'>{item.id}</div>
-                                    <div className='text-42px font-bold mt-30'>{item.title}</div>
-                                    <div className='text-25px font-semibold mt-30'>{item.content}</div>
-                                </div>
-                            </div>
+                        <div key={item.id}>
+                            <NewWorldCard item={item} index={index} />
                         </div>
                     ))
                 }

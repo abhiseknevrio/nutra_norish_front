@@ -161,6 +161,15 @@
 }
 
 @media screen and (max-width: 768px) {
+
+    .mx-common {
+        margin: 0px 10px;
+    }
+
+    .padb-117 {
+        padding-bottom: 0px;
+    }
+
     .blogSec {
         padding: 0px;
     }
@@ -180,9 +189,43 @@
         height: 80px;
     }
 
-    .premiumSection {
-        background: #FFF8EF;
-        padding: 15px;
+
+    .differenceSec {
+        padding: 100px 20px;
     }
 
+    .w-435px {
+        width: 100%;
+    }
+
+    .whatsIcon {
+        width: 80px;
+        top: -40px;
+    }
+
+    .mediaSec {
+        padding: 100px 20px;
+    }
+
+    .healthSection {
+        padding: 100px 20px;
+        text-align: center;
+    }
+
+    .newWorldSection {
+        background: #FFF8EF;
+        padding: 100px 34px;
+    }
+
+    .premiumSection {
+        background: #FFF8EF;
+        padding: 100px 15px;
+    }
+
+    .qualityCard {
+        width: 180px;
+        height: 180px;
+        background: #FFF;
+        color: #121211;
+    }
 }

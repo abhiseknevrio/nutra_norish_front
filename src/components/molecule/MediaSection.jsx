@@ -36,7 +36,7 @@ const MediaSection = () => {
         },
         mobile: {
             breakpoint: { max: 464, min: 0 },
-            items: 1,
+            items: 2,
         }
     };
 
@@ -58,15 +58,15 @@ const MediaSection = () => {
                 <h1 className='text-55px font-bold'>Media</h1>
             </div>
             <div className='mt-10'>
-                <div className=''>
+                {/* <div className=''>
                     <img src='/images/leftArrow.svg' alt='' onClick={handlePrevious} />
-                </div>
+                </div> */}
                 <div>
                     <Carousel
                         ref={carouselRef}
                         swipeable={true}
                         draggable={true}
-                        showDots={false}
+                        showDots={true}
                         arrows={false}
                         responsive={responsive}
                         ssr={true}
@@ -85,9 +85,9 @@ const MediaSection = () => {
                         ))}
                     </Carousel>
                 </div>
-                <div>
+                {/* <div>
                     <img src='/images/rightArrow.svg' alt='' onClick={handleNext} />
-                </div>
+                </div> */}
             </div>
         </section >
     )
