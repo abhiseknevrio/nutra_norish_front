@@ -206,4 +206,13 @@
         width: 80px;
         top: -40px;
     }
+
+    .mediaSec {
+        padding: 100px 20px;
+    }
+
+    .healthSection {
+        padding: 100px 20px;
+        text-align: center;
+    }
 }
