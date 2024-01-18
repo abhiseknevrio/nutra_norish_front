@@ -15,10 +15,10 @@ const ContactFormSection = () => {
     };
 
     return (
-        <section className='bg-contact' style={containerBg}>
-            <div className='mt-24'>
+        <section className='contactSec' style={containerBg}>
+            <div className=''>
                 <div className='flex justify-center'>
-                    <div className='text-45px font-bold md:w-1032 text-center'>Instead Of Removing Sensitive Foods Could Prevent Health Issues</div>
+                    <div className='text-40px md:text-45px font-bold md:w-1032 text-center'>Instead Of Removing Sensitive Foods Could Prevent Health Issues</div>
                 </div>
                 <div className='mt-30 flex justify-center'>
                     <div className='md:w-1320'>
