@@ -8,7 +8,7 @@ const NewWorldCard = ({ item, index }) => {
                 <div className={`mt-16 flex ${(index % 2 !== 0) ? 'flex-row-reverse' : ''}`} style={{ background: item.bgRightColor }}>
                     <div className='md:w-706 flex justify-center items-center' style={{ background: item.bgLeftColor }}>
                         <div>
-                            <img className='rounded-full' src={item.image} alt='' />
+                            <img className={`${index === 3 ? "pt-5" : "rounded-full"}`} src={item.image} alt='' />
                             {item.name &&
                                 <div className='text-30px font-bold text-center'>Dr Menka Gupta</div>
                             }
@@ -32,7 +32,7 @@ const NewWorldCard = ({ item, index }) => {
                 <div className={`mt-16 flex ${(index % 2 !== 0) ? 'flex-col-reverse' : 'flex-col'}`} style={{ background: item.bgRightColor }}>
                     <div className='p-5' style={{ background: item.bgLeftColor }}>
                         <div>
-                            <img className='rounded-full p-5' src={item.image} alt='' />
+                            <img className={`${index === 3 ? "mt-5" : "rounded-full p-5"}`} src={item.image} alt='' />
                             {item.name &&
                                 <div className='text-25px md:text-30px font-bold text-center'>Dr Menka Gupta</div>
                             }
