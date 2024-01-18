@@ -194,4 +194,16 @@
         padding: 15px;
     }
 
+    .differenceSec {
+        padding: 100px 20px;
+    }
+
+    .w-435px {
+        width: 100%;
+    }
+
+    .whatsIcon {
+        width: 80px;
+        top: -40px;
+    }
 }
