@@ -13,10 +13,10 @@ const PersonalisedSection = () => {
     };
 
     return (
-        <section className='overflow-hidden'>
+        <section className='md:overflow-hidden'>
             <div className='flex justify-center items-center' style={containerBg}>
                 <div className='personalisedSec'>
-                    <div className='flex items-center gap-20'>
+                    <div className='flex flex-col md:flex-row items-center md:gap-20'>
                         <div>
                             <img src='/images/newworld/01.svg' alt='' />
                         </div>

@@ -47,7 +47,7 @@ const PremiumQuality = () => {
                 <div className='flex justify-center pt-16'>
                     <div className='text-55px font-bold'>Premium Quality</div>
                 </div>
-                <div className='grid grid-cols-5 mt-11'>
+                <div className='grid grid-cols-2 md:grid-cols-5 md:mt-11'>
                     {quality.map((item) => (
                         <div key={item.id}>
                             <QualityCard image={item.image} text={item.text} />

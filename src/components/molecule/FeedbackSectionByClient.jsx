@@ -3,7 +3,7 @@ import React from 'react'
 const FeedbackSectionByClient = () => {
     return (
         <section className='feedbackSec'>
-            <div className='text-55px font-bold mx-auto text-center' style={{ width: "822px" }}>Satisfied Supplement By Nutra Nourish Clients</div>
+            <div className='text-55px font-bold mx-auto text-center w-822px'>Satisfied Supplement By Nutra Nourish Clients</div>
             <div className='mt-50'>
                 Carousel
             </div>

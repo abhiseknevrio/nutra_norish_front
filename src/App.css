@@ -1,3 +1,15 @@
+.w-435px {
+    width: 435px;
+}
+
+.w-536px {
+    width: 536px;
+}
+
+.w-822px {
+    width: 822px;
+}
+
 .mx-common {
     margin: 0px 170px;
 }
@@ -6,6 +18,11 @@
     border-left: 5px solid;
     height: 28px;
     margin-right: 33px;
+}
+
+.boreder-l-5 {
+    border-left: 5px solid;
+    height: 88px;
 }
 
 .padb-117 {
@@ -133,7 +150,39 @@
 }
 
 .personalisedSec {
-    background-color: #FFF8EF;
+    background: #FFF8EF;
     /* padding: 95px 169px; */
     width: 1580px;
+}
+
+.blogSec {
+    background: #FFF;
+    padding: 95px 296px;
+}
+
+@media screen and (max-width: 768px) {
+    .blogSec {
+        padding: 0px;
+    }
+
+    .personalisedSec {
+        padding: 0px;
+        width: 100%;
+    }
+
+    .feedbackSec {
+        background: #FFF;
+        padding: 0px;
+    }
+
+    .input {
+        width: 100%;
+        height: 80px;
+    }
+
+    .premiumSection {
+        background: #FFF8EF;
+        padding: 15px;
+    }
+
 }

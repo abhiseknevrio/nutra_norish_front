@@ -20,7 +20,7 @@ const HowItWorks = () => {
                     {/*  STEP  */}
                     <div className='flex justify-center'>
                         <div className='flex justify-center items-center'>
-                            <div className='' style={{ width: "435px" }} >
+                            <div className='w-536px'>
                                 <div className='text-28px font-bold'>Get Your FREE Personalised Supplement Recommendation</div>
                                 <div className='text-18px font-medium'>Get Your Unique Plan Designed By Our Leading Functional Medicine Experts </div>
                             </div>
@@ -38,12 +38,12 @@ const HowItWorks = () => {
                         </div>
                         <div className='flex flex-col justify-between'>
                             <div>
-                                <div style={{ width: "536px" }}>
+                                <div className='w-536px'>
                                     <div className='text-28px font-bold'>Take The Health & Wellness Assessment</div>
                                     <div className='text-18px font-medium'>Tell Us About Your Health Goals, Conditions, Diet And Lifestyle</div>
                                 </div>
                             </div>
-                            <div style={{ width: "536px" }}>
+                            <div className='w-536px'>
                                 <div className='text-28px font-bold'>Start Your Journey Towards Optimal Health</div>
                                 <div className='text-18px font-medium'> Use Our App To Build Healthy Habits And Maximise Your Results </div>
                             </div>
