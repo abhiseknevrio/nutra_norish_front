@@ -161,6 +161,11 @@
 }
 
 @media screen and (max-width: 768px) {
+
+    .mx-common {
+        margin: 0px auto;
+    }
+
     .blogSec {
         padding: 0px;
     }
