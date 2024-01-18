@@ -189,10 +189,6 @@
         height: 80px;
     }
 
-    .premiumSection {
-        background: #FFF8EF;
-        padding: 15px;
-    }
 
     .differenceSec {
         padding: 100px 20px;
@@ -219,5 +215,17 @@
     .newWorldSection {
         background: #FFF8EF;
         padding: 100px 34px;
+    }
+
+    .premiumSection {
+        background: #FFF8EF;
+        padding: 100px 15px;
+    }
+
+    .qualityCard {
+        width: 180px;
+        height: 180px;
+        background: #FFF;
+        color: #121211;
     }
 }
