@@ -18,11 +18,11 @@ const ContactFormSection = () => {
         <section className='bg-contact' style={containerBg}>
             <div className='mt-24'>
                 <div className='flex justify-center'>
-                    <div className='text-45px font-bold w-1032 text-center'>Instead Of Removing Sensitive Foods Could Prevent Health Issues</div>
+                    <div className='text-45px font-bold md:w-1032 text-center'>Instead Of Removing Sensitive Foods Could Prevent Health Issues</div>
                 </div>
                 <div className='mt-30 flex justify-center'>
-                    <div className='w-1320'>
-                        <div className='grid grid-cols-2 gap-5'>
+                    <div className='md:w-1320'>
+                        <div className='grid flex-col-1 md:grid-cols-2 gap-5'>
                             <Input type={"text"} label={"Your Name"} placeholder={"Enter Name"} />
                             <Input type={"email"} label={"Your Email"} placeholder={"Enter Email"} />
                             <Input type={"text"} label={"Phone Number"} placeholder={"Enter Phone"} />

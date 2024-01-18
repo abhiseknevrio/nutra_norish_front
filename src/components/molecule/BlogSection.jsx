@@ -2,6 +2,7 @@ import React from 'react'
 import BlogCard from '../atom/BlogCard';
 import Carousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
+import VideosCard from '../atom/VideosCard';
 
 const BlogSection = () => {
 
@@ -32,6 +33,21 @@ const BlogSection = () => {
             image: "/images/blogs/03.svg",
             bgColor: "#E3E3E3",
             redirectTo: "https://nutranourish.com/blog/how-to-flush-out-excess-estrogen"
+        },
+    ]
+
+    const videos = [
+        {
+            id: "01",
+            title: "“Dr Brent Dorval PhD, our CSO, talking about the Food Sensitivity Testing at the recent A4M Gastroenterology Conference” - Dr Brent Dorval",
+            image: "/images/videos/01.svg",
+            redirectTo: "https://www.youtube.com/watch?v=ApuWHhya2Uk"
+        },
+        {
+            id: "02",
+            title: "Dr. Joel Evans, recently spoke abroad regarding food sensitivity testing, inflammation, and leaky gut. -Dr. Joel Evans",
+            image: "/images/videos/02.svg",
+            redirectTo: "https://www.youtube.com/watch?v=ApuWHhya2Uk"
         },
     ]
 
@@ -79,7 +95,15 @@ const BlogSection = () => {
             </div>
             <div className='mt-24'>
                 <div className='text-55px font-bold text-center'> Nutra Nourish Videos</div>
-                <div className='mt-50'>Videos</div>
+                <div className='mt-50 grid grid-cols-1 md:grid-cols-2 gap-10'>
+                    {
+                        videos.map(item => (
+                            <div key={item.id} className=''>
+                                <VideosCard title={item.title} img={item.image} link={item.redirectTo} />
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
         </section>
     )
