@@ -5,7 +5,7 @@ const VideosCard = ({ title, img, link }) => {
         <a href={link} target='_blank' rel="noreferrer">
             <div className='md:ml-10'>
                 <div className='flex justify-center'>
-                    <img className='rounded-2xl' src={img} alt={title} />
+                    <img className='rounded-2xl min-w-full' src={img} alt={title} />
                 </div>
                 <div className='mt-30 text-18px font-bold boreder-l-5 pl-3'>{title}</div>
             </div>

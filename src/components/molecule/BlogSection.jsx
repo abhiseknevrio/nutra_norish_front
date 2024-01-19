@@ -33,11 +33,11 @@ const responsiveForVideos = {
         items: 2,
     },
     tablet: {
-        breakpoint: { max: 1024, min: 464 },
+        breakpoint: { max: 1024, min: 768 },
         items: 2,
     },
     mobile: {
-        breakpoint: { max: 464, min: 0 },
+        breakpoint: { max: 767, min: 0 },
         items: 1,
     }
 };
@@ -145,7 +145,7 @@ const BlogSection = () => {
                     >
                         {
                             videos.map(item => (
-                                <div key={item.id} className='mb-24 md:mb-16'>
+                                <div key={item.id} className='mb-24 lg:mb-16'>
                                     <VideosCard title={item.title} img={item.image} link={item.redirectTo} />
                                 </div>
                             ))
