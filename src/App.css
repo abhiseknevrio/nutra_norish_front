@@ -191,7 +191,7 @@
 }
 
 .clientFeeedbackCard {
-    width: 586px;
+    /* width: 586px; */
     height: 384px;
     text-align: center;
     padding: 40px;
@@ -359,7 +359,7 @@
 
     .feedbackSec {
         background: #FFF;
-        padding: 100px 20px;
+        padding: 100px 100px;
     }
 
     .w-822px {
@@ -371,7 +371,7 @@
         min-height: 423px;
         height: 100%;
         text-align: center;
-        padding: 20px;
+        padding: 30px;
     }
 
     .personalisedSec {
@@ -413,5 +413,11 @@
 
     .blogSec {
         padding: 95px 100px;
+    }
+
+    .clientFeeedbackCard {
+        width: 100%;
+        height: 384px;
+        padding: 40px;
     }
 }

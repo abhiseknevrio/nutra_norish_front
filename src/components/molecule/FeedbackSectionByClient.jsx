@@ -26,7 +26,7 @@ const FeedbackSectionByClient = () => {
             content: "Dr Menka Gupta completely fixed all my gut issues.  I went to see her as I was suffering from anxiety and chronic tiredness for a long time. Rather than trying to find a quick fix for my symptoms, she patiently tried to understand the root cause of my health",
             client: {
                 name: "Monika Marques",
-                image: "",
+                image: "/images/feedback/client1.svg",
                 link: ""
             },
             bgColor: "#CDD1E3"
@@ -37,7 +37,7 @@ const FeedbackSectionByClient = () => {
             content: "I have worked very successfully with Dr Menka in lowering my cholesterol and understanding more about the best foods for me. I appreciate her dept of knowledge from both a medical and functional stance.",
             client: {
                 name: "Veronica Rosetta",
-                image: "",
+                image: "/images/feedback/client2.svg",
                 link: ""
             },
             bgColor: "#F6DAB4"
@@ -48,7 +48,7 @@ const FeedbackSectionByClient = () => {
             content: "Dr Menka Gupta completely fixed all my gut issues.  I went to see her as I was suffering from anxiety and chronic tiredness for a long time. Rather than trying to find a quick fix for my symptoms, she patiently tried to understand the root cause of my health",
             client: {
                 name: "Monika Marques",
-                image: "",
+                image: "/images/feedback/client1.svg",
                 link: ""
             },
             bgColor: "#CDD1E3"
@@ -59,7 +59,7 @@ const FeedbackSectionByClient = () => {
             content: "I have worked very successfully with Dr Menka in lowering my cholesterol and understanding more about the best foods for me. I appreciate her dept of knowledge from both a medical and functional stance.",
             client: {
                 name: "Veronica Rosetta",
-                image: "",
+                image: "/images/feedback/client2.svg",
                 link: ""
             },
             bgColor: "#F6DAB4"
@@ -85,7 +85,7 @@ const FeedbackSectionByClient = () => {
                 >
                     {
                         feedbackData.map(item => (
-                            <div key={item.id} className='mb-20'>
+                            <div key={item.id} className='mb-20 lg:ml-10'>
                                 <ClientFeeedbackCard item={item} />
                             </div>
                         ))
