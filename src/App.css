@@ -1,3 +1,16 @@
+.heroBg {
+    background: url("../public/images/heroBg.svg");
+}
+
+.premiumBg {
+    background: url("../public/images/quality/bg.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 313px;
+    margin-top: 15px;
+    margin-bottom: 150px;
+}
+
 .w-435px {
     width: 435px;
 }
@@ -281,5 +294,10 @@
 
     .contactSec {
         padding: 100px 20px;
+    }
+
+    .heroBg {
+        background-size: cover;
+        background-position: left;
     }
 }

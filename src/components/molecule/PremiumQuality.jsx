@@ -31,22 +31,12 @@ const PremiumQuality = () => {
         },
     ]
 
-    const containerBg = {
-        backgroundImage: `url(${"/images/quality/bg.svg"})`,
-        // backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        width: '100%',
-        height: '313px',
-        marginBottom: "150px"
-    };
-
     return (
         <section className='premiumSection'>
 
             {/* For Desktop */}
             <div className='hidden md:block'>
-                <div style={containerBg}>
+                <div className='premiumBg'>
                     <div className='flex justify-center pt-16'>
                         <div className='text-55px font-bold'>Premium Quality</div>
                     </div>
