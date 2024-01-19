@@ -205,6 +205,14 @@
     padding: 100px 0px;
 }
 
+.newWCard-left {
+    width: 40%;
+}
+
+.newWCard-right {
+    width: 60%;
+    padding: 70px;
+}
 
 @media screen and (max-width: 768px) {
 
@@ -299,5 +307,114 @@
     .heroBg {
         background-size: cover;
         background-position: left;
+    }
+
+    .newWCard-left {
+        width: 100%;
+    }
+
+    .newWCard-right {
+        width: 100%;
+        padding: 0px 20px;
+    }
+}
+
+@media only screen and (max-width: 1440px) and (min-width: 768px) {
+
+    .mx-common {
+        margin: 0px 70px;
+    }
+
+    .padb-117 {
+        padding-bottom: 70px;
+    }
+
+    .input {
+        width: 100%;
+        height: 60px;
+    }
+
+
+    .differenceSec {
+        padding: 100px 20px;
+    }
+
+    .w-435px {
+        width: 100%;
+    }
+
+    .whatsIcon {
+        width: 80px;
+        top: -40px;
+    }
+
+    .mediaSec {
+        padding: 100px 20px;
+    }
+
+    .healthSection {
+        padding: 100px 20px;
+        text-align: center;
+    }
+
+    .newWorldSection {
+        background: #FFF8EF;
+        padding: 100px 34px;
+    }
+
+    .premiumSection {
+        background: #FFF8EF;
+        padding: 100px 20px;
+    }
+
+    .qualityCard {
+        width: 180px;
+        height: 180px;
+        background: #FFF;
+        color: #121211;
+    }
+
+    .feedbackSec {
+        background: #FFF;
+        padding: 100px 20px;
+    }
+
+    .w-822px {
+        width: 100%;
+    }
+
+    .clientFeeedbackCard {
+        width: 100%;
+        min-height: 423px;
+        height: 100%;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .personalisedSec {
+        padding: 70px 20px;
+        width: 100%;
+    }
+
+    .blogSec {
+        padding: 74px 20px 150px;
+    }
+
+    .blogCard {
+        width: 100%;
+        height: 100%;
+    }
+
+    .contactSec {
+        padding: 100px 20px;
+    }
+
+    .heroBg {
+        background-size: cover;
+        background-position: left;
+    }
+
+    .newWCard-right {
+        padding: 0px 30px;
     }
 }

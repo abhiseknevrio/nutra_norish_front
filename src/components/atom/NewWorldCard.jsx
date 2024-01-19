@@ -4,9 +4,9 @@ const NewWorldCard = ({ item, index }) => {
     return (
         <>
             {/* For Desktop */}
-            <div className='hidden md:block'>
-                <div className={`mt-16 flex ${(index % 2 !== 0) ? 'flex-row-reverse' : ''}`} style={{ background: item.bgRightColor }}>
-                    <div className='md:w-706 flex justify-center items-center' style={{ background: item.bgLeftColor }}>
+            <div className=''>
+                <div className={`mt-16 flex flex-col md:flex-row ${(index % 2 !== 0) ? 'flex-row-reverse' : ''}`} style={{ background: item.bgRightColor }}>
+                    <div className=' flex justify-center items-center newWCard-left' style={{ background: item.bgLeftColor }}>
                         <div>
                             <img className={`${index === 3 ? "pt-5" : "rounded-full"}`} src={item.image} alt='' />
                             {item.name &&
@@ -17,18 +17,16 @@ const NewWorldCard = ({ item, index }) => {
                             }
                         </div>
                     </div>
-                    <div className='md:w-874 my-24'>
-                        <div className='md:w-690 mx-auto'>
-                            <div className='text-40px font-medium'>{item.id}</div>
-                            <div className='text-42px font-bold mt-30'>{item.title}</div>
-                            <div className='text-25px font-semibold mt-30'>{item.content}</div>
-                        </div>
+                    <div className='my-24 newWCard-right'>
+                        <div className='text-40px font-medium'>{item.id}</div>
+                        <div className='text-42px font-bold mt-30'>{item.title}</div>
+                        <div className='text-25px font-semibold mt-30'>{item.content}</div>
                     </div>
                 </div>
             </div>
 
             {/* For Mobile */}
-            <div className=' md:hidden'>
+            {/* <div className=' md:hidden'>
                 <div className={`mt-16 flex ${(index % 2 !== 0) ? 'flex-col-reverse' : 'flex-col'}`} style={{ background: item.bgRightColor }}>
                     <div className='p-5' style={{ background: item.bgLeftColor }}>
                         <div>
@@ -48,7 +46,7 @@ const NewWorldCard = ({ item, index }) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }

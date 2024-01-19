@@ -20,18 +20,18 @@ const HeroSection = () => {
                                     <span className='left-border'></span>
                                     {"Personalised Vitamins".toUpperCase()}
                                 </div>
-                                <div className='font-bold text-28px md:text-65px mt-10 md:mt-5 md:w-1160'>
+                                <div className='font-bold text-28px md:text-65px mt-10 md:mt-5 xl:w-1160'>
                                     Get the Nutrients You Need for Peak Performance
                                 </div>
                                 <p className='font-bold text-20px mt-8'>Instant access to expert designed personalised Supplement Plan made just For You</p>
                             </div>
                         </div>
-                        <div className='md:hidden flex justify-center mt-14 mb-24'>
+                        <div className='lg:hidden flex justify-center mt-14 mb-24'>
                             <Button text="Take The Quiz" />
                         </div>
 
                         {/* Importent Section */}
-                        <div className='hidden md:block'>
+                        <div className='hidden lg:block'>
                             <div className='flex justify-center mt-14'>
                                 <QuizCard />
                             </div>
