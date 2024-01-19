@@ -406,4 +406,12 @@
     .differenceSec {
         padding: 100px 40px;
     }
+
+    .feedbackSec {
+        padding: 100px 70px;
+    }
+
+    .blogSec {
+        padding: 95px 100px;
+    }
 }

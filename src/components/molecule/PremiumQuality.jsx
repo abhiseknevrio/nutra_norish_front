@@ -33,8 +33,6 @@ const PremiumQuality = () => {
 
     return (
         <section className='premiumSection'>
-
-            {/* For Desktop */}
             <div className='premiumBg'>
                 <div className='flex justify-center mb-11'>
                     <div className='text-55px font-bold'>Premium Quality</div>
@@ -47,20 +45,6 @@ const PremiumQuality = () => {
                     ))}
                 </div>
             </div>
-
-            {/* For Mobile */}
-            {/* <div className='block md:hidden'>
-                <div className='flex justify-center'>
-                    <div className='text-40px font-bold'>Premium Quality</div>
-                </div>
-                <div className='grid grid-cols-2 gap-x-5 gap-y-7 mt-16'>
-                    {quality.map((item) => (
-                        <div key={item.id}>
-                            <QualityCard image={item.image} text={item.text} />
-                        </div>
-                    ))}
-                </div>
-            </div> */}
         </section>
     )
 }
