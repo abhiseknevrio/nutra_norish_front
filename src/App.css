@@ -134,9 +134,7 @@
 }
 
 .input {
-    width: 651px;
-    height: 80px;
-    flex-shrink: 0;
+    width: 100%;
     border-radius: 5px;
     border: 1px solid rgba(18, 18, 17, 0.30);
     background: #FFF;
@@ -190,8 +188,11 @@
 }
 
 .contactSec {
-    background: #FBF5F0;
-    padding: 100px 0px;
+    background: url("../public/images/contactFormBg.svg");
+    background-repeat: no-repeat;
+    background-position: top;
+    margin-top: 19px;
+    padding: 100px 293px;
 }
 
 .newWCard-left {
@@ -226,12 +227,6 @@
     .padb-117 {
         padding-bottom: 0px;
     }
-
-    .input {
-        width: 100%;
-        height: 60px;
-    }
-
 
     .differenceSec {
         padding: 100px 20px;
@@ -329,12 +324,6 @@
     .padb-117 {
         padding-bottom: 70px;
     }
-
-    .input {
-        width: 100%;
-        height: 60px;
-    }
-
 
     .differenceSec {
         padding: 100px 40px;
@@ -440,4 +429,20 @@
     .personalisedBg {
         padding: 75px 160px;
     }
+}
+
+.footercard {
+    width: 269px;
+}
+
+.customInput {
+    width: 100%;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.30);
+    background: #FFF;
+}
+
+.socialIcon {
+    margin-left: 15px;
 }
