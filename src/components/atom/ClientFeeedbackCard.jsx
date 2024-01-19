@@ -6,8 +6,8 @@ const ClientFeeedbackCard = ({ item }) => {
         <div className='clientFeeedbackCard' style={{ background: item.bgColor }}>
             <div className='text-20px font-bold'>{item.title}</div>
             <div className='text-18px mt-30'>{item.content}</div>
-            <div className='mt-30 flex justify-center'>
-                <img src='' alt='' />
+            <div className='mt-30 flex justify-center items-center gap-5'>
+                <img style={{ borderRadius: "46% 54% 62% 38% / 45% 32% 68% 55%" }} src={item.client.image} alt='' />
                 <div>
                     <div>{item.client.name}</div>
                     <div>Read</div>

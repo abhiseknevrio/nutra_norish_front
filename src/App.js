@@ -14,17 +14,10 @@ import BlogSection from './components/molecule/BlogSection';
 
 function App() {
 
-
-  const heroBg = {
-    backgroundImage: `url(${"/images/heroBg.svg"})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  };
-
   return (
     <>
       <div>
-        <div style={heroBg}>
+        <div className='heroBg'>
           <Header />
           <HeroSection />
         </div>
