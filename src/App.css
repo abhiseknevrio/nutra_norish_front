@@ -5,10 +5,7 @@
 .premiumBg {
     background: url("../public/images/quality/bg.svg");
     background-repeat: no-repeat;
-    background-position: center;
-    height: 313px;
-    margin-top: 15px;
-    margin-bottom: 150px;
+    background-position: top;
 }
 
 .w-435px {
@@ -69,7 +66,7 @@
 
 .premiumSection {
     background: #FFF8EF;
-    padding: 15px 169px 150px;
+    padding: 80px 169px 150px;
 }
 
 .mt-30 {
@@ -146,8 +143,8 @@
 }
 
 .qualityCard {
-    width: 261px;
-    height: 259px;
+    width: 230px;
+    height: 230px;
     background: #FFF;
     color: #121211;
 }
@@ -262,13 +259,6 @@
         padding: 100px 20px;
     }
 
-    .qualityCard {
-        width: 180px;
-        height: 180px;
-        background: #FFF;
-        color: #121211;
-    }
-
     .feedbackSec {
         background: #FFF;
         padding: 100px 20px;
@@ -336,7 +326,7 @@
 
 
     .differenceSec {
-        padding: 100px 20px;
+        padding: 100px 40px;
     }
 
     .w-435px {
@@ -365,13 +355,6 @@
     .premiumSection {
         background: #FFF8EF;
         padding: 100px 20px;
-    }
-
-    .qualityCard {
-        width: 180px;
-        height: 180px;
-        background: #FFF;
-        color: #121211;
     }
 
     .feedbackSec {
@@ -416,5 +399,11 @@
 
     .newWCard-right {
         padding: 0px 30px;
+    }
+}
+
+@media only screen and (max-width: 1720px) and (min-width: 1441px) {
+    .differenceSec {
+        padding: 100px 40px;
     }
 }

@@ -35,23 +35,21 @@ const PremiumQuality = () => {
         <section className='premiumSection'>
 
             {/* For Desktop */}
-            <div className='hidden md:block'>
-                <div className='premiumBg'>
-                    <div className='flex justify-center pt-16'>
-                        <div className='text-55px font-bold'>Premium Quality</div>
-                    </div>
-                    <div className='grid grid-cols-5 mt-11'>
-                        {quality.map((item) => (
-                            <div key={item.id}>
-                                <QualityCard image={item.image} text={item.text} />
-                            </div>
-                        ))}
-                    </div>
+            <div className='premiumBg'>
+                <div className='flex justify-center mb-11'>
+                    <div className='text-55px font-bold'>Premium Quality</div>
+                </div>
+                <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-4'>
+                    {quality.map((item) => (
+                        <div key={item.id} className='flex justify-center'>
+                            <QualityCard image={item.image} text={item.text} />
+                        </div>
+                    ))}
                 </div>
             </div>
 
             {/* For Mobile */}
-            <div className='block md:hidden'>
+            {/* <div className='block md:hidden'>
                 <div className='flex justify-center'>
                     <div className='text-40px font-bold'>Premium Quality</div>
                 </div>
@@ -62,7 +60,7 @@ const PremiumQuality = () => {
                         </div>
                     ))}
                 </div>
-            </div>
+            </div> */}
         </section>
     )
 }
