@@ -165,13 +165,7 @@
 
 .blogSec {
     background: #FFF;
-    padding: 95px 296px;
-}
-
-.blogCard {
-    width: 422px;
-    height: 472px;
-    padding: 24px;
+    padding: 95px 293px;
 }
 
 .react-multi-carousel-dot button {
@@ -292,11 +286,6 @@
         padding: 74px 20px 150px;
     }
 
-    .blogCard {
-        width: 100%;
-        height: 100%;
-    }
-
     .contactSec {
         padding: 100px 20px;
     }
@@ -398,11 +387,6 @@
 
     .blogSec {
         padding: 74px 20px 150px;
-    }
-
-    .blogCard {
-        width: 100%;
-        height: 100%;
     }
 
     .contactSec {
