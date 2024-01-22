@@ -1,3 +1,13 @@
+.heroBg {
+    background: url("../public/images/heroBg.svg");
+}
+
+.premiumBg {
+    background: url("../public/images/quality/bg.svg");
+    background-repeat: no-repeat;
+    background-position: top;
+}
+
 .w-435px {
     width: 435px;
 }
@@ -16,7 +26,7 @@
 
 .left-border {
     border-left: 5px solid;
-    height: 28px;
+    min-height: 28px;
     margin-right: 33px;
 }
 
@@ -56,7 +66,7 @@
 
 .premiumSection {
     background: #FFF8EF;
-    padding: 15px 169px 150px;
+    padding: 80px 169px 150px;
 }
 
 .mt-30 {
@@ -124,17 +134,15 @@
 }
 
 .input {
-    width: 651px;
-    height: 80px;
-    flex-shrink: 0;
+    width: 100%;
     border-radius: 5px;
     border: 1px solid rgba(18, 18, 17, 0.30);
     background: #FFF;
 }
 
 .qualityCard {
-    width: 261px;
-    height: 259px;
+    width: 230px;
+    height: 230px;
     background: #FFF;
     color: #121211;
 }
@@ -151,38 +159,308 @@
 
 .personalisedSec {
     background: #FFF8EF;
-    /* padding: 95px 169px; */
-    width: 1580px;
 }
 
 .blogSec {
     background: #FFF;
-    padding: 95px 296px;
+    padding: 95px 293px;
+}
+
+.react-multi-carousel-dot button {
+    width: 20px !important;
+    height: 20px !important;
+    border: none !important;
+    background: #CDD1E3;
+}
+
+.react-multi-carousel-dot--active button {
+    border-radius: 12px !important;
+    border: none !important;
+    width: 58px !important;
+    background: #1F4934;
+}
+
+.clientFeeedbackCard {
+    /* width: 586px; */
+    height: 384px;
+    text-align: center;
+    padding: 40px;
+}
+
+.contactSec {
+    background: url("../public/images/contactFormBg.svg");
+    background-repeat: no-repeat;
+    background-position: top;
+    margin-top: 19px;
+    padding: 100px 293px;
+}
+
+.newWCard-left {
+    width: 40%;
+}
+
+.newWCard-right {
+    width: 60%;
+    padding: 70px;
+}
+
+.personalisedBg {
+    background: url("../public/images/personalised/bg.svg");
+    padding: 90px 169px;
+}
+
+.personalised-left {
+    width: 40%;
+}
+
+.personalised-right {
+    width: 60%;
+    padding: 70px;
+}
+
+.footerSec {
+    background: #FFF;
+    padding: 96px 300px 62px;
+}
+
+.w-40per {
+    width: 40%;
 }
 
 @media screen and (max-width: 768px) {
-    .blogSec {
-        padding: 0px;
+
+    .mx-common {
+        margin: 0px 10px;
     }
 
-    .personalisedSec {
-        padding: 0px;
+    .padb-117 {
+        padding-bottom: 0px;
+    }
+
+    .differenceSec {
+        padding: 100px 20px;
+    }
+
+    .w-435px {
         width: 100%;
     }
 
-    .feedbackSec {
-        background: #FFF;
-        padding: 0px;
+    .whatsIcon {
+        width: 80px;
+        top: -40px;
     }
 
-    .input {
-        width: 100%;
-        height: 80px;
+    .mediaSec {
+        padding: 100px 20px;
+    }
+
+    .healthSection {
+        padding: 100px 20px;
+        text-align: center;
+    }
+
+    .newWorldSection {
+        background: #FFF8EF;
+        padding: 100px 34px;
     }
 
     .premiumSection {
         background: #FFF8EF;
-        padding: 15px;
+        padding: 100px 20px;
     }
 
+    .feedbackSec {
+        background: #FFF;
+        padding: 100px 20px;
+    }
+
+    .w-822px {
+        width: 100%;
+    }
+
+    .clientFeeedbackCard {
+        width: 100%;
+        min-height: 423px;
+        height: 100%;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .blogSec {
+        padding: 74px 20px 150px;
+    }
+
+    .contactSec {
+        padding: 100px 20px;
+    }
+
+    .heroBg {
+        background-size: cover;
+        background-position: left;
+    }
+
+    .newWCard-left {
+        width: 100%;
+    }
+
+    .newWCard-right {
+        width: 100%;
+        padding: 0px 20px;
+    }
+
+    .personalisedBg {
+        padding: 70px 20px;
+    }
+
+    .personalised-left {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .personalised-right {
+        width: 100%;
+        padding: 70px;
+    }
+
+    .footerSec {
+        padding: 60px 20px;
+    }
+
+    .w-40per {
+        width: 100%;
+    }
+
+}
+
+@media only screen and (max-width: 1440px) and (min-width: 768px) {
+
+    .mx-common {
+        margin: 0px 70px;
+    }
+
+    .padb-117 {
+        padding-bottom: 70px;
+    }
+
+    .differenceSec {
+        padding: 100px 40px;
+    }
+
+    .w-435px {
+        width: 100%;
+    }
+
+    .whatsIcon {
+        width: 80px;
+        top: -40px;
+    }
+
+    .mediaSec {
+        padding: 100px 20px;
+    }
+
+    .healthSection {
+        padding: 100px 20px;
+        text-align: center;
+    }
+
+    .newWorldSection {
+        background: #FFF8EF;
+        padding: 100px 34px;
+    }
+
+    .premiumSection {
+        background: #FFF8EF;
+        padding: 100px 20px;
+    }
+
+    .feedbackSec {
+        background: #FFF;
+        padding: 100px 100px;
+    }
+
+    .w-822px {
+        width: 100%;
+    }
+
+    .clientFeeedbackCard {
+        width: 100%;
+        min-height: 423px;
+        height: 100%;
+        text-align: center;
+        padding: 30px;
+    }
+
+    .blogSec {
+        padding: 74px 20px 150px;
+    }
+
+    .contactSec {
+        padding: 100px 20px;
+    }
+
+    .heroBg {
+        background-size: cover;
+        background-position: left;
+    }
+
+    .newWCard-right {
+        padding: 0px 30px;
+    }
+
+    .personalisedBg {
+        padding: 60px 100px;
+    }
+
+    .personalised-left {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .personalised-right {
+        width: 100%;
+        padding: 70px;
+    }
+
+    .footerSec {
+        padding: 60px 20px;
+    }
+}
+
+@media only screen and (max-width: 1720px) and (min-width: 1441px) {
+    .differenceSec {
+        padding: 100px 40px;
+    }
+
+    .feedbackSec {
+        padding: 100px 70px;
+    }
+
+    .blogSec {
+        padding: 95px 100px;
+    }
+
+    .clientFeeedbackCard {
+        width: 100%;
+        height: 384px;
+        padding: 40px;
+    }
+
+    .personalisedBg {
+        padding: 75px 160px;
+    }
+}
+
+.customInput {
+    width: 100%;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.30);
+    background: #FFF;
+}
+
+.socialIcon {
+    margin-left: 15px;
 }

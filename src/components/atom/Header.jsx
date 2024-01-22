@@ -5,9 +5,11 @@ const Header = () => {
 
     return (
         <header className='border-b border-borderCol'>
-            <div className='mx-common flex justify-between items-center'>
-                <img src='/images/nutranourish-logo.png' className='h-16 my-7' alt='' />
-                <Button text="Take The Quiz" />
+            <div className='mx-common flex justify-center lg:justify-between items-center'>
+                <img src='/images/nutranourish-logo.svg' className='h-11 md:h-16 my-7' alt='' />
+                <div className='hidden lg:block'>
+                    <Button text="Take The Quiz" />
+                </div>
             </div>
         </header>
     )

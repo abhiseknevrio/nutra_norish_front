@@ -6,25 +6,19 @@ import MediaSection from './components/molecule/MediaSection'
 import HealthierHappierSection from './components/molecule/HealthierHappierSection'
 import NewWorldSection from './components/molecule/NewWorldSection'
 import PremiumQuality from './components/molecule/PremiumQuality'
-import HowItWorks from './components/molecule/HowItWorks'
+// import HowItWorks from './components/molecule/HowItWorks'
 import ContactFormSection from './components/molecule/ContactFormSection'
 import FeedbackSectionByClient from './components/molecule/FeedbackSectionByClient';
 import PersonalisedSection from './components/molecule/PersonalisedSection';
 import BlogSection from './components/molecule/BlogSection';
+import Footer from './components/molecule/Footer';
 
 function App() {
-
-
-  const heroBg = {
-    backgroundImage: `url(${"/images/heroBg.svg"})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  };
 
   return (
     <>
       <div>
-        <div style={heroBg}>
+        <div className='heroBg'>
           <Header />
           <HeroSection />
         </div>
@@ -32,12 +26,13 @@ function App() {
         <MediaSection />
         <HealthierHappierSection />
         <NewWorldSection />
-        <HowItWorks />
+        {/* <HowItWorks /> */}
         <PremiumQuality />
         <FeedbackSectionByClient />
         <PersonalisedSection />
         <BlogSection />
         <ContactFormSection />
+        <Footer />
       </div>
     </>
   );
