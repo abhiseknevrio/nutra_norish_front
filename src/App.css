@@ -237,8 +237,8 @@
 }
 
 /* Re-factor */
-.title65 {
-    font-size: 65px;
+.title50 {
+    font-size: 50px;
     font-weight: 700;
 }
 
@@ -247,8 +247,13 @@
     font-weight: 700;
 }
 
-.title50 {
-    font-size: 50px;
+.title58 {
+    font-size: 58px;
+    font-weight: 700;
+}
+
+.title65 {
+    font-size: 65px;
     font-weight: 700;
 }
 
@@ -385,8 +390,8 @@
         top: 128px;
     }
 
-    .title65 {
-        font-size: 30px;
+    .title50 {
+        font-size: 25px;
         font-weight: 700;
     }
 
@@ -395,8 +400,13 @@
         font-weight: 700;
     }
 
-    .title50 {
-        font-size: 25px;
+    .title58 {
+        font-size: 50px;
+        font-weight: 700;
+    }
+
+    .title65 {
+        font-size: 30px;
         font-weight: 700;
     }
 }
