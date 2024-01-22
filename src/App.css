@@ -218,6 +218,15 @@
     padding: 70px;
 }
 
+.footerSec {
+    background: #FFF;
+    padding: 96px 300px 62px;
+}
+
+.w-40per {
+    width: 40%;
+}
+
 @media screen and (max-width: 768px) {
 
     .mx-common {
@@ -313,6 +322,15 @@
         width: 100%;
         padding: 70px;
     }
+
+    .footerSec {
+        padding: 60px 20px;
+    }
+
+    .w-40per {
+        width: 100%;
+    }
+
 }
 
 @media only screen and (max-width: 1440px) and (min-width: 768px) {
@@ -405,6 +423,10 @@
         width: 100%;
         padding: 70px;
     }
+
+    .footerSec {
+        padding: 60px 20px;
+    }
 }
 
 @media only screen and (max-width: 1720px) and (min-width: 1441px) {
@@ -429,10 +451,6 @@
     .personalisedBg {
         padding: 75px 160px;
     }
-}
-
-.footercard {
-    width: 269px;
 }
 
 .customInput {
