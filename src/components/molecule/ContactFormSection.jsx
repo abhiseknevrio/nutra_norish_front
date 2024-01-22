@@ -7,7 +7,7 @@ const ContactFormSection = () => {
     return (
         <section className='contactSec'>
             <div className='flex justify-center'>
-                <div className='text-40px md:text-45px font-bold md:w-1032 text-center'>Instead Of Removing Sensitive Foods Could Prevent Health Issues</div>
+                <div className='title50 md:w-1032 text-center'>Instead Of Removing Sensitive Foods Could Prevent Health Issues</div>
             </div>
             <div className='mt-30'>
                 <div className='grid grid-col-1 md:grid-cols-2 gap-5'>

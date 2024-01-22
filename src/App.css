@@ -236,6 +236,39 @@
     padding: 34px 294px 100px;
 }
 
+/* Re-factor */
+.title40 {
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.title42 {
+    font-size: 42px;
+    font-weight: 700;
+}
+
+.title50 {
+    font-size: 50px;
+    font-weight: 700;
+}
+
+.title55 {
+    font-size: 55px;
+    font-weight: 700;
+}
+
+.title58 {
+    font-size: 58px;
+    font-weight: 700;
+}
+
+.title65 {
+    font-size: 65px;
+    font-weight: 700;
+}
+
+/* Re-factor */
+
 @media screen and (max-width: 767px) {
 
     .mx-common {
@@ -365,6 +398,31 @@
 
     .lineCss {
         top: 128px;
+    }
+
+    .title42 {
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    .title50 {
+        font-size: 25px;
+        font-weight: 700;
+    }
+
+    .title55 {
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    .title58 {
+        font-size: 40px;
+        font-weight: 700;
+    }
+
+    .title65 {
+        font-size: 45px;
+        font-weight: 700;
     }
 }
 

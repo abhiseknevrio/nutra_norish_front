@@ -11,19 +11,19 @@ const HeroSection = () => {
             <section className='padb-117'>
                 <div className='mx-common'>
                     <div>
-                        <div className='font-bold text-20px md:text-25px mt-7 md:mt-14'>
+                        <div className='font-bold text-xl md:text-2xl mt-7 md:mt-14'>
                             ⭐⭐⭐⭐⭐ “I feel better than ever”
                         </div>
                         <div className='flex justify-center mt-5 md:mt-2'>
                             <div className='text-center'>
-                                <div className='font-bold text-20px md:text-25px'>
+                                <div className='font-bold text-xl md:text-2xl'>
                                     <span className='left-border'></span>
                                     {"Personalised Vitamins".toUpperCase()}
                                 </div>
-                                <div className='font-bold text-28px md:text-65px mt-10 md:mt-5 xl:w-1160'>
+                                <div className='title65 mt-10 md:mt-5 xl:w-1160'>
                                     Get the Nutrients You Need for Peak Performance
                                 </div>
-                                <p className='font-bold text-20px mt-8'>Instant access to expert designed personalised Supplement Plan made just For You</p>
+                                <p className='font-bold text-xl mt-8'>Instant access to expert designed personalised Supplement Plan made just For You</p>
                             </div>
                         </div>
                         <div className='lg:hidden flex justify-center mt-14 mb-24'>

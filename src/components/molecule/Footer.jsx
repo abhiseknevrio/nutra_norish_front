@@ -6,21 +6,21 @@ const Footer = () => {
             <div className='flex justify-center'>
                 <img src={'/images/nutranourish-logo.svg'} alt='footerlogo' />
             </div>
-            <div className={'flex justify-center'}>
+            <div className={'flex justify-center text-base'}>
                 <img src={'/images/footer/health-store.svg'} alt='healthstoreicon' className={'mr-2'} />
                 <a href="http://">Health Store</a>
             </div>
             <div>
                 <div className='flex flex-col md:flex-row justify-between mt-16'>
                     <div className='w-40per mb-10 md:mb-0'>
-                        <p className='text-20px font-medium'>
+                        <p className='text-xl font-medium'>
                             Subscribe and receive latest on health and <br /> exclusive offers
                         </p>
                         <div className='my-5'>
                             <input type="text" placeholder={'Subscribe Now'} className={'customInput'} />
                         </div>
                         <div className='flex mt-9 md:mt-auto'>
-                            <div className='mr-4 text-20px font-medium'>
+                            <div className='mr-4 text-xl font-medium'>
                                 Social Media:
                             </div>
                             <div className={'flex items-center'}>
@@ -37,7 +37,7 @@ const Footer = () => {
                     </div>
                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 w-40per'>
                         <div>
-                            <div className='text-20px font-medium mb-5'>
+                            <div className='text-xl font-medium mb-5'>
                                 Services
                             </div>
                             <div>
@@ -59,7 +59,7 @@ const Footer = () => {
                             </div>
                         </div >
                         <div>
-                            <div className='text-20px font-medium mb-5'>
+                            <div className='text-xl font-medium mb-5'>
                                 Contact
                             </div>
                             <div>
@@ -68,7 +68,7 @@ const Footer = () => {
                                     #03-07, Singapore 238876
                                 </div>
                             </div>
-                            <div className='text-25px font-medium my-3'>
+                            <div className='text-2xl font-medium my-3'>
                                 <a href="tel:+65 9125 7500">+65 9125 7500</a>
                             </div>
                             <div>
@@ -78,7 +78,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <div className='text-center mt-20'>
+            <div className='text-center mt-20' style={{ color: '#59524B' }}>
                 Copyright © 2023 by <span className='font-bold'> Nutra Nourish. </span>All rights reserved.
             </div>
         </footer >
