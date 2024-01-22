@@ -97,17 +97,19 @@
 .react-multiple-carousel__arrow--left {
     border-radius: 10px 0 0 10px !important;
     background: #E4E1CE !important;
-    /* margin-left: -80px; */
     height: 56px;
     width: 56px;
+    left: 0px !important;
+    top: 35px !important;
 }
 
 .react-multiple-carousel__arrow--right {
     border-radius: 0 10px 10px 0 !important;
     background: #E4E1CE !important;
-    /* margin-right: -80px; */
     height: 56px;
     width: 56px;
+    right: 0px !important;
+    top: 35px !important;
 }
 
 .react-multiple-carousel__arrow::before {
@@ -424,6 +426,15 @@
         font-size: 45px;
         font-weight: 700;
     }
+
+    .react-multiple-carousel__arrow--left {
+        display: none;
+    }
+
+    .react-multiple-carousel__arrow--right {
+        display: none;
+    }
+
 }
 
 @media only screen and (max-width: 1440px) and (min-width: 768px) {
