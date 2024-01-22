@@ -27,7 +27,8 @@ const FeedbackSectionByClient = () => {
             client: {
                 name: "Monika Marques",
                 image: "/images/feedback/client1.svg",
-                link: ""
+                link: "",
+                linkText: 'Microblading'
             },
             bgColor: "#CDD1E3"
         },
@@ -38,7 +39,8 @@ const FeedbackSectionByClient = () => {
             client: {
                 name: "Veronica Rosetta",
                 image: "/images/feedback/client2.svg",
-                link: ""
+                link: "",
+                linkText: 'Ombré'
             },
             bgColor: "#F6DAB4"
         },
@@ -49,7 +51,8 @@ const FeedbackSectionByClient = () => {
             client: {
                 name: "Monika Marques",
                 image: "/images/feedback/client1.svg",
-                link: ""
+                link: "",
+                linkText: 'Microblading'
             },
             bgColor: "#CDD1E3"
         },
@@ -60,7 +63,8 @@ const FeedbackSectionByClient = () => {
             client: {
                 name: "Veronica Rosetta",
                 image: "/images/feedback/client2.svg",
-                link: ""
+                link: "",
+                linkText: 'Ombré'
             },
             bgColor: "#F6DAB4"
         },
@@ -68,7 +72,7 @@ const FeedbackSectionByClient = () => {
 
     return (
         <section className='feedbackSec'>
-            <div className='text-30px md:text-55px font-bold mx-auto text-center w-822px'>Satisfied Supplement By Nutra Nourish Clients</div>
+            <div className='title55 mx-auto text-center w-822px'>Satisfied Supplement By Nutra Nourish Clients</div>
             <div className='mt-16 md:mt-50'>
                 <Carousel
                     swipeable={true}
