@@ -20,6 +20,7 @@ code {
 }
 
 .quizBox {
+  max-width: 1250px;
   border-radius: 25px;
   border: 2px dashed #FFF;
   background: #F1E4DB;
