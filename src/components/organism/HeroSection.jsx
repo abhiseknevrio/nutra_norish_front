@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import QuizCard from '../molecule/QuizCard';
 import ClientGroup from '../molecule/ClientGroup';
 import Button from '../atom/Button';
 
 
 const HeroSection = () => {
+
+    const [questions, setQuestions] = useState(null)
+
+    console.log("questions : ", questions)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(process.env.REACT_APP_BASE_URL);
+                const data = await response.json();
+                setQuestions(data)
+                console.log("data : ", data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
 
     return (
         <>
