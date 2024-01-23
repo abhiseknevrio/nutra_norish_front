@@ -5,19 +5,33 @@ const QuizCard = ({ questions }) => {
     const [question, setNextQue] = useState(questions[0]);
     const [userInput, setUserInput] = useState(null);
 
-    // console.log("userData : ", userData);
-    // console.log("question : ", question);
+    console.log("userData : ", userData);
+    console.log("question : ", question);
 
     const addUserData = (key, val, next) => {
-        setUserData((prevUserData) => [...prevUserData, { key: key, val: val }]);
+        setUserData((prevUserData) => {
+            const existingIndex = prevUserData.findIndex((item) => item.key === key);
+
+            if (existingIndex !== -1) {
+                const updatedUserData = [...prevUserData];
+                updatedUserData[existingIndex] = { key: key, val: val };
+                return updatedUserData;
+            } else {
+                return [...prevUserData, { key: key, val: val }];
+            }
+        });
+
         nextQue(next);
     };
 
     const nextQue = (val) => {
         const que = questions?.find((item) => item.key === val)
+
         try {
             if (que !== undefined) {
                 setNextQue(que)
+            } else {
+                alert("Submit Form")
             }
         } catch (error) {
             console.error("nextQue error", error)
@@ -37,7 +51,7 @@ const QuizCard = ({ questions }) => {
                                         <div>
                                             <div className='text-lg border border-borderGreen rounded-full py-2.5 px-5 inline-block'>
                                                 <input
-                                                    onClick={() => addUserData(item.key, item.value, item.nextQuestion)}
+                                                    onClick={() => addUserData(question.key, item.value, item.nextQuestion)}
                                                     type="radio"
                                                     id={item.key}
                                                     name="question"
@@ -55,7 +69,7 @@ const QuizCard = ({ questions }) => {
                                                 type='text'
                                             />
                                             <img
-                                                onClick={() => addUserData(item.key, userInput, item.nextQuestion)}
+                                                onClick={() => addUserData(question.key, userInput, item.nextQuestion)}
                                                 className='absolute cursor-pointer'
                                                 style={{ right: "40px" }}
                                                 src='/images/rightArrow.svg'
