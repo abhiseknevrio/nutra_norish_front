@@ -5,7 +5,7 @@ const NewWorldCard = ({ item, index }) => {
         <>
             {/* For Desktop */}
             <div className=''>
-                <div className={`mt-16 flex flex-col md:flex-row ${(index % 2 !== 0) ? 'flex-row-reverse' : ''}`} style={{ background: item.bgRightColor }}>
+                <div className={`mt-16 flex ${(index % 2 !== 0) ? 'flex-col md:flex-row-reverse' : 'flex-col md:flex-row'}`} style={{ background: item.bgRightColor }}>
                     <div className=' flex justify-center items-center newWCard-left' style={{ background: item.bgLeftColor }}>
                         <div>
                             <img className={`${index === 3 ? "pt-5" : "rounded-full"}`} src={item.image} alt='' />
