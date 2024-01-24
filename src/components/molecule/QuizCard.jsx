@@ -4,7 +4,7 @@ const QuizCard = ({ questions }) => {
     const [userData, setUserData] = useState([]); // POST DATA
     const [question, setNextQue] = useState(questions[0]); // Current Que
     const [userInput, setUserInput] = useState(null);
-    const [singleSelect, setSingleSelect] = useState([]);
+    const [singleSelectInput, setSingleSelectInput] = useState({});
     const [multiSelectInput, setMultiSelectInput] = useState({ question: "", answer: [] });
     const [nextRecQue, setNextRecQue] = useState(null)
 
@@ -19,6 +19,13 @@ const QuizCard = ({ questions }) => {
         setNextRecQue(next)
     };
 
+    const handleRadioChange = (que, key, next) => {
+        setSingleSelectInput((prevSingleSelectInput) => {
+            return { ...prevSingleSelectInput, [que]: key, }
+        });
+        nextQue(next);
+    };
+
     const addUserData = (key, val, next) => {
         setUserData((prevUserData) => {
             const existingIndex = prevUserData.findIndex((item) => item.key === key);
@@ -31,8 +38,6 @@ const QuizCard = ({ questions }) => {
                 return [...prevUserData, { question: key, answer: val }];
             }
         });
-
-        nextQue(next);
     };
 
     const nextQue = (val) => {
@@ -59,7 +64,7 @@ const QuizCard = ({ questions }) => {
                             <div>
                                 <div className='text-lg border border-borderGreen rounded-full py-2.5 px-5 inline-block'>
                                     <input
-                                        onClick={() => addUserData(question.key, item.key, item.nextQuestion)}
+                                        onClick={() => handleRadioChange(question.key, item.key, item.nextQuestion)}
                                         type="radio"
                                         id={item.key}
                                         name={item.value}
