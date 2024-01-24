@@ -6,10 +6,6 @@ const QuizCard = ({ questions }) => {
     const [userInput, setUserInput] = useState(null);
     const [userMultiInput, setMultiUserInput] = useState([]);
 
-    console.log("userMultiInput : ", userMultiInput)
-    console.log("userData : ", userData);
-    console.log("question : ", question);
-
     const addUserData = (key, val, next) => {
         setUserData((prevUserData) => {
             const existingIndex = prevUserData.findIndex((item) => item.key === key);
