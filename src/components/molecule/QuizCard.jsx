@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const QuizCard = ({ questions }) => {
     const [userData, setUserData] = useState([]); // POST DATA
     const [question, setNextQue] = useState(questions[0]); // Current Que
-    const [userInput, setUserInput] = useState(null);
+    const [userInput, setUserInput] = useState({});
     const [singleSelectInput, setSingleSelectInput] = useState({});
     const [multiSelectInput, setMultiSelectInput] = useState({ question: "", answer: [] });
     const [nextRecQue, setNextRecQue] = useState(null)
@@ -23,8 +23,18 @@ const QuizCard = ({ questions }) => {
         setSingleSelectInput((prevSingleSelectInput) => {
             return { ...prevSingleSelectInput, [que]: key, }
         });
-        nextQue(next);
+        setNextRecQue(next);
     };
+
+    const handleInputChange = (que, key, next) => {
+        setUserInput((prevUserInput) => {
+            return { ...prevUserInput, [que]: key, }
+        });
+
+        setNextRecQue(next)
+    };
+
+    console.log("userInput : ", userInput)
 
     const addUserData = (key, val, next) => {
         setUserData((prevUserData) => {
@@ -91,12 +101,12 @@ const QuizCard = ({ questions }) => {
                         {question.type === "input" &&
                             <div className='quizInputContainer'>
                                 <input
-                                    onChange={(e) => setUserInput(e.target.value)}
+                                    onChange={(e) => handleInputChange(question.key, e.target.value, item.nextQuestion)}
                                     className='quizInput rounded-full'
                                     type='text'
                                 />
                                 <img
-                                    onClick={() => addUserData(question.key, userInput, item.nextQuestion)}
+                                    onClick={() => nextQue(nextRecQue)}
                                     className='absolute cursor-pointer'
                                     style={{ right: "40px" }}
                                     src='/images/rightArrow.svg'

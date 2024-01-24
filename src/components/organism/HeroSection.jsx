@@ -143,6 +143,123 @@ const HeroSection = () => {
                         "recommendation": null,
                         "value": "Maintain Healthy Skin, Hair and Nails",
                         "key": "option6"
+                    },
+                    {
+                        "nextQuestion": "q3.4",
+                        "recommendation": null,
+                        "value": "Increase my Energy ",
+                        "key": "option7"
+                    },
+                    {
+                        "nextQuestion": "q3.5",
+                        "recommendation": null,
+                        "value": "Gut health issues",
+                        "key": "option8"
+                    },
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": [
+                            "recommendation19",
+                            "recommendation20"
+                        ],
+                        "value": "Get Restful Sleep",
+                        "key": "option9"
+                    },
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": [
+                            "recommendation21",
+                            "recommendation22"
+                        ],
+                        "value": "Improve Fitness performance (improve my workout)",
+                        "key": "option10"
+                    },
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": [
+                            "recommendation23",
+                            "recommendation24",
+                            "recommendation25",
+                            "recommendation26"
+                        ],
+                        "value": "Gain Lean Muscles mass",
+                        "key": "option11"
+                    },
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": [
+                            "recommendation27"
+                        ],
+                        "value": "Joint health",
+                        "key": "option12"
+                    },
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": [
+                            "recommendation28",
+                            "recommendation29"
+                        ],
+                        "value": "Heart health",
+                        "key": "option13"
+                    },
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": [
+                            "recommendation31",
+                            "recommendation30"
+                        ],
+                        "value": "Support Brain Health (Focus, Memory, Concentration)",
+                        "key": "option14"
+                    },
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": [
+                            "recommendation32",
+                            "recommendation10"
+                        ],
+                        "value": "Anxiety",
+                        "key": "option15"
+                    },
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": [
+                            "recommendation34"
+                        ],
+                        "value": "Eye Health",
+                        "key": "option16"
+                    },
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": [
+                            "recommendation35"
+                        ],
+                        "value": "Blood Sugar Control",
+                        "key": "option17"
+                    },
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": [
+                            "recommendation10",
+                            "recommendation33"
+                        ],
+                        "value": "Blood Pressure",
+                        "key": "option18"
+                    },
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": [
+                            "recommendation36"
+                        ],
+                        "value": "Cholestrol",
+                        "key": "option19"
+                    },
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": [
+                            "recommendation37"
+                        ],
+                        "value": "Liver Health/ Better Detox",
+                        "key": "option20"
                     }
                 ],
                 "type": "multi_select",
@@ -150,7 +267,7 @@ const HeroSection = () => {
                 "required": true
             },
             {
-                "question": "How often do you get colds/ other infections?A 1. Rarely 2. 2-3 times a year 3. More than 4 times a year",
+                "question": "How often do you get colds/ other infections?",
                 "options": [
                     {
                         "nextQuestion": "q4",
@@ -221,7 +338,7 @@ const HeroSection = () => {
                 "required": true
             },
             {
-                "question": "",
+                "question": "Maintain Healthy Skin, Hair and Nails",
                 "options": [
                     {
                         "nextQuestion": "q4",
@@ -250,6 +367,103 @@ const HeroSection = () => {
                 ],
                 "type": "multi_select",
                 "key": "q3.3",
+                "required": true
+            },
+            {
+                "question": "In general, how are your energy levels?",
+                "options": [
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": [
+                            "recommendation14",
+                            "recommendation13"
+                        ],
+                        "value": "Very Low",
+                        "key": "option1"
+                    },
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": [
+                            "recommendation14",
+                            "recommendation13"
+                        ],
+                        "value": "Low",
+                        "key": "option2"
+                    },
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": [
+                            "recommendation14",
+                            "recommendation13"
+                        ],
+                        "value": "Moderate",
+                        "key": "option3"
+                    },
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": null,
+                        "value": "High",
+                        "key": "option3"
+                    }
+                ],
+                "type": "single_select",
+                "key": "q3.4",
+                "required": true
+            },
+            {
+                "question": "Gut health issues",
+                "options": [
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": [
+                            "recommendation15"
+                        ],
+                        "value": "I have had antibiotics in the past year or did frequently in the past? ",
+                        "key": "option1"
+                    },
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": [
+                            "recommendation16"
+                        ],
+                        "value": "I often have gas and bloating",
+                        "key": "option2"
+                    },
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": [
+                            "recommendation15",
+                            "recommendation16"
+                        ],
+                        "value": "I often have indigestion",
+                        "key": "option3"
+                    },
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": [
+                            "recommendation17"
+                        ],
+                        "value": "I frequenty have diarrhea or soft stools - Diarrhoea",
+                        "key": "option4"
+                    },
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": [
+                            "recommendation15",
+                            "recommendation18"
+                        ],
+                        "value": "I often deal with constipation",
+                        "key": "option5"
+                    },
+                    {
+                        "nextQuestion": "q4",
+                        "recommendation": null,
+                        "value": "None of the above",
+                        "key": "option3"
+                    }
+                ],
+                "type": "multi_select",
+                "key": "q3.5",
                 "required": true
             }
         ]
