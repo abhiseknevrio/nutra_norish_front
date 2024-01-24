@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const QuizCard = ({ questions }) => {
     const [userData, setUserData] = useState([]); // POST DATA
@@ -7,6 +7,10 @@ const QuizCard = ({ questions }) => {
     const [singleSelectInput, setSingleSelectInput] = useState({});
     const [multiSelectInput, setMultiSelectInput] = useState({ question: "", answer: [] });
     const [nextRecQue, setNextRecQue] = useState(null)
+
+    console.log("singleSelectInput : ", singleSelectInput)
+    console.log("multiSelectInput : ", multiSelectInput)
+    console.log("userInput : ", userInput)
 
     const handleCheckboxChange = (que, key, next) => {
         setMultiSelectInput((prevMultiSelectInput) => {
@@ -68,10 +72,10 @@ const QuizCard = ({ questions }) => {
         <div className='text-center p-20 quizBox'>
             <div className='title50'>{question?.question}{question?.required && <span>*</span>}</div>
             <div className='mt-9'>
-                {question?.options?.map((item) => (
-                    <div key={item.key}>
-                        {(question.type === "single_select") &&
-                            <div>
+                {question.type === "single_select" &&
+                    <>
+                        {question?.options?.map((item) => (
+                            <div key={item.key}>
                                 <div className='text-lg border border-borderGreen rounded-full py-2.5 px-5 inline-block'>
                                     <input
                                         onClick={() => handleRadioChange(question.key, item.key, item.nextQuestion)}
@@ -83,23 +87,13 @@ const QuizCard = ({ questions }) => {
                                     <label className='px-1.5' htmlFor={item.key}>{item.value}</label>
                                 </div>
                             </div>
-                        }
-                        {(question?.type === "multi_select") &&
-                            <div className=''>
-                                <div className='text-lg border border-borderGreen rounded-full py-2.5 px-5 inline-block'>
-                                    <input
-                                        type="checkbox"
-                                        id={item.key}
-                                        name="question"
-                                        value={item.value}
-                                        onChange={() => handleCheckboxChange(question.key, item.key, item.nextQuestion)}
-                                    />
-                                    <label className='px-1.5' htmlFor={item.key}>{item.value}</label>
-                                </div>
-                            </div>
-                        }
-                        {question.type === "input" &&
-                            <div className='quizInputContainer'>
+                        ))}
+                    </>
+                }
+                {question.type === "input" &&
+                    <>
+                        {question?.options?.map((item) => (
+                            <div key={item.key}>
                                 <input
                                     onChange={(e) => handleInputChange(question.key, e.target.value, item.nextQuestion)}
                                     className='quizInput rounded-full'
@@ -113,15 +107,38 @@ const QuizCard = ({ questions }) => {
                                     alt=''
                                 />
                             </div>
-                        }
+                        ))}
+                    </>
+                }
+
+
+                {
+                    question.type === "multi_select" &&
+                    <div className='checkbox-dropdown' >
+                        <ul class="checkbox-dropdown-list">
+                            {question?.options?.map((item) => (
+                                <li key={item.key}>
+                                    <label>
+                                        <input
+                                            type="checkbox"
+                                            id={item.key}
+                                            name="question"
+                                            value={item.value}
+                                            onChange={() => handleCheckboxChange(question.key, item.key, item.nextQuestion)}
+                                        />
+                                        {item.value}
+                                    </label>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
-                ))}
-            </div>
-            <div className='flex justify-between text-lg font-bold mt-10'>
+                }
+            </div >
+            <div div className='flex justify-between text-lg font-bold mt-10' >
                 <button>Previous</button>
                 <button className='hover:text-borderGreen' onClick={() => nextQue(nextRecQue)}>Next</button>
             </div>
-        </div>
+        </div >
     );
 };
 
