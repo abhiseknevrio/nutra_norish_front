@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 
 const QuizCard = ({ questions }) => {
-    const [userData, setUserData] = useState([]);
-    const [question, setNextQue] = useState(questions[0]);
+    const [userData, setUserData] = useState([]); // POST DATA
+    const [question, setNextQue] = useState(questions[0]); // Current Que
     const [userInput, setUserInput] = useState(null);
-    const [checkedItems, setCheckedItems] = useState([]);
     const [singleSelect, setSingleSelect] = useState([]);
+    const [multiSelectInput, setMultiSelectInput] = useState({ question: "", answer: [] });
     const [nextRecQue, setNextRecQue] = useState(null)
 
-    const handleCheckboxChange = (key) => {
-        setCheckedItems((prevCheckedItems) => {
-            if (!prevCheckedItems.includes(key)) {
-                return [...prevCheckedItems, key];
+    const handleCheckboxChange = (que, key, next) => {
+        setMultiSelectInput((prevMultiSelectInput) => {
+            if (!prevMultiSelectInput.answer.includes(key)) {
+                return { ...prevMultiSelectInput, question: que, answer: [...prevMultiSelectInput.answer, key] };
             } else {
-                return prevCheckedItems.filter(item => item !== key);
+                return { ...prevMultiSelectInput, answer: prevMultiSelectInput.answer.filter(item => item !== key) };
             }
         });
+        setNextRecQue(next)
     };
 
     const addUserData = (key, val, next) => {
@@ -41,7 +42,7 @@ const QuizCard = ({ questions }) => {
             if (que !== undefined) {
                 setNextQue(que)
             } else {
-                // alert("Submit Form")
+                alert("Ques end...! --> Submit Form")
             }
         } catch (error) {
             console.error("nextQue error", error)
@@ -76,7 +77,7 @@ const QuizCard = ({ questions }) => {
                                         id={item.key}
                                         name="question"
                                         value={item.value}
-                                        onChange={() => handleCheckboxChange(item.key)}
+                                        onChange={() => handleCheckboxChange(question.key, item.key, item.nextQuestion)}
                                     />
                                     <label className='px-1.5' htmlFor={item.key}>{item.value}</label>
                                 </div>
