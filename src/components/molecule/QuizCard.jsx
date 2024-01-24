@@ -7,6 +7,7 @@ const QuizCard = ({ questions }) => {
     const [singleSelectInput, setSingleSelectInput] = useState({});
     const [multiSelectInput, setMultiSelectInput] = useState({ question: "", answer: [] });
     const [nextRecQue, setNextRecQue] = useState(null)
+    const [dropdownVisible, setDropdownVisible] = useState(false);
 
     console.log("singleSelectInput : ", singleSelectInput)
     console.log("multiSelectInput : ", multiSelectInput)
@@ -114,12 +115,16 @@ const QuizCard = ({ questions }) => {
 
                 {
                     question.type === "multi_select" &&
-                    <div className='checkbox-dropdown' >
-                        <ul class="checkbox-dropdown-list">
+                    <div className='dropdown-container' >
+                        <div className="dropdown-trigger" onClick={() => setDropdownVisible(!dropdownVisible)}>
+                            Select options
+                        </div>
+                        {dropdownVisible && (<ul class="dropdown-list">
                             {question?.options?.map((item) => (
                                 <li key={item.key}>
                                     <label>
                                         <input
+                                            className='mr-2.5'
                                             type="checkbox"
                                             id={item.key}
                                             name="question"
@@ -130,7 +135,7 @@ const QuizCard = ({ questions }) => {
                                     </label>
                                 </li>
                             ))}
-                        </ul>
+                        </ul>)}
                     </div>
                 }
             </div >
