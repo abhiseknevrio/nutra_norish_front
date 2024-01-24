@@ -4,7 +4,19 @@ const QuizCard = ({ questions }) => {
     const [userData, setUserData] = useState([]);
     const [question, setNextQue] = useState(questions[0]);
     const [userInput, setUserInput] = useState(null);
-    const [userMultiInput, setMultiUserInput] = useState([]);
+    const [checkedItems, setCheckedItems] = useState([]);
+    const [singleSelect, setSingleSelect] = useState([]);
+    const [nextRecQue, setNextRecQue] = useState(null)
+
+    const handleCheckboxChange = (key) => {
+        setCheckedItems((prevCheckedItems) => {
+            if (!prevCheckedItems.includes(key)) {
+                return [...prevCheckedItems, key];
+            } else {
+                return prevCheckedItems.filter(item => item !== key);
+            }
+        });
+    };
 
     const addUserData = (key, val, next) => {
         setUserData((prevUserData) => {
@@ -29,7 +41,7 @@ const QuizCard = ({ questions }) => {
             if (que !== undefined) {
                 setNextQue(que)
             } else {
-                alert("Submit Form")
+                // alert("Submit Form")
             }
         } catch (error) {
             console.error("nextQue error", error)
@@ -49,7 +61,7 @@ const QuizCard = ({ questions }) => {
                                         onClick={() => addUserData(question.key, item.key, item.nextQuestion)}
                                         type="radio"
                                         id={item.key}
-                                        name="question"
+                                        name={item.value}
                                         value={item.key}
                                     />
                                     <label className='px-1.5' htmlFor={item.key}>{item.value}</label>
@@ -60,11 +72,11 @@ const QuizCard = ({ questions }) => {
                             <div className=''>
                                 <div className='text-lg border border-borderGreen rounded-full py-2.5 px-5 inline-block'>
                                     <input
-                                        onClick={(e) => setMultiUserInput(prevState => [...prevState, e.target.value])}
                                         type="checkbox"
                                         id={item.key}
                                         name="question"
-                                        value={item.key}
+                                        value={item.value}
+                                        onChange={() => handleCheckboxChange(item.key)}
                                     />
                                     <label className='px-1.5' htmlFor={item.key}>{item.value}</label>
                                 </div>
@@ -88,6 +100,10 @@ const QuizCard = ({ questions }) => {
                         }
                     </div>
                 ))}
+            </div>
+            <div className='flex justify-between text-lg font-bold mt-10'>
+                <button>Previous</button>
+                <button className='hover:text-borderGreen' onClick={() => nextQue(nextRecQue)}>Next</button>
             </div>
         </div>
     );
