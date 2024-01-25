@@ -9,10 +9,6 @@ const QuizCard = ({ questions }) => {
     const [nextRecQue, setNextRecQue] = useState(null)
     const [dropdownVisible, setDropdownVisible] = useState(false);
 
-    console.log("singleSelectInput : ", singleSelectInput)
-    console.log("multiSelectInput : ", multiSelectInput)
-    console.log("userInput : ", userInput)
-
     const handleCheckboxChange = (que, key, next) => {
         setMultiSelectInput((prevMultiSelectInput) => {
             if (!prevMultiSelectInput.answer.includes(key)) {
