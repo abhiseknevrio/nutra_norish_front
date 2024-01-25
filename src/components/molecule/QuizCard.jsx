@@ -3,11 +3,13 @@ import React, { useEffect, useState } from 'react';
 const QuizCard = ({ questions }) => {
     const [userData, setUserData] = useState([]); // POST DATA
     const [question, setNextQue] = useState(questions[0]); // Current Que
-    const [userInput, setUserInput] = useState({});
-    const [singleSelectInput, setSingleSelectInput] = useState({});
-    const [multiSelectInput, setMultiSelectInput] = useState({ question: "", answer: [] });
+    const [userInput, setUserInput] = useState([]);
+    const [singleSelectInput, setSingleSelectInput] = useState([]);
+    const [multiSelectInput, setMultiSelectInput] = useState([{ question: "", answer: [] }]);
     const [nextRecQue, setNextRecQue] = useState(null)
     const [dropdownVisible, setDropdownVisible] = useState(false);
+
+    console.log("singleSelectInput", singleSelectInput)
 
     const handleCheckboxChange = (que, key, next) => {
         setMultiSelectInput((prevMultiSelectInput) => {
@@ -21,9 +23,16 @@ const QuizCard = ({ questions }) => {
     };
 
     const handleRadioChange = (que, key, next) => {
-        setSingleSelectInput((prevSingleSelectInput) => {
-            return { ...prevSingleSelectInput, [que]: key, }
-        });
+        const existingResponseIndex = singleSelectInput.findIndex(response => response.question === que);
+
+        if (existingResponseIndex !== -1) {
+            const updatedResponses = [...singleSelectInput];
+            updatedResponses[existingResponseIndex] = { question: que, answer: key };
+            setSingleSelectInput(updatedResponses)
+            setNextRecQue(next);
+        } else {
+            setSingleSelectInput(prevResponses => [...prevResponses, { question: que, ans: key }]);
+        };
         setNextRecQue(next);
     };
 
