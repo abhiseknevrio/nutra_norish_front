@@ -1,59 +1,105 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const QuizCard = ({ questions }) => {
     const [userData, setUserData] = useState([]); // POST DATA
     const [question, setNextQue] = useState(questions[0]); // Current Que
-    const [userInput, setUserInput] = useState({});
-    const [singleSelectInput, setSingleSelectInput] = useState({});
-    const [multiSelectInput, setMultiSelectInput] = useState({ question: "", answer: [] });
+    const [userInput, setUserInput] = useState([]);
+    const [singleSelectInput, setSingleSelectInput] = useState([]);
+    const [multiSelectInput, setMultiSelectInput] = useState([]);
     const [nextRecQue, setNextRecQue] = useState(null)
-    const [dropdownVisible, setDropdownVisible] = useState(false);
-
-    console.log("singleSelectInput : ", singleSelectInput)
-    console.log("multiSelectInput : ", multiSelectInput)
-    console.log("userInput : ", userInput)
+    const [isSubmit, setIsSubmit] = useState(false)
 
     const handleCheckboxChange = (que, key, next) => {
-        setMultiSelectInput((prevMultiSelectInput) => {
-            if (!prevMultiSelectInput.answer.includes(key)) {
-                return { ...prevMultiSelectInput, question: que, answer: [...prevMultiSelectInput.answer, key] };
-            } else {
-                return { ...prevMultiSelectInput, answer: prevMultiSelectInput.answer.filter(item => item !== key) };
-            }
-        });
+        const updatedSelectedOptions = [...multiSelectInput];
+        const questionIndex = updatedSelectedOptions.findIndex(option => option.question === que);
+        if (questionIndex === -1) {
+            updatedSelectedOptions.push({ question: que, answer: [] });
+        }
+
+        const updatedQuestionIndex = updatedSelectedOptions.findIndex(option => option.question === que);
+
+        const isOptionSelected = updatedSelectedOptions[updatedQuestionIndex].answer.includes(key);
+
+        if (isOptionSelected) {
+
+            updatedSelectedOptions[updatedQuestionIndex].answer = updatedSelectedOptions[updatedQuestionIndex].answer.filter(item => item !== key);
+        } else {
+
+            updatedSelectedOptions[updatedQuestionIndex].answer.push(key);
+        }
+        setMultiSelectInput(updatedSelectedOptions);
+
         setNextRecQue(next)
+
     };
 
     const handleRadioChange = (que, key, next) => {
-        setSingleSelectInput((prevSingleSelectInput) => {
-            return { ...prevSingleSelectInput, [que]: key, }
-        });
+        const existingResponseIndex = singleSelectInput.findIndex(response => response.question === que);
+
+        if (existingResponseIndex !== -1) {
+            const updatedResponses = [...singleSelectInput];
+            updatedResponses[existingResponseIndex] = { question: que, answer: key };
+            setSingleSelectInput(updatedResponses)
+            setNextRecQue(next);
+        } else {
+            setSingleSelectInput(prevResponses => [...prevResponses, { question: que, answer: key }]);
+        };
         setNextRecQue(next);
     };
 
     const handleInputChange = (que, key, next) => {
-        setUserInput((prevUserInput) => {
-            return { ...prevUserInput, [que]: key, }
-        });
-
-        setNextRecQue(next)
+        const existingResponseIndex = userInput.findIndex(response => response.question === que);
+        if (existingResponseIndex !== -1) {
+            const updatedResponses = [...userInput];
+            updatedResponses[existingResponseIndex] = { question: que, answer: key };
+            setUserInput(updatedResponses)
+        } else {
+            setUserInput(prevResponses => [...prevResponses, { question: que, answer: key }]);
+        };
+        setNextRecQue(next);
     };
 
-    console.log("userInput : ", userInput)
 
-    const addUserData = (key, val, next) => {
-        setUserData((prevUserData) => {
-            const existingIndex = prevUserData.findIndex((item) => item.key === key);
+    const addUserData = async () => {
+        const finalArr = [...singleSelectInput, ...userInput, ...multiSelectInput]
+        setUserData(finalArr)
 
-            if (existingIndex !== -1) {
-                const updatedUserData = [...prevUserData];
-                updatedUserData[existingIndex] = { question: key, answer: val };
-                return updatedUserData;
-            } else {
-                return [...prevUserData, { question: key, answer: val }];
-            }
-        });
+        console.log("final Arr", finalArr)
+
+        // setUserData((prevUserData) => {
+        //     const existingIndex = prevUserData.findIndex((item) => item.key === key);
+
+        //     if (existingIndex !== -1) {
+        //         const updatedUserData = [...prevUserData];
+        //         updatedUserData[existingIndex] = { question: key, answer: val };
+        //         return updatedUserData;
+        //     } else {
+        //         return [...prevUserData, { question: key, answer: val }];
+        //     }
+        // });
+
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BASE_URL}saveUserDataFunction`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "userDetails": {
+                        "name": "Abhisek",
+                        "email": "abhisek@nevrio.tech"
+                    },
+                    response: finalArr
+                }),
+            });
+            console.log("post response : ", response);
+        } catch (error) {
+            console.error("post error : ", error);
+        }
+
     };
+
+    console.log("userData", userData)
 
     const nextQue = (val) => {
         const que = questions?.find((item) => item.key === val)
@@ -63,6 +109,7 @@ const QuizCard = ({ questions }) => {
                 setNextQue(que)
             } else {
                 alert("Ques end...! --> Submit Form")
+                setIsSubmit(true)
             }
         } catch (error) {
             console.error("nextQue error", error)
@@ -115,30 +162,18 @@ const QuizCard = ({ questions }) => {
 
                 {
                     question.type === "multi_select" &&
-                    <div className='dropdown-container' >
-                        <div className="dropdown-trigger" onClick={() => setDropdownVisible(!dropdownVisible)}>
-                            Select options
-                        </div>
-                        {dropdownVisible && (<ul class="dropdown-list">
-                            {question?.options?.map((item) => (
-                                <li key={item.key}>
-                                    <label>
-                                        <input
-                                            className='mr-2.5'
-                                            type="checkbox"
-                                            id={item.key}
-                                            name="question"
-                                            value={item.value}
-                                            onChange={() => handleCheckboxChange(question.key, item.key, item.nextQuestion)}
-                                        />
-                                        {item.value}
-                                    </label>
-                                </li>
-                            ))}
-                        </ul>)}
+                    <div className='grid grid-cols-3 cursor-pointer gap-5' >
+                        {
+                            question?.options?.map(item =>
+                                <div className='multiSelectCard' key={item.key} onClick={() => handleCheckboxChange(question.key, item.key, item.nextQuestion)}>{item.value}</div>)
+                        }
                     </div>
                 }
             </div >
+
+            {
+                isSubmit && <h1 onClick={addUserData}>Submit Form </h1>
+            }
             <div div className='flex justify-between text-lg font-bold mt-10' >
                 <button>Previous</button>
                 <button className='hover:text-borderGreen' onClick={() => nextQue(nextRecQue)}>Next</button>
