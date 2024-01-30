@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 
 const QuizCard = ({ questions }) => {
-    const [userData, setUserData] = useState([]); // POST DATA
     const [question, setNextQue] = useState(questions[0]); // Current Que
     const [userInput, setUserInput] = useState([]);
     const [singleSelectInput, setSingleSelectInput] = useState([]);
     const [multiSelectInput, setMultiSelectInput] = useState([]);
     const [nextRecQue, setNextRecQue] = useState(null)
     const [isSubmit, setIsSubmit] = useState(false)
+    const [responseData, setResponseData] = useState(null)
+
+    console.log("response", responseData)
+
 
     const handleCheckboxChange = (que, key, next) => {
         const updatedSelectedOptions = [...multiSelectInput];
@@ -62,22 +65,6 @@ const QuizCard = ({ questions }) => {
 
     const addUserData = async () => {
         const finalArr = [...singleSelectInput, ...userInput, ...multiSelectInput]
-        setUserData(finalArr)
-
-        console.log("final Arr", finalArr)
-
-        // setUserData((prevUserData) => {
-        //     const existingIndex = prevUserData.findIndex((item) => item.key === key);
-
-        //     if (existingIndex !== -1) {
-        //         const updatedUserData = [...prevUserData];
-        //         updatedUserData[existingIndex] = { question: key, answer: val };
-        //         return updatedUserData;
-        //     } else {
-        //         return [...prevUserData, { question: key, answer: val }];
-        //     }
-        // });
-
         try {
             const response = await fetch(`${process.env.REACT_APP_BASE_URL}saveUserDataFunction`, {
                 method: 'POST',
@@ -92,14 +79,14 @@ const QuizCard = ({ questions }) => {
                     response: finalArr
                 }),
             });
-            console.log("post response : ", response);
+
+            const data = await response.json()
+            setResponseData(data.recommendations)
         } catch (error) {
             console.error("post error : ", error);
         }
 
     };
-
-    console.log("userData", userData)
 
     const nextQue = (val) => {
         const que = questions?.find((item) => item.key === val)
