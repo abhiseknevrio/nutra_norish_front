@@ -81,6 +81,9 @@ const QuizCard = ({ questions }) => {
         try {
             const response = await fetch(`${process.env.REACT_APP_BASE_URL}saveUserDataFunction`, {
                 method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify({
                     "userDetails": {
                         "name": "Abhisek",
@@ -159,7 +162,7 @@ const QuizCard = ({ questions }) => {
 
                 {
                     question.type === "multi_select" &&
-                    <div className='grid grid-cols-3 cursor-pointer' >
+                    <div className='grid grid-cols-3 cursor-pointer gap-5' >
                         {
                             question?.options?.map(item =>
                                 <div className='multiSelectCard' key={item.key} onClick={() => handleCheckboxChange(question.key, item.key, item.nextQuestion)}>{item.value}</div>)
