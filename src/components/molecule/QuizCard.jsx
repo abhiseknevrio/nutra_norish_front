@@ -6,6 +6,7 @@ const QuizCard = ({ questions }) => {
     const [singleSelectInput, setSingleSelectInput] = useState([]);
     const [multiSelectInput, setMultiSelectInput] = useState([]);
     const [nextRecQue, setNextRecQue] = useState(null)
+    const [prevRecQue, setPrevRecQue] = useState(null)
     const [isSubmit, setIsSubmit] = useState(false)
     // const [responseData, setResponseData] = useState([
     //     {
@@ -548,8 +549,6 @@ const QuizCard = ({ questions }) => {
     // ])
     const [responseData, setResponseData] = useState([])
 
-    console.log("responseData", responseData)
-
     const handleCheckboxChange = (que, key, next) => {
         const updatedSelectedOptions = [...multiSelectInput];
         const questionIndex = updatedSelectedOptions.findIndex(option => option.question === que);
@@ -570,6 +569,7 @@ const QuizCard = ({ questions }) => {
         }
         setMultiSelectInput(updatedSelectedOptions);
 
+        setPrevRecQue(que)
         setNextRecQue(next)
 
     };
@@ -585,6 +585,7 @@ const QuizCard = ({ questions }) => {
         } else {
             setSingleSelectInput(prevResponses => [...prevResponses, { question: que, answer: key }]);
         };
+        setPrevRecQue(que)
         setNextRecQue(next);
     };
 
@@ -597,6 +598,7 @@ const QuizCard = ({ questions }) => {
         } else {
             setUserInput(prevResponses => [...prevResponses, { question: que, answer: key }]);
         };
+        setPrevRecQue(que)
         setNextRecQue(next);
     };
 
@@ -630,16 +632,23 @@ const QuizCard = ({ questions }) => {
 
     const nextQue = (val) => {
         const que = questions?.find((item) => item.key === val)
+        if (que !== undefined) {
+            setNextQue(que)
+        } else {
+            alert("Ques end...! --> Submit Form")
+            setIsSubmit(true)
+        }
 
-        try {
-            if (que !== undefined) {
-                setNextQue(que)
-            } else {
-                alert("Ques end...! --> Submit Form")
-                setIsSubmit(true)
-            }
-        } catch (error) {
-            console.error("nextQue error", error)
+    };
+
+    const prevQue = (val) => {
+        const que = questions?.find((item) => item.key === val)
+        console.log(questions?.find((item) => item.key === val))
+        if (que !== undefined) {
+            setNextQue(que)
+            setPrevRecQue()
+        } else {
+            console.log("no prev quetion")
         }
     };
 
@@ -651,22 +660,18 @@ const QuizCard = ({ questions }) => {
                         <div className='title50'>{question?.question}{question?.required && <span>*</span>}</div>
                         <div className='mt-9'>
                             {question.type === "single_select" &&
-                                <>
+                                <div className='flex justify-center gap-x-10'>
                                     {question?.options?.map((item) => (
-                                        <div key={item.key}>
-                                            <div className='text-lg border border-borderGreen rounded-full py-2.5 px-5 inline-block'>
-                                                <input
-                                                    onClick={() => handleRadioChange(question.key, item.key, item.nextQuestion)}
-                                                    type="radio"
-                                                    id={item.key}
-                                                    name={item.value}
-                                                    value={item.key}
-                                                />
-                                                <label className='px-1.5' htmlFor={item.key}>{item.value}</label>
+                                        <div
+                                            key={item.key}
+                                            onClick={() => handleRadioChange(question.key, item.key, item.nextQuestion)}
+                                        >
+                                            <div className='hover:bg-btnBg hover:text-nutraWhite cursor-pointer text-lg border border-borderGreen rounded-full py-2.5 px-5 inline-block'>
+                                                {item.value}
                                             </div>
                                         </div>
                                     ))}
-                                </>
+                                </div>
                             }
                             {question.type === "input" &&
                                 <>
@@ -677,13 +682,13 @@ const QuizCard = ({ questions }) => {
                                                 className='quizInput rounded-full'
                                                 type='text'
                                             />
-                                            <img
+                                            {/* <img
                                                 onClick={() => nextQue(nextRecQue)}
                                                 className='absolute cursor-pointer'
                                                 style={{ right: "40px" }}
                                                 src='/images/rightArrow.svg'
                                                 alt=''
-                                            />
+                                            /> */}
                                         </div>
                                     ))}
                                 </>
@@ -705,13 +710,14 @@ const QuizCard = ({ questions }) => {
                             isSubmit && <h1 onClick={addUserData}>Submit Form </h1>
                         }
                         <div div className='flex justify-between text-lg font-bold mt-10' >
-                            <button>Previous</button>
+                            <button className='hover:text-borderGreen' onClick={() => prevQue(prevRecQue)}>Previous</button>
                             <button className='hover:text-borderGreen' onClick={() => nextQue(nextRecQue)}>Next</button>
                         </div>
 
                     </div>
 
                     :
+
                     <div className='h-96 overflow-y-scroll'>
                         <h1 className='text-5xl font-bold'>Response Based on your Answer</h1>
                         {
@@ -726,7 +732,7 @@ const QuizCard = ({ questions }) => {
                                             <div>Price : {item?.price}</div>
                                             <div>Properties : {item?.properties.Dairy_free && "Dairy Free, "} {item?.properties.Gluten_free && "Gluten Free, "} {item?.properties.non_vegetarian && "Non Vegetarian, "} {item?.properties.vegan && "Vegan"}</div>
                                             <div className='hover:text-btnBg'>
-                                                <a href={item.link} target='_blank'>Click here for Product Info</a>
+                                                <a href={item.link} target='_blank' rel='noreferrer'>Click here for Product Info</a>
                                             </div>
                                         </div>
                                     ))}
