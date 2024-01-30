@@ -7,6 +7,7 @@ const QuizCard = ({ questions }) => {
     const [singleSelectInput, setSingleSelectInput] = useState([]);
     const [multiSelectInput, setMultiSelectInput] = useState([]);
     const [nextRecQue, setNextRecQue] = useState(null)
+    const [isSubmit, setIsSubmit] = useState(false)
 
     const handleCheckboxChange = (que, key, next) => {
         const updatedSelectedOptions = [...multiSelectInput];
@@ -41,7 +42,7 @@ const QuizCard = ({ questions }) => {
             setSingleSelectInput(updatedResponses)
             setNextRecQue(next);
         } else {
-            setSingleSelectInput(prevResponses => [...prevResponses, { question: que, ans: key }]);
+            setSingleSelectInput(prevResponses => [...prevResponses, { question: que, answer: key }]);
         };
         setNextRecQue(next);
     };
@@ -53,7 +54,7 @@ const QuizCard = ({ questions }) => {
             updatedResponses[existingResponseIndex] = { question: que, answer: key };
             setUserInput(updatedResponses)
         } else {
-            setUserInput(prevResponses => [...prevResponses, { question: que, ans: key }]);
+            setUserInput(prevResponses => [...prevResponses, { question: que, answer: key }]);
         };
         setNextRecQue(next);
     };
@@ -85,7 +86,7 @@ const QuizCard = ({ questions }) => {
                         "name": "Abhisek",
                         "email": "abhisek@nevrio.tech"
                     },
-                    finalArr
+                    response: finalArr
                 }),
             });
             console.log("post response : ", response);
@@ -105,7 +106,7 @@ const QuizCard = ({ questions }) => {
                 setNextQue(que)
             } else {
                 alert("Ques end...! --> Submit Form")
-                addUserData()
+                setIsSubmit(true)
             }
         } catch (error) {
             console.error("nextQue error", error)
@@ -158,14 +159,18 @@ const QuizCard = ({ questions }) => {
 
                 {
                     question.type === "multi_select" &&
-                    <div className='cursor-pointer' >
+                    <div className='grid grid-cols-3 cursor-pointer' >
                         {
                             question?.options?.map(item =>
-                                <div key={item.key} onClick={() => handleCheckboxChange(question.key, item.key, item.nextQuestion)}>{item.value}</div>)
+                                <div className='multiSelectCard' key={item.key} onClick={() => handleCheckboxChange(question.key, item.key, item.nextQuestion)}>{item.value}</div>)
                         }
                     </div>
                 }
             </div >
+
+            {
+                isSubmit && <h1 onClick={addUserData}>Submit Form </h1>
+            }
             <div div className='flex justify-between text-lg font-bold mt-10' >
                 <button>Previous</button>
                 <button className='hover:text-borderGreen' onClick={() => nextQue(nextRecQue)}>Next</button>
