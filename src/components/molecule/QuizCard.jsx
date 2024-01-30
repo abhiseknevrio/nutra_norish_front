@@ -1,25 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const QuizCard = ({ questions }) => {
     const [userData, setUserData] = useState([]); // POST DATA
     const [question, setNextQue] = useState(questions[0]); // Current Que
     const [userInput, setUserInput] = useState([]);
     const [singleSelectInput, setSingleSelectInput] = useState([]);
-    const [multiSelectInput, setMultiSelectInput] = useState([{ question: "", answer: [] }]);
+    const [multiSelectInput, setMultiSelectInput] = useState([]);
     const [nextRecQue, setNextRecQue] = useState(null)
-    const [dropdownVisible, setDropdownVisible] = useState(false);
-
-    console.log("singleSelectInput", singleSelectInput)
 
     const handleCheckboxChange = (que, key, next) => {
-        setMultiSelectInput((prevMultiSelectInput) => {
-            if (!prevMultiSelectInput.answer.includes(key)) {
-                return { ...prevMultiSelectInput, question: que, answer: [...prevMultiSelectInput.answer, key] };
-            } else {
-                return { ...prevMultiSelectInput, answer: prevMultiSelectInput.answer.filter(item => item !== key) };
-            }
-        });
+        const updatedSelectedOptions = [...multiSelectInput];
+        const questionIndex = updatedSelectedOptions.findIndex(option => option.question === que);
+        if (questionIndex === -1) {
+            updatedSelectedOptions.push({ question: que, answer: [] });
+        }
+
+        const updatedQuestionIndex = updatedSelectedOptions.findIndex(option => option.question === que);
+
+        const isOptionSelected = updatedSelectedOptions[updatedQuestionIndex].answer.includes(key);
+
+        if (isOptionSelected) {
+
+            updatedSelectedOptions[updatedQuestionIndex].answer = updatedSelectedOptions[updatedQuestionIndex].answer.filter(item => item !== key);
+        } else {
+
+            updatedSelectedOptions[updatedQuestionIndex].answer.push(key);
+        }
+        setMultiSelectInput(updatedSelectedOptions);
+
         setNextRecQue(next)
+
     };
 
     const handleRadioChange = (que, key, next) => {
@@ -37,28 +47,24 @@ const QuizCard = ({ questions }) => {
     };
 
     const handleInputChange = (que, key, next) => {
-        setUserInput((prevUserInput) => {
-            return { ...prevUserInput, [que]: key, }
-        });
-
-        setNextRecQue(next)
+        const existingResponseIndex = userInput.findIndex(response => response.question === que);
+        if (existingResponseIndex !== -1) {
+            const updatedResponses = [...userInput];
+            updatedResponses[existingResponseIndex] = { question: que, answer: key };
+            setUserInput(updatedResponses)
+        } else {
+            setUserInput(prevResponses => [...prevResponses, { question: que, ans: key }]);
+        };
+        setNextRecQue(next);
     };
 
-    console.log("userInput : ", userInput)
 
-    const addUserData = (key, val, next) => {
-        setUserData((prevUserData) => {
-            const existingIndex = prevUserData.findIndex((item) => item.key === key);
-
-            if (existingIndex !== -1) {
-                const updatedUserData = [...prevUserData];
-                updatedUserData[existingIndex] = { question: key, answer: val };
-                return updatedUserData;
-            } else {
-                return [...prevUserData, { question: key, answer: val }];
-            }
-        });
+    const addUserData = () => {
+        const finalArr = [...singleSelectInput, ...userInput, ...multiSelectInput]
+        setUserData(prev => prev = finalArr)
     };
+
+    console.log("userData", userData)
 
     const nextQue = (val) => {
         const que = questions?.find((item) => item.key === val)
@@ -68,6 +74,7 @@ const QuizCard = ({ questions }) => {
                 setNextQue(que)
             } else {
                 alert("Ques end...! --> Submit Form")
+                addUserData()
             }
         } catch (error) {
             console.error("nextQue error", error)
@@ -120,27 +127,11 @@ const QuizCard = ({ questions }) => {
 
                 {
                     question.type === "multi_select" &&
-                    <div className='dropdown-container' >
-                        <div className="dropdown-trigger" onClick={() => setDropdownVisible(!dropdownVisible)}>
-                            Select options
-                        </div>
-                        {dropdownVisible && (<ul class="dropdown-list">
-                            {question?.options?.map((item) => (
-                                <li key={item.key}>
-                                    <label>
-                                        <input
-                                            className='mr-2.5'
-                                            type="checkbox"
-                                            id={item.key}
-                                            name="question"
-                                            value={item.value}
-                                            onChange={() => handleCheckboxChange(question.key, item.key, item.nextQuestion)}
-                                        />
-                                        {item.value}
-                                    </label>
-                                </li>
-                            ))}
-                        </ul>)}
+                    <div className='cursor-pointer' >
+                        {
+                            question?.options?.map(item =>
+                                <div key={item.key} onClick={() => handleCheckboxChange(question.key, item.key, item.nextQuestion)}>{item.value}</div>)
+                        }
                     </div>
                 }
             </div >
