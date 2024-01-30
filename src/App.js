@@ -6,7 +6,7 @@ import MediaSection from './components/molecule/MediaSection'
 import HealthierHappierSection from './components/molecule/HealthierHappierSection'
 import NewWorldSection from './components/molecule/NewWorldSection'
 import PremiumQuality from './components/molecule/PremiumQuality'
-// import HowItWorks from './components/molecule/HowItWorks'
+import HowItWorks from './components/molecule/HowItWorks'
 import ContactFormSection from './components/molecule/ContactFormSection'
 import FeedbackSectionByClient from './components/molecule/FeedbackSectionByClient';
 import PersonalisedSection from './components/molecule/PersonalisedSection';
@@ -26,7 +26,7 @@ function App() {
         <MediaSection />
         <HealthierHappierSection />
         <NewWorldSection />
-        {/* <HowItWorks /> */}
+        <HowItWorks />
         <PremiumQuality />
         <FeedbackSectionByClient />
         <PersonalisedSection />

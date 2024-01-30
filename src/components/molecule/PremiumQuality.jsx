@@ -35,7 +35,7 @@ const PremiumQuality = () => {
         <section className='premiumSection'>
             <div className='premiumBg'>
                 <div className='flex justify-center mb-11'>
-                    <div className='text-55px font-bold'>Premium Quality</div>
+                    <div className='title55'>Premium Quality</div>
                 </div>
                 <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-4'>
                     {quality.map((item) => (

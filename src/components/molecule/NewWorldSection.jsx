@@ -43,7 +43,7 @@ const NewWorldSection = () => {
     return (
         <section className='newWorldSection'>
             <div className='flex justify-center'>
-                <div className='text-40px md:text-58px font-bold md:w-1032 text-center'>Welcome To A Whole New World Of Personalised Health & Wellness</div>
+                <div className='title58 md:w-1032 text-center'>Welcome To A Whole New World Of Personalised Health & Wellness</div>
             </div>
             <div className='mt-14'>
                 {

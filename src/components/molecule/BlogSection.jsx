@@ -104,7 +104,7 @@ const BlogSection = () => {
     return (
         <section className='blogSec'>
             <div>
-                <div className='text-30px md:text-55px font-bold text-center'>Recent blog Posts</div>
+                <div className='title55 text-center'>Recent blog Posts</div>
                 <div className='mt-50'>
                     <Carousel
                         swipeable={true}
@@ -128,7 +128,7 @@ const BlogSection = () => {
                 </div>
             </div>
             <div className='mt-24'>
-                <div className='text-30px md:text-55px font-bold text-center'> Nutra Nourish Videos</div>
+                <div className='title55 text-center'> Nutra Nourish Videos</div>
                 <div className='mt-50'>
                     <Carousel
                         swipeable={true}

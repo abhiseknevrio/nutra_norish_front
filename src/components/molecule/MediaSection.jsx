@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -23,8 +23,6 @@ const items = [
 
 const MediaSection = () => {
 
-    const carouselRef = useRef(null)
-
     const responsive = {
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
@@ -40,27 +38,14 @@ const MediaSection = () => {
         }
     };
 
-    const handleNext = () => {
-        if (carouselRef.current) {
-            carouselRef.current.next(1);
-        }
-    };
-
-    const handlePrevious = () => {
-        if (carouselRef.current) {
-            carouselRef.current.previous(1);
-        }
-    }
-
     return (
         <section className='mediaSec'>
             <div className='flex justify-center'>
-                <h1 className='text-55px font-bold'>Media</h1>
+                <h1 className='title55'>Media</h1>
             </div>
             <div className='mt-10'>
                 <div>
                     <Carousel
-                        ref={carouselRef}
                         swipeable={true}
                         draggable={true}
                         showDots={true}
