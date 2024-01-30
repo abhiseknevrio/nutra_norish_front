@@ -59,9 +59,40 @@ const QuizCard = ({ questions }) => {
     };
 
 
-    const addUserData = () => {
+    const addUserData = async () => {
         const finalArr = [...singleSelectInput, ...userInput, ...multiSelectInput]
-        setUserData(prev => prev = finalArr)
+        setUserData(finalArr)
+
+        console.log("final Arr", finalArr)
+
+        // setUserData((prevUserData) => {
+        //     const existingIndex = prevUserData.findIndex((item) => item.key === key);
+
+        //     if (existingIndex !== -1) {
+        //         const updatedUserData = [...prevUserData];
+        //         updatedUserData[existingIndex] = { question: key, answer: val };
+        //         return updatedUserData;
+        //     } else {
+        //         return [...prevUserData, { question: key, answer: val }];
+        //     }
+        // });
+
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BASE_URL}saveUserDataFunction`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    "userDetails": {
+                        "name": "Abhisek",
+                        "email": "abhisek@nevrio.tech"
+                    },
+                    finalArr
+                }),
+            });
+            console.log("post response : ", response);
+        } catch (error) {
+            console.error("post error : ", error);
+        }
+
     };
 
     console.log("userData", userData)
