@@ -113,6 +113,7 @@ const QuizCard = ({ questions }) => {
 
                 if (response.ok) {
                     const data = await response.json()
+                    alert(data.message[0].disclaimer)
                     setResponseData(data.recommendations)
                 }
             } catch (error) {
@@ -136,7 +137,7 @@ const QuizCard = ({ questions }) => {
                                         <div key={item.key} >
                                             <div
                                                 onClick={() => handleRadioChange(question.key, item.key, item.nextQuestion)}
-                                                className={`hover:bg-btnBg hover:text-nutraWhite cursor-pointer text-lg border border-borderGreen rounded-full py-2.5 px-5 inline-block`}>
+                                                className={`hover:bg-btnBg hover:text-nutraWhite cursor-pointer text-lg border border-borderGreen rounded-full py-2.5 px-5 inline-block ${singleSelectInput.find(obj => obj.question === question.key && obj.answer === item.key) ? 'bg-btnBg text-nutraWhite' : ''}`}>
                                                 {item.value}
                                             </div>
                                         </div>
