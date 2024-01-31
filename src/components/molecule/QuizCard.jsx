@@ -171,7 +171,8 @@ const QuizCard = ({ questions }) => {
                                 <div className='grid grid-cols-3 cursor-pointer gap-5' >
                                     {
                                         question?.options?.map(item =>
-                                            <div className='multiSelectCard' key={item.key} onClick={() => handleCheckboxChange(question.key, item.key, item.nextQuestion)}>{item.value}</div>)
+                                            // <div className='multiSelectCard' key={item.key} onClick={() => handleCheckboxChange(question.key, item.key, item.nextQuestion)}>{item.value}</div>)
+                                            <div className={`multiSelectCard ${multiSelectInput.find(obj => obj.question === question.key && obj.answer.includes(item.key)) ? 'bg-btnBg text-nutraWhite' : 'bg-nutraWhite'}`} key={item.key} onClick={() => handleCheckboxChange(question.key, item.key, item.nextQuestion)}>{item.value}</div>)
                                     }
                                 </div>
                             }
