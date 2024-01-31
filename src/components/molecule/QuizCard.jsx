@@ -6,10 +6,14 @@ const QuizCard = ({ questions }) => {
     const [singleSelectInput, setSingleSelectInput] = useState([]);
     const [multiSelectInput, setMultiSelectInput] = useState([]);
     const [nextRecQue, setNextRecQue] = useState(null)
-    const [isSubmit, setIsSubmit] = useState(false)
     const [orderIndex, setOrderIndex] = useState([])
     const [isShowPrev, setIsShowPrev] = useState(false)
-    const [isShowNext, setIsShowNext] = useState(false)
+    const [isShowNext, setIsShowNext] = useState(true)
+    const [isSubmit, setIsSubmit] = useState(false)
+    const [userDetails, setUserDetails] = useState({
+        name: null,
+        email: null
+    })
 
     const [responseData, setResponseData] = useState([])
 
@@ -61,34 +65,6 @@ const QuizCard = ({ questions }) => {
         setNextRecQue(next);
     };
 
-
-    const addUserData = async () => {
-        const finalArr = [...singleSelectInput, ...userInput, ...multiSelectInput]
-        try {
-            const response = await fetch(`${process.env.REACT_APP_BASE_URL}saveUserDataFunction`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "userDetails": {
-                        "name": "Abhisek",
-                        "email": "abhisek@nevrio.tech"
-                    },
-                    response: finalArr
-                }),
-            });
-
-            if (response.ok) {
-                const data = await response.json()
-                setResponseData(data.recommendations)
-            }
-        } catch (error) {
-            console.error("post error : ", error);
-        }
-
-    };
-
     const nextQue = (val) => {
         const que = questions?.find((item) => item.key === val)
         const updatedIndex = [...orderIndex];
@@ -101,9 +77,11 @@ const QuizCard = ({ questions }) => {
             }
             setOrderIndex(updatedIndex)
         } else {
-            alert("Ques end...! --> Submit Form")
             setIsSubmit(true)
+            setIsShowNext(false)
+            setIsShowPrev(false)
         }
+        setIsShowPrev(true)
     };
 
     const prevQue = () => {
@@ -114,24 +92,51 @@ const QuizCard = ({ questions }) => {
             setNextQue(que)
         } else {
             setNextQue(questions[0])
+            setIsShowPrev(false)
+        }
+    };
+
+    const submitUserData = async () => {
+        if (userDetails.name !== null || userDetails.email !== null) {
+            const finalArr = [...singleSelectInput, ...userInput, ...multiSelectInput]
+            try {
+                const response = await fetch(`${process.env.REACT_APP_BASE_URL}saveUserDataFunction`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        userDetails: userDetails,
+                        response: finalArr
+                    }),
+                });
+
+                if (response.ok) {
+                    const data = await response.json()
+                    setResponseData(data.recommendations)
+                }
+            } catch (error) {
+                console.error("post error : ", error);
+            }
+        } else {
+            alert("Please fill all fields")
         }
     };
 
     return (
         <>
             {
-                !responseData.length ?
+                !isSubmit ?
                     <div className='text-center p-20 quizBox'>
                         <div className='title50'>{question?.question}{question?.required && <span>*</span>}</div>
                         <div className='mt-9'>
                             {question.type === "single_select" &&
                                 <div className='grid grid-cols-3 justify-center gap-x-10'>
                                     {question?.options?.map((item) => (
-                                        <div
-                                            key={item.key}
-                                            onClick={() => handleRadioChange(question.key, item.key, item.nextQuestion)}
-                                        >
-                                            <div className={`hover:bg-btnBg hover:text-nutraWhite cursor-pointer text-lg border border-borderGreen rounded-full py-2.5 px-5 inline-block`}>
+                                        <div key={item.key} >
+                                            <div
+                                                onClick={() => handleRadioChange(question.key, item.key, item.nextQuestion)}
+                                                className={`hover:bg-btnBg hover:text-nutraWhite cursor-pointer text-lg border border-borderGreen rounded-full py-2.5 px-5 inline-block`}>
                                                 {item.value}
                                             </div>
                                         </div>
@@ -169,12 +174,8 @@ const QuizCard = ({ questions }) => {
                                     }
                                 </div>
                             }
-                        </div >
-
-                        {
-                            isSubmit && <h1 onClick={addUserData}>Submit Form </h1>
-                        }
-                        <div div className='flex justify-between text-lg font-bold mt-10' >
+                        </div>
+                        <div div className={`flex ${isShowPrev ? 'justify-between' : 'justify-end'} text-lg font-bold mt-10`} >
                             {isShowPrev && <button className='hover:text-borderGreen' onClick={() => prevQue()}>Previous</button>}
                             {isShowNext && <button className='hover:text-borderGreen' onClick={() => nextQue(nextRecQue)}>Next</button>}
                         </div>
@@ -183,29 +184,51 @@ const QuizCard = ({ questions }) => {
 
                     :
 
+                    (
+                        <div>
+                            <div className='w-1320 justify-center mx-auto'>
+                                <div className='grid grid-col-1 md:grid-cols-2 gap-5'>
+                                    <input onChange={e => setUserDetails({ ...userDetails, name: e.target.value })} className='formInput pl-5 py-7 mt-3' type="text" placeholder="Enter Name" />
+                                    <input onChange={e => setUserDetails({ ...userDetails, email: e.target.value })} className='formInput pl-5 py-7 mt-3' type="email" placeholder="Enter Email" />
+                                </div>
+                                {/* Bottom Border */}
+                                <div className='border-b border-borderGreen mt-10'></div>
+                                <div className='flex justify-center mt-4'>
+                                    <button onClick={submitUserData} className='bg-btnBg inline-block px-9 py-5 rounded-full'>
+                                        <div className='flex gap-4'>
+                                            <div className='font-bold text-lg text-nutraWhite'>Submit Form</div>
+                                            <img src="/images/btnArrow.svg" alt="" />
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )
+
+            }
+
+            {
+                responseData.length ?
                     <div className='h-96 overflow-y-scroll'>
                         <h1 className='text-5xl font-bold'>Response Based on your Answer</h1>
                         {
-                            responseData ?
-                                <>
-                                    {responseData.map(item => (
-                                        <div key={item?.key} className='my-5 border p-2.5'>
-                                            <div className='text-xl'>Quetion: {item?.question}</div>
-                                            <div>Answer : {item?.option}</div>
-                                            <div>Rec : {item?.descriotion}</div>
-                                            <div>Product : {item?.product_name}</div>
-                                            <div>Price : {item?.price}</div>
-                                            <div>Properties : {item?.properties.Dairy_free && "Dairy Free, "} {item?.properties.Gluten_free && "Gluten Free, "} {item?.properties.non_vegetarian && "Non Vegetarian, "} {item?.properties.vegan && "Vegan"}</div>
-                                            <div className='hover:text-btnBg'>
-                                                <a href={item.link} target='_blank' rel='noreferrer'>Click here for Product Info</a>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </>
-                                :
-                                null
+                            responseData.map(item => (
+                                <div key={item?.key} className='my-5 border p-2.5'>
+                                    <div className='text-xl'>Quetion: {item?.question}</div>
+                                    <div>Answer : {item?.option}</div>
+                                    <div>Rec : {item?.descriotion}</div>
+                                    <div>Product : {item?.product_name}</div>
+                                    <div>Price : {item?.price}</div>
+                                    <div>Properties : {item?.properties.Dairy_free && "Dairy Free, "} {item?.properties.Gluten_free && "Gluten Free, "} {item?.properties.non_vegetarian && "Non Vegetarian, "} {item?.properties.vegan && "Vegan"}</div>
+                                    <div className='hover:text-btnBg'>
+                                        <a href={item.link} target='_blank' rel='noreferrer'>Click here for Product Info</a>
+                                    </div>
+                                </div>
+                            ))
                         }
                     </div>
+                    :
+                    null
             }
         </>
     );
