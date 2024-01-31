@@ -15,6 +15,15 @@ const QuizCard = ({ questions }) => {
         email: null
     })
 
+    // const finalArrSelected = []
+
+    // singleSelectInput.map(item => finalArrSelected.push(item))
+    // userInput.map(item => finalArrSelected.push(item))
+    // multiSelectInput.map(item => finalArrSelected.push(item))
+
+    // console.log("finalArrSelected", singleSelectInput.findIndex(res => res.question === 'q14' && res.answer === 'option1'))
+    // console.log("finalArrSelected", finalArrSelected.findIndex(res => res.question === 'q14' && res.answer.includes('option1')))
+
     const [responseData, setResponseData] = useState([])
 
     const handleCheckboxChange = (que, key, next) => {
@@ -113,6 +122,7 @@ const QuizCard = ({ questions }) => {
 
                 if (response.ok) {
                     const data = await response.json()
+                    alert(data.message[0].disclaimer)
                     setResponseData(data.recommendations)
                 }
             } catch (error) {
