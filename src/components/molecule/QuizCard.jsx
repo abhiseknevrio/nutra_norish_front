@@ -15,69 +15,9 @@ const QuizCard = ({ questions }) => {
         email: null
     })
 
-    // const [responseData, setResponseData] = useState([
-    //     {
-    //         "question": "How is your menstrual cycle?",
-    //         "questionKey": "q1.1",
-    //         "option": "Post Menopause/ Hysterectomy",
-    //         "optionKey": "option2",
-    //         "condition": {
-    //             "gender": "Female"
-    //         },
-    //         "price": 29.99,
-    //         "link": "https://nutranourish.shop/products/complete-multi%E2%84%A2?_pos=3&_sid=b69aed83a&_ss=r",
-    //         "descriotion": "Female not having menses: Complete Multi without Copper & Iron (Take 4 capsules per day (2 with each meal)) and OmegaAvail synergy (1 after any meal)",
-    //         "priority": 1,
-    //         "product_name": "DFH Multi (feee of copper and iron)",
-    //         "key": "recommendation2",
-    //         "properties": {
-    //             "Gluten_free": true,
-    //             "non_vegetarian": false,
-    //             "vegan": true,
-    //             "Dairy_free": true
-    //         }
-    //     },
-    //     {
-    //         "question": "Is there anything you're particularly concerned about or want to improve?",
-    //         "questionKey": "q3",
-    //         "option": "Blood Pressure",
-    //         "optionKey": "option18",
-    //         "price": 83,
-    //         "link": "https://nutranourish.shop/products/htn-supreme%E2%84%A2?_pos=1&_sid=e3a901793&_ss=r",
-    //         "description": " Take 4 capsules per day (Divided dosing recommended)",
-    //         "priority": 1,
-    //         "product_name": " HTN supreme",
-    //         "key": "recommendation33",
-    //         "properties": {
-    //             "Gluten_free": true,
-    //             "non_vegetarian": false,
-    //             "vegan": true,
-    //             "Dairy_free": true
-    //         }
-    //     },
-    //     {
-    //         "question": "Do you frequently suffer from Seasonal Allergies?",
-    //         "questionKey": "q6",
-    //         "option": "Yes",
-    //         "optionKey": "option1",
-    //         "price": 85,
-    //         "link": "https://nutranourish.shop/products/histaeze%E2%84%A2?_pos=1&_sid=74d73797a&_ss=r",
-    //         "description": "Take 4 capsules per day (Divided dosing recommended)",
-    //         "priority": 1,
-    //         "product_name": "Histease",
-    //         "key": "recommendation40",
-    //         "properties": {
-    //             "Gluten_free": true,
-    //             "non_vegetarian": false,
-    //             "vegan": true,
-    //             "Dairy_free": true
-    //         }
-    //     }
-    // ])
+    const [isLoading, setIsLoading] = useState(false)
 
     const [responseData, setResponseData] = useState([])
-
-    console.log(responseData)
 
     const handleCheckboxChange = (que, key, next) => {
         const updatedSelectedOptions = [...multiSelectInput];
@@ -159,6 +99,7 @@ const QuizCard = ({ questions }) => {
     };
 
     const submitUserData = async () => {
+        setIsLoading(true)
         if (userDetails.name !== null || userDetails.email !== null) {
             const finalArr = [...singleSelectInput, ...userInput, ...multiSelectInput]
             try {
@@ -174,6 +115,7 @@ const QuizCard = ({ questions }) => {
                 });
 
                 if (response.ok) {
+                    setIsLoading(false)
                     const data = await response.json()
                     if (data.message[0]) {
                         alert(data?.message[0]?.disclaimer)
@@ -182,9 +124,11 @@ const QuizCard = ({ questions }) => {
                 }
             } catch (error) {
                 console.error("post error : ", error);
+                setIsLoading(false)
             }
         } else {
             alert("Please fill all fields")
+            setIsLoading(false)
         }
     };
 
@@ -260,7 +204,7 @@ const QuizCard = ({ questions }) => {
                                         <div className='flex justify-center mt-4'>
                                             <button onClick={submitUserData} className='bg-btnBg inline-block px-9 py-5 rounded-full'>
                                                 <div className='flex gap-4'>
-                                                    <div className='font-bold text-lg text-nutraWhite'>Submit Form</div>
+                                                    <div className='font-bold text-lg text-nutraWhite'>{isLoading ? 'Submitting...' : 'Submit Form'}</div>
                                                     <img src="/images/btnArrow.svg" alt="" />
                                                 </div>
                                             </button>
