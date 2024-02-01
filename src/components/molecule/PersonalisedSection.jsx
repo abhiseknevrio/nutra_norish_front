@@ -9,7 +9,7 @@ const PersonalisedSection = () => {
                 <div className='personalisedSec'>
                     <div className='flex flex-col lg:flex-row items-center'>
                         <div className='personalised-left'>
-                            <img className='p-5' src='/images/personalised/personalised.svg' alt='' />
+                            <img className='p-5' src='/images/personalised/personalised-rr.svg' alt='' />
                         </div>
                         <div className='personalised-right text-center lg:text-left'>
                             <div className='title55'>Personalized Plans,Best Value</div>
