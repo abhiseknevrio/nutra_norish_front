@@ -142,7 +142,7 @@ const QuizCard = ({ questions }) => {
                                 <div className='title50'>{question?.question}{question?.required && <span>*</span>}</div>
                                 <div className='mt-9'>
                                     {question.type === "single_select" &&
-                                        <div className='grid grid-cols-3 justify-center gap-x-10'>
+                                        <div className='grid sm:grid-cols-2 lg:grid-cols-3 justify-center gap-x-10'>
                                             {question?.options?.map((item) => (
                                                 <div key={item.key} >
                                                     <div

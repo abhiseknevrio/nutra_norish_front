@@ -43,12 +43,12 @@ const HeroSection = () => {
                                 <p className='font-bold text-xl mt-8'>Instant access to expert designed personalised Supplement Plan made just For You</p>
                             </div>
                         </div>
-                        <div className='lg:hidden flex justify-center mt-14 mb-24'>
+                        {/* <div className='lg:hidden flex justify-center mt-14 mb-24'>
                             <Button text="Take The Quiz" />
-                        </div>
+                        </div> */}
 
                         {/* Importent Section */}
-                        <div className='hidden lg:block'>
+                        <div className=''>
                             <div className='flex justify-center mt-14'>
                                 {
                                     questions ?
