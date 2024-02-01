@@ -16,21 +16,20 @@ const QuizCard = ({ questions }) => {
     })
 
     const [recNextQue, setRecNextQue] = useState([])
-
-
+    // const [recPrevQue, setRecPrevQue] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
     const [responseData, setResponseData] = useState([])
 
+    console.log("recNextQue", recNextQue)
+
     const handleCheckboxChange = (que, key, next) => {
-        const nextQue = [...recNextQue]
-        if (nextQue.includes(next)) {
-            nextQue.filter(item => item !== item)
-        } else {
+        let nextQue = [...recNextQue]
+        if (next) {
             nextQue.push(next)
         }
-
-        setRecNextQue(nextQue.sort())
+        const uniqueQue = [...new Set(nextQue)]
+        setRecNextQue(uniqueQue.sort())
 
         const updatedSelectedOptions = [...multiSelectInput];
         const questionIndex = updatedSelectedOptions.findIndex(option => option.question === que);
