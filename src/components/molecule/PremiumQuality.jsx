@@ -6,27 +6,27 @@ const PremiumQuality = () => {
     const quality = [
         {
             id: "01",
-            image: "/images/quality/01.svg",
+            image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/premium01.svg",
             text: "Quality Ingredients"
         },
         {
             id: "02",
-            image: "/images/quality/02.svg",
+            image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/premium02.svg",
             text: "No nasties"
         },
         {
             id: "03",
-            image: "/images/quality/03.svg",
+            image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/premium03.svg",
             text: "GMP certified Labs"
         },
         {
             id: "04",
-            image: "/images/quality/04.svg",
+            image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/premium04.svg",
             text: "Non GMO, Gluten Free"
         },
         {
             id: "05",
-            image: "/images/quality/05.svg",
+            image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/premium05.svg",
             text: "Bioavailable"
         },
     ]
