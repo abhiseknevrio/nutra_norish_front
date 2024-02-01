@@ -50,7 +50,7 @@ const BlogSection = () => {
             date: "October 5, 2023",
             by: "Dr Menka Gupta",
             title: "Understanding Female Hormones: Types and Functions",
-            image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/blog01-rr.svg",
+            image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/blog01-rr.jpg",
             bgColor: "#F1E4DB",
             redirectTo: ""
         },
@@ -59,7 +59,7 @@ const BlogSection = () => {
             date: "September 30, 2023",
             by: "Dr Menka Gupta",
             title: "Benefits Of Yoga For Digestion",
-            image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/blog02-rr.svg",
+            image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/blog02-rr.jpg",
             bgColor: "#CDD1E3",
             redirectTo: ""
         },
@@ -68,7 +68,7 @@ const BlogSection = () => {
             date: "October 5, 2023",
             by: "Dr Menka Gupta",
             title: "How to Flush Out Excess Estrogen from the Body?",
-            image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/blog03-rr.svg",
+            image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/blog03-rr.jpg",
             bgColor: "#E3E3E3",
             redirectTo: "https://nutranourish.com/blog/how-to-flush-out-excess-estrogen"
         },
@@ -78,25 +78,25 @@ const BlogSection = () => {
         {
             id: "01",
             title: "“Dr Brent Dorval PhD, our CSO, talking about the Food Sensitivity Testing at the recent A4M Gastroenterology Conference” - Dr Brent Dorval",
-            image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/blog01-rr.svg",
+            image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/video01-rr.jpg",
             redirectTo: "https://www.youtube.com/watch?v=ApuWHhya2Uk"
         },
         {
             id: "02",
             title: "Dr. Joel Evans, recently spoke abroad regarding food sensitivity testing, inflammation, and leaky gut. -Dr. Joel Evans",
-            image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/blog02-rr.svg",
+            image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/video02-rr.jpg",
             redirectTo: "https://www.youtube.com/watch?v=ApuWHhya2Uk"
         },
         {
             id: "03",
             title: "“Dr Brent Dorval PhD, our CSO, talking about the Food Sensitivity Testing at the recent A4M Gastroenterology Conference” - Dr Brent Dorval",
-            image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/blog01-rr.svg",
+            image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/video01-rr.jpg",
             redirectTo: "https://www.youtube.com/watch?v=ApuWHhya2Uk"
         },
         {
             id: "04",
             title: "Dr. Joel Evans, recently spoke abroad regarding food sensitivity testing, inflammation, and leaky gut. -Dr. Joel Evans",
-            image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/blog02-rr.svg",
+            image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/video02-rr.jpg",
             redirectTo: "https://www.youtube.com/watch?v=ApuWHhya2Uk"
         },
     ]
