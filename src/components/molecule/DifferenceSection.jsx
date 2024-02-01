@@ -23,7 +23,7 @@ const DifferenceSection = () => {
 
     return (
         <section className='differenceSec relative'>
-            <img className='absolute -top-100 right-right0 whatsIcon' src='/images/whatsapp-rr.svg' alt='' />
+            <img className='absolute -top-100 right-right0 whatsIcon' src='https://cdn.shopify.com/s/files/1/0606/0703/7648/files/whatsapp-rr.svg' alt='' />
             <div className=''>
                 <div className='flex justify-center'>
                     <h1 className='title55 text-center md:w-1032'>
