@@ -103,7 +103,7 @@ const QuizCard = ({ questions }) => {
         if (userDetails.name !== null || userDetails.email !== null) {
             const finalArr = [...singleSelectInput, ...userInput, ...multiSelectInput]
             try {
-                const response = await fetch(`${process.env.REACT_APP_BASE_URL}saveUserDataFunction`, {
+                const response = await fetch(`https://us-central1-nutra-nourish.cloudfunctions.net/saveUserDataFunction`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
