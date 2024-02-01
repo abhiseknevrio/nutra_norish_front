@@ -23,6 +23,8 @@ const HeroSection = () => {
         fetchData();
     }, []);
 
+    console.log("questions", questions)
+
     return (
         <>
             <section className='padb-117'>
