@@ -4,10 +4,10 @@ const Footer = () => {
     return (
         <footer className='footerSec'>
             <div className='flex justify-center'>
-                <img src={'https://cdn.shopify.com/s/files/1/0606/0703/7648/files/nutranourish-logo.svg'} alt='footerlogo' />
+                <img src={'https://cdn.shopify.com/s/files/1/0606/0703/7648/files/nutranourish-logo-rr.svg'} alt='footerlogo' />
             </div>
             <div className={'flex justify-center text-base'}>
-                <img src={'https://cdn.shopify.com/s/files/1/0606/0703/7648/files/health-store.svg'} alt='healthstoreicon' className={'mr-2'} />
+                <img src={'https://cdn.shopify.com/s/files/1/0606/0703/7648/files/health-store-rr.svg'} alt='healthstoreicon' className={'mr-2'} />
                 <a href="http://">Health Store</a>
             </div>
             <div>
@@ -24,11 +24,11 @@ const Footer = () => {
                                 Social Media:
                             </div>
                             <div className={'flex items-center'}>
-                                <img src={'https://cdn.shopify.com/s/files/1/0606/0703/7648/files/facebook.svg'} alt='fbIcon' className={'socialIcon'} />
-                                <img src={'https://cdn.shopify.com/s/files/1/0606/0703/7648/files/twitter.svg'} alt='twitterIcon' className={'socialIcon'} />
-                                <img src={'https://cdn.shopify.com/s/files/1/0606/0703/7648/files/youtube.svg'} alt='ytIcon' className={'socialIcon'} />
-                                <img src={'https://cdn.shopify.com/s/files/1/0606/0703/7648/files/instagram.svg'} alt='igIcon' className={'socialIcon'} />
-                                <img src={'https://cdn.shopify.com/s/files/1/0606/0703/7648/files/linkedin.svg'} alt='igIcon' className={'socialIcon'} />
+                                <img src={'https://cdn.shopify.com/s/files/1/0606/0703/7648/files/facebook-rr.svg'} alt='fbIcon' className={'socialIcon'} />
+                                <img src={'https://cdn.shopify.com/s/files/1/0606/0703/7648/files/twitter-rr.svg'} alt='twitterIcon' className={'socialIcon'} />
+                                <img src={'https://cdn.shopify.com/s/files/1/0606/0703/7648/files/youtube-rr.svg'} alt='ytIcon' className={'socialIcon'} />
+                                <img src={'https://cdn.shopify.com/s/files/1/0606/0703/7648/files/instagram-rr.svg'} alt='igIcon' className={'socialIcon'} />
+                                <img src={'https://cdn.shopify.com/s/files/1/0606/0703/7648/files/linkedin-rr.svg'} alt='igIcon' className={'socialIcon'} />
                             </div>
                         </div>
                     </div>
