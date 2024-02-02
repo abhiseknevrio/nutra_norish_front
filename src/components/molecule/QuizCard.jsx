@@ -15,11 +15,22 @@ const QuizCard = ({ questions }) => {
         email: null
     })
 
+    const [recNextQue, setRecNextQue] = useState([])
+    // const [recPrevQue, setRecPrevQue] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
     const [responseData, setResponseData] = useState([])
 
+    console.log("recNextQue", recNextQue)
+
     const handleCheckboxChange = (que, key, next) => {
+        let nextQue = [...recNextQue]
+        if (next) {
+            nextQue.push(next)
+        }
+        const uniqueQue = [...new Set(nextQue)]
+        setRecNextQue(uniqueQue.sort())
+
         const updatedSelectedOptions = [...multiSelectInput];
         const questionIndex = updatedSelectedOptions.findIndex(option => option.question === que);
         if (questionIndex === -1) {
@@ -38,8 +49,14 @@ const QuizCard = ({ questions }) => {
             updatedSelectedOptions[updatedQuestionIndex].answer.push(key);
         }
         setMultiSelectInput(updatedSelectedOptions);
-        setNextRecQue(next)
+
+        if (recNextQue.length > 0) {
+            setNextRecQue(recNextQue[0])
+        } else {
+            setNextRecQue(next)
+        }
     };
+
 
     const handleRadioChange = (que, key, next) => {
         const existingResponseIndex = singleSelectInput.findIndex(response => response.question === que);
@@ -52,7 +69,12 @@ const QuizCard = ({ questions }) => {
         } else {
             setSingleSelectInput(prevResponses => [...prevResponses, { question: que, answer: key }]);
         };
-        setNextRecQue(next);
+
+        if (recNextQue.length > 0) {
+            setNextRecQue(recNextQue[0])
+        } else {
+            setNextRecQue(next)
+        }
     };
 
     const handleInputChange = (que, key, next) => {
@@ -64,7 +86,12 @@ const QuizCard = ({ questions }) => {
         } else {
             setUserInput(prevResponses => [...prevResponses, { question: que, answer: key }]);
         };
-        setNextRecQue(next);
+
+        if (recNextQue.length > 0) {
+            setNextRecQue(recNextQue[0])
+        } else {
+            setNextRecQue(next)
+        }
     };
 
     const nextQue = (val) => {
@@ -84,6 +111,7 @@ const QuizCard = ({ questions }) => {
             setIsShowPrev(false)
         }
         setIsShowPrev(true)
+        recNextQue.shift()
     };
 
     const prevQue = () => {
@@ -160,7 +188,7 @@ const QuizCard = ({ questions }) => {
                                                 <div key={item.key}>
                                                     <input
                                                         onChange={(e) => handleInputChange(question.key, e.target.value, item.nextQuestion)}
-                                                        className='quizInput rounded-full'
+                                                        className='quizInput rounded-full title50'
                                                         type='text'
                                                     />
                                                     {/* <img
