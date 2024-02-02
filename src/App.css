@@ -230,7 +230,7 @@
 }
 
 .lineCss {
-    top: 74px;
+    top: 150px;
 }
 
 .howItWorkSec {
@@ -269,9 +269,20 @@
     font-weight: 700;
 }
 
+.whatsIcon {
+    width: 143px;
+}
 
 .multiSelectCard {
     padding: 20px 40px;
+}
+
+.desktopBlock {
+    display: block;
+}
+
+.mobileBlock {
+    display: none;
 }
 
 /* Re-factor */
@@ -296,7 +307,6 @@
 
     .whatsIcon {
         width: 80px;
-        bottom: 0px;
     }
 
     .mediaSec {
@@ -443,6 +453,14 @@
     .multiSelectCard {
         padding: 10px 20px;
     }
+
+    .desktopBlock {
+        display: none;
+    }
+
+    .mobileBlock {
+        display: block;
+    }
 }
 
 @media only screen and (max-width: 1440px) and (min-width: 768px) {
@@ -465,7 +483,6 @@
 
     .whatsIcon {
         width: 80px;
-        bottom: 0px;
     }
 
     .mediaSec {
