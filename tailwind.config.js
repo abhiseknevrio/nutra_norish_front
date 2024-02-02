@@ -33,10 +33,6 @@ module.exports = {
       '1320': '1320px',
       '1580': '1580px',
     },
-    inset: {
-      'right0': '0px',
-      '100': '100px'
-    },
     extend: {},
   },
   plugins: [],
