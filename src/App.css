@@ -1,9 +1,9 @@
 .heroBg {
-    background: url("../public/images/heroBg.svg");
+    background: url("https://cdn.shopify.com/s/files/1/0606/0703/7648/files/heroBg-rr.svg");
 }
 
 .premiumBg {
-    background: url("../public/images/quality/bg.svg");
+    background: url("https://cdn.shopify.com/s/files/1/0606/0703/7648/files/premiumbg-rr.svg");
     background-repeat: no-repeat;
     background-position: top;
 }
@@ -190,7 +190,7 @@
 }
 
 .contactSec {
-    background: url("../public/images/contactFormBg.svg");
+    background: url("https://cdn.shopify.com/s/files/1/0606/0703/7648/files/contactFormBg.svg");
     background-repeat: no-repeat;
     background-position: top;
     margin-top: 19px;
@@ -207,7 +207,7 @@
 }
 
 .personalisedBg {
-    background: url("../public/images/personalised/bg.svg");
+    background: url("https://cdn.shopify.com/s/files/1/0606/0703/7648/files/personalisedbg.svg");
     padding: 90px 169px;
 }
 

@@ -11,7 +11,7 @@ const HowItWorks = () => {
                     <div className='flex justify-center items-center'>
                     </div>
                     <div className='flex justify-center items-center relative'>
-                        <img src="/images/longline.svg" alt="" srcSet="" className='absolute lineCss' />
+                        <img src="https://cdn.shopify.com/s/files/1/0606/0703/7648/files/longline-rr.svg" alt="" srcSet="" className='absolute lineCss' />
                         <div className='step1 flex justify-center items-center text-3xl text-nutraWhite font-bold'>STEP 1</div>
                     </div>
                     <div className='flex justify-center items-center flex-col'>
@@ -48,7 +48,7 @@ const HowItWorks = () => {
             <div className='block md:hidden'>
                 <div className='grid grid-cols-2 py-8'>
                     <div className='flex justify-center items-center relative'>
-                        <img src="/images/line.svg" alt="" srcSet="" className='absolute lineCss' />
+                        <img src="https://cdn.shopify.com/s/files/1/0606/0703/7648/files/line-rr.svg" alt="" srcSet="" className='absolute lineCss' />
                         <div className='step1 flex justify-center items-center text-xl text-nutraWhite font-bold'>STEP 1</div>
                     </div>
                     <div className='flex justify-center items-center flex-col'>

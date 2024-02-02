@@ -4,19 +4,19 @@ import "react-multi-carousel/lib/styles.css";
 
 const items = [
     {
-        icon: '/images/media/peak.svg',
+        icon: 'https://cdn.shopify.com/s/files/1/0606/0703/7648/files/peak-rr.svg',
         name: 'peak'
     },
     {
-        icon: '/images/media/cnbc.svg',
+        icon: 'https://cdn.shopify.com/s/files/1/0606/0703/7648/files/cnbc-rr.svg',
         name: 'cnbc'
     },
     {
-        icon: '/images/media/tatler-asia.svg',
+        icon: 'https://cdn.shopify.com/s/files/1/0606/0703/7648/files/tatler-asia-rr.svg',
         name: 'tatler-asia'
     },
     {
-        icon: '/images/media/the-straits-times.svg',
+        icon: 'https://cdn.shopify.com/s/files/1/0606/0703/7648/files/the-straits-times-rr.svg',
         name: 'the-straits-times'
     }
 ];

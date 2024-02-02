@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <header className='border-b border-borderCol'>
             <div className='mx-common flex justify-center lg:justify-between items-center'>
-                <img src='/images/nutranourish-logo.svg' className='h-11 md:h-16 my-7' alt='' />
+                <img src='https://cdn.shopify.com/s/files/1/0606/0703/7648/files/nutranourish-logo-rr.svg' className='h-11 md:h-16 my-7' alt='' />
                 <div className='hidden lg:block'>
                     <Button text="Take The Quiz" />
                 </div>
