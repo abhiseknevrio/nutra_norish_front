@@ -170,12 +170,12 @@ const QuizCard = ({ questions }) => {
                                 <div className='title50'>{question?.question}{question?.required && <span>*</span>}</div>
                                 <div className='mt-9'>
                                     {question.type === "single_select" &&
-                                        <div className={`${question.options.length <= 2 ? "flex justify-center gap-x-10" : "grid grid-cols-2 gap-10"}`}>
+                                        <div className={`${question.options.length <= 2 ? "flex justify-center gap-x-10" : "grid md:grid-cols-2 gap-5"}`}>
                                             {question?.options?.map((item) => (
                                                 <div key={item.key} >
                                                     <div
                                                         onClick={() => handleRadioChange(question.key, item.key, item.nextQuestion)}
-                                                        className={`${question.options.length > 2 ? "multiSelectCard" : "rounded-full inline-block"} hover:bg-btnBg hover:text-nutraWhite cursor-pointer text-lg border border-borderGreen py-2.5 px-5 ${singleSelectInput.find(obj => obj.question === question.key && obj.answer === item.key) ? 'bg-btnBg text-nutraWhite' : 'bg-nutraWhite'}`}>
+                                                        className={`${question.options.length > 2 ? "multiSelectCard rounded-md" : "rounded-full inline-block border border-borderGreen"} hover:bg-btnBg hover:text-nutraWhite cursor-pointer text-lg  py-2.5 px-10 ${singleSelectInput.find(obj => obj.question === question.key && obj.answer === item.key) ? 'bg-btnBg text-nutraWhite' : 'bg-cardBg'}`}>
                                                         {item.value}
                                                     </div>
                                                 </div>
@@ -188,7 +188,7 @@ const QuizCard = ({ questions }) => {
                                                 <div key={item.key}>
                                                     <input
                                                         onChange={(e) => handleInputChange(question.key, e.target.value, item.nextQuestion)}
-                                                        className='quizInput rounded-full title50'
+                                                        className='quizInput rounded-full title40'
                                                         type='text'
                                                     />
                                                     {/* <img
@@ -208,7 +208,7 @@ const QuizCard = ({ questions }) => {
                                         <div className='grid grid-cols-2 lg:grid-cols-3 cursor-pointer gap-5' >
                                             {
                                                 question?.options?.map(item =>
-                                                    <div className={`multiSelectCard flex justify-center items-center ${multiSelectInput.find(obj => obj.question === question.key && obj.answer.includes(item.key)) ? 'bg-btnBg text-nutraWhite' : 'bg-nutraWhite'}`} key={item.key} onClick={() => handleCheckboxChange(question.key, item.key, item.nextQuestion)}>{item.value}</div>)
+                                                    <div className={`multiSelectCard flex justify-center items-center rounded-md ${multiSelectInput.find(obj => obj.question === question.key && obj.answer.includes(item.key)) ? 'bg-btnBg text-nutraWhite' : 'bg-cardBg'}`} key={item.key} onClick={() => handleCheckboxChange(question.key, item.key, item.nextQuestion)}>{item.value}</div>)
                                             }
                                         </div>
                                     }
@@ -221,8 +221,8 @@ const QuizCard = ({ questions }) => {
                             </div>
                             :
                             (
-                                <div>
-                                    <div className='w-1320 justify-center mx-auto'>
+                                <div className='min-w-full'>
+                                    <div className='md:w-1320 justify-center mx-auto'>
                                         <div className='grid grid-col-1 md:grid-cols-2 gap-5'>
                                             <input onChange={e => setUserDetails({ ...userDetails, name: e.target.value })} className='formInput pl-5 py-7 mt-3' type="text" placeholder="Enter Name" />
                                             <input onChange={e => setUserDetails({ ...userDetails, email: e.target.value })} className='formInput pl-5 py-7 mt-3' type="email" placeholder="Enter Email" />

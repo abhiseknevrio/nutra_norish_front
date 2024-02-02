@@ -269,6 +269,11 @@
     font-weight: 700;
 }
 
+
+.multiSelectCard {
+    padding: 20px 40px;
+}
+
 /* Re-factor */
 
 @media screen and (max-width: 767px) {
@@ -435,6 +440,9 @@
         display: none;
     }
 
+    .multiSelectCard {
+        padding: 10px 20px;
+    }
 }
 
 @media only screen and (max-width: 1440px) and (min-width: 768px) {
@@ -577,8 +585,4 @@
 
 .socialIcon {
     margin-left: 15px;
-}
-
-.multiSelectCard {
-    padding: 20px 40px;
 }
