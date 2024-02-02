@@ -17,7 +17,8 @@ module.exports = {
       borderGreen: "#A2AE85",
       contact: "#FBF5F0",
       cardBg: "#FAF5EF",
-      warning: "#F43B14"
+      warning: "#F43B14",
+      hover: "#4C6D5D"
     },
     width: {
       '261': '261px',
