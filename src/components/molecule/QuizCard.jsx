@@ -142,12 +142,12 @@ const QuizCard = ({ questions }) => {
                                 <div className='title50'>{question?.question}{question?.required && <span>*</span>}</div>
                                 <div className='mt-9'>
                                     {question.type === "single_select" &&
-                                        <div className='grid grid-cols-3 justify-center gap-x-10'>
+                                        <div className={`${question.options.length <= 2 ? "flex justify-center gap-x-10" : "grid grid-cols-2 gap-10"}`}>
                                             {question?.options?.map((item) => (
                                                 <div key={item.key} >
                                                     <div
                                                         onClick={() => handleRadioChange(question.key, item.key, item.nextQuestion)}
-                                                        className={`hover:bg-btnBg hover:text-nutraWhite cursor-pointer text-lg border border-borderGreen rounded-full py-2.5 px-5 inline-block ${singleSelectInput.find(obj => obj.question === question.key && obj.answer === item.key) ? 'bg-btnBg text-nutraWhite' : ''}`}>
+                                                        className={`${question.options.length > 2 ? "multiSelectCard" : "rounded-full inline-block"} hover:bg-btnBg hover:text-nutraWhite cursor-pointer text-lg border border-borderGreen py-2.5 px-5 ${singleSelectInput.find(obj => obj.question === question.key && obj.answer === item.key) ? 'bg-btnBg text-nutraWhite' : 'bg-nutraWhite'}`}>
                                                         {item.value}
                                                     </div>
                                                 </div>
