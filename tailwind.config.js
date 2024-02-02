@@ -16,7 +16,8 @@ module.exports = {
       newWorldSection: "#FFF8EF",
       borderGreen: "#A2AE85",
       contact: "#FBF5F0",
-      cardBg: "#FAF5EF"
+      cardBg: "#FAF5EF",
+      warning: "#F43B14"
     },
     width: {
       '261': '261px',

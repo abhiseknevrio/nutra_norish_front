@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const QuizCard = ({ questions }) => {
+const QuizCard = ({ questions, queLoading }) => {
     const [question, setNextQue] = useState(questions[0]); // Current Que
     const [userInput, setUserInput] = useState([]);
     const [singleSelectInput, setSingleSelectInput] = useState([]);
@@ -18,10 +18,14 @@ const QuizCard = ({ questions }) => {
     const [recNextQue, setRecNextQue] = useState([])
     // const [recPrevQue, setRecPrevQue] = useState([])
     const [isLoading, setIsLoading] = useState(false)
-
     const [responseData, setResponseData] = useState([])
 
-    console.log("recNextQue", recNextQue)
+
+    if (queLoading) {
+        return <div className="three col">
+            <div className="loader" id="loader-1"></div>
+        </div>
+    }
 
     const handleCheckboxChange = (que, key, next) => {
         let nextQue = [...recNextQue]
@@ -148,7 +152,7 @@ const QuizCard = ({ questions }) => {
                     if (data.message[0]) {
                         alert(data?.message[0]?.disclaimer)
                     }
-                    setResponseData(data.recommendations)
+                    setResponseData(data)
                 }
             } catch (error) {
                 console.error("post error : ", error);
@@ -245,11 +249,12 @@ const QuizCard = ({ questions }) => {
 
                     :
 
-                    (
-                        <div className='h-96 overflow-y-scroll'>
-                            <h1 className='text-5xl font-bold'>Response Based on your Answer</h1>
+                    (<div className=' md:w-874'>
+                        <h1 className='text-5xl font-bold mb-5'>Response Based on your Answer</h1>
+                        <p className='text-lg font-bold text-warning text-center mb-5'>{responseData?.message?.[0].disclaimer}</p>
+                        <div className='md:h-96 md:overflow-y-scroll'>
                             {
-                                responseData.map(item => (
+                                responseData?.recommendations.map(item => (
                                     <div key={item?.key} className='my-5 border p-2.5'>
                                         <div className='text-xl'>Quetion: {item?.question}</div>
                                         <div>Answer : {item?.option}</div>
@@ -264,7 +269,7 @@ const QuizCard = ({ questions }) => {
                                 ))
                             }
                         </div>
-                    )
+                    </div>)
             }
         </>
     );
