@@ -7,6 +7,7 @@ import QuizCard from '../molecule/QuizCard';
 const HeroSection = () => {
 
     const [questions, setQuestions] = useState(null)
+    const [queLoading, setQueLoading] = useState(true)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -14,7 +15,11 @@ const HeroSection = () => {
                 const response = await fetch(`https://us-central1-nutra-nourish.cloudfunctions.net//getAllQuestions`);
                 const data = await response.json();
                 setQuestions(data.questions)
-
+                if (response.ok) {
+                    setTimeout(() => {
+                        setQueLoading(false)
+                    }, 800)
+                }
             } catch (error) {
                 console.error(error);
             }
@@ -52,7 +57,7 @@ const HeroSection = () => {
                             <div className='flex justify-center mt-14'>
                                 {
                                     questions ?
-                                        <QuizCard questions={questions} />
+                                        <QuizCard questions={questions} queLoading={queLoading} />
                                         :
                                         null
                                 }
