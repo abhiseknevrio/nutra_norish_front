@@ -6,12 +6,12 @@ const HowItWorks = () => {
     return (
         <section className='howItWorkSec'>
             <div className='title55 text-healthTextDark text-center pt-12'>How It Works</div>
-            <div className='hidden md:block'>
+            <div className='desktopBlock'>
                 <div className='grid md:grid-cols-3 py-16'>
                     <div className='flex justify-center items-center'>
                     </div>
                     <div className='flex justify-center items-center relative'>
-                        <img src="https://cdn.shopify.com/s/files/1/0606/0703/7648/files/longline-rr.svg" alt="" srcSet="" className='absolute lineCss' />
+                        <img src="https://cdn.shopify.com/s/files/1/0606/0703/7648/files/line-rr.svg" alt="" srcSet="" className='absolute lineCss' />
                         <div className='step1 flex justify-center items-center text-3xl text-nutraWhite font-bold'>STEP 1</div>
                     </div>
                     <div className='flex justify-center items-center flex-col'>
@@ -45,7 +45,7 @@ const HowItWorks = () => {
             </div>
 
             {/* Mobile */}
-            <div className='block md:hidden'>
+            <div className='mobileBlock'>
                 <div className='grid grid-cols-2 py-8'>
                     <div className='flex justify-center items-center relative'>
                         <img src="https://cdn.shopify.com/s/files/1/0606/0703/7648/files/line-rr.svg" alt="" srcSet="" className='absolute lineCss' />

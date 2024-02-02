@@ -230,7 +230,7 @@
 }
 
 .lineCss {
-    top: 74px;
+    top: 150px;
 }
 
 .howItWorkSec {
@@ -275,6 +275,14 @@
 
 .multiSelectCard {
     padding: 20px 40px;
+}
+
+.desktopBlock {
+    display: block;
+}
+
+.mobileBlock {
+    display: none;
 }
 
 /* Re-factor */
@@ -444,6 +452,14 @@
 
     .multiSelectCard {
         padding: 10px 20px;
+    }
+
+    .desktopBlock {
+        display: none;
+    }
+
+    .mobileBlock {
+        display: block;
     }
 }
 
