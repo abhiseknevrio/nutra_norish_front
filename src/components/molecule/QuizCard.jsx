@@ -166,7 +166,7 @@ const QuizCard = ({ questions }) => {
                 responseData.length <= 0 ? <>
                     {
                         !isSubmit ?
-                            <div className='text-center p-20 quizBox'>
+                            <div className='text-center p-5 lg:p-20 quizBox'>
                                 <div className='title50'>{question?.question}{question?.required && <span>*</span>}</div>
                                 <div className='mt-9'>
                                     {question.type === "single_select" &&
@@ -205,10 +205,10 @@ const QuizCard = ({ questions }) => {
 
                                     {
                                         question.type === "multi_select" &&
-                                        <div className='grid grid-cols-3 cursor-pointer gap-5' >
+                                        <div className='grid grid-cols-2 lg:grid-cols-3 cursor-pointer gap-5' >
                                             {
                                                 question?.options?.map(item =>
-                                                    <div className={`multiSelectCard ${multiSelectInput.find(obj => obj.question === question.key && obj.answer.includes(item.key)) ? 'bg-btnBg text-nutraWhite' : 'bg-nutraWhite'}`} key={item.key} onClick={() => handleCheckboxChange(question.key, item.key, item.nextQuestion)}>{item.value}</div>)
+                                                    <div className={`multiSelectCard flex justify-center items-center ${multiSelectInput.find(obj => obj.question === question.key && obj.answer.includes(item.key)) ? 'bg-btnBg text-nutraWhite' : 'bg-nutraWhite'}`} key={item.key} onClick={() => handleCheckboxChange(question.key, item.key, item.nextQuestion)}>{item.value}</div>)
                                             }
                                         </div>
                                     }
