@@ -296,7 +296,7 @@
 
     .whatsIcon {
         width: 80px;
-        top: -40px;
+        bottom: 0px;
     }
 
     .mediaSec {
@@ -465,7 +465,7 @@
 
     .whatsIcon {
         width: 80px;
-        top: -40px;
+        bottom: 0px;
     }
 
     .mediaSec {
