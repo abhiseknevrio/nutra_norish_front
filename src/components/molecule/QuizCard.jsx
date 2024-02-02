@@ -188,7 +188,7 @@ const QuizCard = ({ questions }) => {
                                                 <div key={item.key}>
                                                     <input
                                                         onChange={(e) => handleInputChange(question.key, e.target.value, item.nextQuestion)}
-                                                        className='quizInput rounded-full'
+                                                        className='quizInput rounded-full title50'
                                                         type='text'
                                                     />
                                                     {/* <img
