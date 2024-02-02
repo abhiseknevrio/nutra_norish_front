@@ -7,6 +7,7 @@ import QuizCard from '../molecule/QuizCard';
 const HeroSection = () => {
 
     const [questions, setQuestions] = useState(null)
+    const [queLoading, setQueLoading] = useState(true)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -14,7 +15,11 @@ const HeroSection = () => {
                 const response = await fetch(`${process.env.REACT_APP_BASE_URL}/getAllQuestions`);
                 const data = await response.json();
                 setQuestions(data.questions)
-
+                if (response.ok) {
+                    setTimeout(() => {
+                        setQueLoading(false)
+                    }, 800)
+                }
             } catch (error) {
                 console.error(error);
             }
@@ -22,8 +27,6 @@ const HeroSection = () => {
 
         fetchData();
     }, []);
-
-    console.log("questions", questions)
 
     return (
         <>
@@ -54,7 +57,7 @@ const HeroSection = () => {
                             <div className='flex justify-center mt-14'>
                                 {
                                     questions ?
-                                        <QuizCard questions={questions} />
+                                        <QuizCard questions={questions} queLoading={queLoading} />
                                         :
                                         null
                                 }
