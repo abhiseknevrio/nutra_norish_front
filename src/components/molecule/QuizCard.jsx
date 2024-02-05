@@ -18,6 +18,10 @@ const QuizCard = ({ questions, queLoading }) => {
     const [recNextQue, setRecNextQue] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [responseData, setResponseData] = useState([])
+    const [nextOrderIndex, setNextOrderIndex] = useState([])
+
+    console.log("orderIndex : ", orderIndex)
+    console.log("nextOrderIndex : ", nextOrderIndex)
 
     if (queLoading) {
         return <div className="three col">
@@ -104,8 +108,14 @@ const QuizCard = ({ questions, queLoading }) => {
     };
 
     const nextQue = (val) => {
-        setIsShowNext(false)
-        const que = questions?.find((item) => item.key === val)
+        let que;
+        // const que = questions?.find((item) => item.key === val)
+        if (nextOrderIndex.length > 0) {
+            que = questions?.find((item) => item.key === nextOrderIndex[0])
+        } else {
+            que = questions?.find((item) => item.key === val)
+        }
+        nextOrderIndex.shift()
         const updatedIndex = [...orderIndex];
         const questionIndex = updatedIndex.findIndex(option => option === que)
         if (que !== undefined) {
@@ -118,11 +128,20 @@ const QuizCard = ({ questions, queLoading }) => {
             setIsSubmit(true)
             setIsShowPrev(false)
         }
+        // setIsShowNext(false)
         setIsShowPrev(true)
         recNextQue.shift()
+
+        if (nextOrderIndex.length === 0) {
+            setIsShowNext(false);
+        }
     };
 
     const prevQue = () => {
+        setIsShowNext(true)
+        const nextOrder = [...nextOrderIndex]
+        nextOrder.push(orderIndex[orderIndex.length - 1])
+        setNextOrderIndex(nextOrder.sort())
         orderIndex.pop()
         const lastQue = orderIndex.at(orderIndex.length - 1)
         const que = questions?.find((item) => item.key === lastQue)
