@@ -254,19 +254,19 @@ const QuizCard = ({ questions, queLoading }) => {
 
                     (<div className=' md:w-874'>
                         <h1 className='text-5xl font-bold mb-5'>Response Based on your Answer</h1>
-                        <p className='text-lg font-bold text-warning text-center mb-5'>{responseData?.message?.[0].disclaimer}</p>
+                        <p className='text-lg font-bold text-warning text-center mb-5'>{responseData?.message?.[0]?.disclaimer}</p>
                         <div className='md:h-96 md:overflow-y-scroll'>
                             {
-                                responseData?.recommendations.map(item => (
+                                responseData?.recommendations?.map(item => (
                                     <div key={item?.key} className='my-5 border p-2.5'>
                                         <div className='text-xl'>Quetion: {item?.question}</div>
                                         <div>Answer : {item?.option}</div>
                                         <div>Rec : {item?.descriotion}</div>
                                         <div>Product : {item?.product_name}</div>
                                         <div>Price : {item?.price}</div>
-                                        <div>Properties : {item?.properties.Dairy_free && "Dairy Free, "} {item?.properties.Gluten_free && "Gluten Free, "} {item?.properties.non_vegetarian && "Non Vegetarian, "} {item?.properties.vegan && "Vegan"}</div>
+                                        <div>Properties : {item?.properties?.Dairy_free && "Dairy Free, "} {item?.properties?.Gluten_free && "Gluten Free, "} {item?.properties?.non_vegetarian && "Non Vegetarian, "} {item?.properties?.vegan && "Vegan"}</div>
                                         <div className='hover:text-btnBg'>
-                                            <a href={item.link} target='_blank' rel='noreferrer'>Click here for Product Info</a>
+                                            <a href={item?.link} target='_blank' rel='noreferrer'>Click here for Product Info</a>
                                         </div>
                                     </div>
                                 ))
