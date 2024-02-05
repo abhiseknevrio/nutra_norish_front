@@ -16,14 +16,12 @@ const QuizCard = ({ questions, queLoading }) => {
     })
 
     const [recNextQue, setRecNextQue] = useState([])
-    // const [recPrevQue, setRecPrevQue] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [responseData, setResponseData] = useState([])
 
-
     if (queLoading) {
-        return <div class="three col">
-            <div class="loader" id="loader-1">
+        return <div className="three col">
+            <div className="loader" id="loader-1">
                 <span></span>
                 <span></span>
                 <span></span>
