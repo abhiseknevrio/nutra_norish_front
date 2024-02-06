@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const QuizCard = ({ questions, queLoading }) => {
     const [question, setNextQue] = useState(questions[0]); // Current Que
@@ -19,9 +19,17 @@ const QuizCard = ({ questions, queLoading }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [responseData, setResponseData] = useState([])
     const [nextOrderIndex, setNextOrderIndex] = useState([])
+    const [finalArr, setFinalArr] = useState([])
 
+    console.log("singleSelectInput", singleSelectInput)
     console.log("orderIndex : ", orderIndex)
     console.log("nextOrderIndex : ", nextOrderIndex)
+
+    useEffect(() => {
+        const finalArr = [...singleSelectInput, ...multiSelectInput, ...userInput]
+        setFinalArr(finalArr)
+
+    }, [singleSelectInput, multiSelectInput, userInput])
 
     if (queLoading) {
         return <div className="three col">
@@ -38,6 +46,7 @@ const QuizCard = ({ questions, queLoading }) => {
         let nextQue = [...recNextQue]
         if (next) {
             nextQue.push(next)
+            setNextOrderIndex([])
         }
         const uniqueQue = [...new Set(nextQue)]
         setRecNextQue(uniqueQue.sort())
@@ -70,6 +79,9 @@ const QuizCard = ({ questions, queLoading }) => {
 
 
     const handleRadioChange = (que, key, next) => {
+        if (next) {
+            setNextOrderIndex([])
+        }
         setIsShowNext(true)
         const existingResponseIndex = singleSelectInput.findIndex(response => response.question === que);
 
@@ -90,6 +102,9 @@ const QuizCard = ({ questions, queLoading }) => {
     };
 
     const handleInputChange = (que, key, next) => {
+        if (next) {
+            setNextOrderIndex([])
+        }
         setIsShowNext(true)
         const existingResponseIndex = userInput.findIndex(response => response.question === que);
         if (existingResponseIndex !== -1) {
@@ -156,7 +171,6 @@ const QuizCard = ({ questions, queLoading }) => {
     const submitUserData = async () => {
         setIsLoading(true)
         if (userDetails.name !== null || userDetails.email !== null) {
-            const finalArr = [...singleSelectInput, ...userInput, ...multiSelectInput]
             try {
                 const response = await fetch(`${process.env.REACT_APP_BASE_URL}saveUserDataFunction`, {
                     method: 'POST',
@@ -276,7 +290,7 @@ const QuizCard = ({ questions, queLoading }) => {
                             {
                                 responseData?.recommendations?.map(item => (
                                     <div key={item?.key} className='my-5 border p-2.5'>
-                                        <div className='text-xl'>Quetion: {item?.question}</div>
+                                        <div className='text-xl'>Question: {item?.question}</div>
                                         <div>Answer : {item?.option}</div>
                                         <div>Rec : {item?.descriotion}</div>
                                         <div>Product : {item?.product_name}</div>
