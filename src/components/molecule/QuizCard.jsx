@@ -16,14 +16,16 @@ const QuizCard = ({ questions, queLoading }) => {
     })
 
     const [recNextQue, setRecNextQue] = useState([])
-    // const [recPrevQue, setRecPrevQue] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [responseData, setResponseData] = useState([])
+    const [nextOrderIndex, setNextOrderIndex] = useState([])
 
+    console.log("orderIndex : ", orderIndex)
+    console.log("nextOrderIndex : ", nextOrderIndex)
 
     if (queLoading) {
-        return <div class="three col">
-            <div class="loader" id="loader-1">
+        return <div className="three col">
+            <div className="loader" id="loader-1">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -106,8 +108,14 @@ const QuizCard = ({ questions, queLoading }) => {
     };
 
     const nextQue = (val) => {
-        setIsShowNext(false)
-        const que = questions?.find((item) => item.key === val)
+        let que;
+        // const que = questions?.find((item) => item.key === val)
+        if (nextOrderIndex.length > 0) {
+            que = questions?.find((item) => item.key === nextOrderIndex[0])
+        } else {
+            que = questions?.find((item) => item.key === val)
+        }
+        nextOrderIndex.shift()
         const updatedIndex = [...orderIndex];
         const questionIndex = updatedIndex.findIndex(option => option === que)
         if (que !== undefined) {
@@ -120,11 +128,20 @@ const QuizCard = ({ questions, queLoading }) => {
             setIsSubmit(true)
             setIsShowPrev(false)
         }
+        // setIsShowNext(false)
         setIsShowPrev(true)
         recNextQue.shift()
+
+        if (nextOrderIndex.length === 0) {
+            setIsShowNext(false);
+        }
     };
 
     const prevQue = () => {
+        setIsShowNext(true)
+        const nextOrder = [...nextOrderIndex]
+        nextOrder.push(orderIndex[orderIndex.length - 1])
+        setNextOrderIndex(nextOrder.sort())
         orderIndex.pop()
         const lastQue = orderIndex.at(orderIndex.length - 1)
         const que = questions?.find((item) => item.key === lastQue)
@@ -254,19 +271,19 @@ const QuizCard = ({ questions, queLoading }) => {
 
                     (<div className=' md:w-874'>
                         <h1 className='text-5xl font-bold mb-5'>Response Based on your Answer</h1>
-                        <p className='text-lg font-bold text-warning text-center mb-5'>{responseData?.message?.[0].disclaimer}</p>
+                        <p className='text-lg font-bold text-warning text-center mb-5'>{responseData?.message?.[0]?.disclaimer}</p>
                         <div className='md:h-96 md:overflow-y-scroll'>
                             {
-                                responseData?.recommendations.map(item => (
+                                responseData?.recommendations?.map(item => (
                                     <div key={item?.key} className='my-5 border p-2.5'>
                                         <div className='text-xl'>Quetion: {item?.question}</div>
                                         <div>Answer : {item?.option}</div>
                                         <div>Rec : {item?.descriotion}</div>
                                         <div>Product : {item?.product_name}</div>
                                         <div>Price : {item?.price}</div>
-                                        <div>Properties : {item?.properties.Dairy_free && "Dairy Free, "} {item?.properties.Gluten_free && "Gluten Free, "} {item?.properties.non_vegetarian && "Non Vegetarian, "} {item?.properties.vegan && "Vegan"}</div>
+                                        <div>Properties : {item?.properties?.Dairy_free && "Dairy Free, "} {item?.properties?.Gluten_free && "Gluten Free, "} {item?.properties?.non_vegetarian && "Non Vegetarian, "} {item?.properties?.vegan && "Vegan"}</div>
                                         <div className='hover:text-btnBg'>
-                                            <a href={item.link} target='_blank' rel='noreferrer'>Click here for Product Info</a>
+                                            <a href={item?.link} target='_blank' rel='noreferrer'>Click here for Product Info</a>
                                         </div>
                                     </div>
                                 ))
