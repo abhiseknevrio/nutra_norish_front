@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const QuizCard = ({ questions, queLoading }) => {
     const [question, setNextQue] = useState(questions[0]); // Current Que
-    const [userInput, setUserInput] = useState([]);
-    const [singleSelectInput, setSingleSelectInput] = useState([]);
-    const [multiSelectInput, setMultiSelectInput] = useState([]);
     const [nextRecQue, setNextRecQue] = useState(null)
     const [orderIndex, setOrderIndex] = useState([])
     const [isShowPrev, setIsShowPrev] = useState(false)
@@ -14,22 +11,15 @@ const QuizCard = ({ questions, queLoading }) => {
         name: null,
         email: null
     })
-
     const [recNextQue, setRecNextQue] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [responseData, setResponseData] = useState([])
     const [nextOrderIndex, setNextOrderIndex] = useState([])
-    const [finalArr, setFinalArr] = useState([])
+    const [storedRes, setStoredRes] = useState([])
 
-    console.log("singleSelectInput", singleSelectInput)
+    console.log("storedRes : ", storedRes)
     console.log("orderIndex : ", orderIndex)
-    console.log("nextOrderIndex : ", nextOrderIndex)
 
-    useEffect(() => {
-        const finalArr = [...singleSelectInput, ...multiSelectInput, ...userInput]
-        setFinalArr(finalArr)
-
-    }, [singleSelectInput, multiSelectInput, userInput])
 
     if (queLoading) {
         return <div className="three col">
@@ -41,86 +31,76 @@ const QuizCard = ({ questions, queLoading }) => {
         </div>
     }
 
-    const handleCheckboxChange = (que, key, next) => {
+
+    const handleInputChange = (type, que, key, next) => {
         setIsShowNext(true)
         let nextQue = [...recNextQue]
         if (next) {
             nextQue.push(next)
-            setNextOrderIndex([])
         }
+
         const uniqueQue = [...new Set(nextQue)]
         setRecNextQue(uniqueQue.sort())
 
-        const updatedSelectedOptions = [...multiSelectInput];
-        const questionIndex = updatedSelectedOptions.findIndex(option => option.question === que);
-        if (questionIndex === -1) {
-            updatedSelectedOptions.push({ question: que, answer: [] });
+        const existingResponseIndex = storedRes.findIndex(response => response.question === que);
+        const updatedResponses = [...storedRes];
+
+        switch (type) {
+            case 'single_select':
+                // Call function for type 1
+
+                if (existingResponseIndex !== -1) {
+                    updatedResponses[existingResponseIndex] = { question: que, answer: key };
+                    setStoredRes(updatedResponses)
+                    setNextRecQue(next);
+                } else {
+                    setStoredRes(prevResponses => [...prevResponses, { question: que, answer: key }]);
+                };
+
+                break;
+            case 'multi_select':
+                // Call function for type 2
+
+                if (existingResponseIndex === -1) {
+                    updatedResponses.push({ question: que, answer: [] });
+                }
+
+                const updatedQuestionIndex = updatedResponses.findIndex(option => option.question === que);
+
+                const isOptionSelected = updatedResponses[updatedQuestionIndex].answer.includes(key);
+
+                if (isOptionSelected) {
+
+                    updatedResponses[updatedQuestionIndex].answer = updatedResponses[updatedQuestionIndex].answer.filter(item => item !== key);
+                } else {
+
+                    updatedResponses[updatedQuestionIndex].answer.push(key);
+                }
+                setStoredRes(updatedResponses);
+
+                break;
+            case 'input':
+                // Call function for type 3
+
+                if (existingResponseIndex !== -1) {
+                    updatedResponses[existingResponseIndex] = { question: que, answer: key };
+                    setStoredRes(updatedResponses)
+                } else {
+                    setStoredRes(prevResponses => [...prevResponses, { question: que, answer: key }]);
+                };
+
+                break;
+            default:
+                // Handle default case
+                console.log('Unknown type');
         }
-
-        const updatedQuestionIndex = updatedSelectedOptions.findIndex(option => option.question === que);
-
-        const isOptionSelected = updatedSelectedOptions[updatedQuestionIndex].answer.includes(key);
-
-        if (isOptionSelected) {
-
-            updatedSelectedOptions[updatedQuestionIndex].answer = updatedSelectedOptions[updatedQuestionIndex].answer.filter(item => item !== key);
-        } else {
-
-            updatedSelectedOptions[updatedQuestionIndex].answer.push(key);
-        }
-        setMultiSelectInput(updatedSelectedOptions);
 
         if (recNextQue.length > 0) {
             setNextRecQue(recNextQue[0])
         } else {
             setNextRecQue(next)
         }
-    };
-
-
-    const handleRadioChange = (que, key, next) => {
-        if (next) {
-            setNextOrderIndex([])
-        }
-        setIsShowNext(true)
-        const existingResponseIndex = singleSelectInput.findIndex(response => response.question === que);
-
-        if (existingResponseIndex !== -1) {
-            const updatedResponses = [...singleSelectInput];
-            updatedResponses[existingResponseIndex] = { question: que, answer: key };
-            setSingleSelectInput(updatedResponses)
-            setNextRecQue(next);
-        } else {
-            setSingleSelectInput(prevResponses => [...prevResponses, { question: que, answer: key }]);
-        };
-
-        if (recNextQue.length > 0) {
-            setNextRecQue(recNextQue[0])
-        } else {
-            setNextRecQue(next)
-        }
-    };
-
-    const handleInputChange = (que, key, next) => {
-        if (next) {
-            setNextOrderIndex([])
-        }
-        setIsShowNext(true)
-        const existingResponseIndex = userInput.findIndex(response => response.question === que);
-        if (existingResponseIndex !== -1) {
-            const updatedResponses = [...userInput];
-            updatedResponses[existingResponseIndex] = { question: que, answer: key };
-            setUserInput(updatedResponses)
-        } else {
-            setUserInput(prevResponses => [...prevResponses, { question: que, answer: key }]);
-        };
-
-        if (recNextQue.length > 0) {
-            setNextRecQue(recNextQue[0])
-        } else {
-            setNextRecQue(next)
-        }
-    };
+    }
 
     const nextQue = (val) => {
         let que;
@@ -179,7 +159,8 @@ const QuizCard = ({ questions, queLoading }) => {
                     },
                     body: JSON.stringify({
                         userDetails: userDetails,
-                        response: finalArr
+                        // response: finalArr
+                        response: storedRes
                     }),
                 });
 
@@ -212,8 +193,8 @@ const QuizCard = ({ questions, queLoading }) => {
                                             {question?.options?.map((item) => (
                                                 <div key={item.key} >
                                                     <div
-                                                        onClick={() => handleRadioChange(question.key, item.key, item.nextQuestion)}
-                                                        className={`${question.options.length > 2 ? "multiSelectCard rounded-md" : "rounded-full inline-block border border-borderGreen"} hover:bg-hover hover:text-nutraWhite cursor-pointer text-lg  py-2.5 px-10 ${singleSelectInput.find(obj => obj.question === question.key && obj.answer === item.key) ? 'bg-btnBg text-nutraWhite' : 'bg-cardBg'}`}>
+                                                        onClick={() => handleInputChange(question.type, question.key, item.key, item.nextQuestion)}
+                                                        className={`${question.options.length > 2 ? "multiSelectCard rounded-md" : "rounded-full inline-block border border-borderGreen"} hover:bg-hover hover:text-nutraWhite cursor-pointer text-lg  py-2.5 px-10 ${storedRes.find(obj => obj.question === question.key && obj.answer === item.key) ? 'bg-btnBg text-nutraWhite' : 'bg-cardBg'}`}>
                                                         {item.value}
                                                     </div>
                                                 </div>
@@ -225,7 +206,7 @@ const QuizCard = ({ questions, queLoading }) => {
                                             {question?.options?.map((item) => (
                                                 <div key={item.key}>
                                                     <input
-                                                        onChange={(e) => handleInputChange(question.key, e.target.value, item.nextQuestion)}
+                                                        onChange={(e) => handleInputChange(question.type, question.key, e.target.value, item.nextQuestion)}
                                                         className='quizInput rounded-full title40'
                                                         type='text'
                                                     />
@@ -246,7 +227,7 @@ const QuizCard = ({ questions, queLoading }) => {
                                         <div className='grid grid-cols-2 lg:grid-cols-3 cursor-pointer gap-5' >
                                             {
                                                 question?.options?.map(item =>
-                                                    <div className={`multiSelectCard hover:bg-hover hover:text-nutraWhite flex justify-center items-center rounded-md ${multiSelectInput.find(obj => obj.question === question.key && obj.answer.includes(item.key)) ? 'bg-btnBg text-nutraWhite' : 'bg-cardBg'}`} key={item.key} onClick={() => handleCheckboxChange(question.key, item.key, item.nextQuestion)}>{item.value}</div>)
+                                                    <div className={`multiSelectCard hover:bg-hover hover:text-nutraWhite flex justify-center items-center rounded-md ${storedRes.find(obj => obj.question === question.key && obj.answer.includes(item.key)) ? 'bg-btnBg text-nutraWhite' : 'bg-cardBg'}`} key={item.key} onClick={() => handleInputChange(question.type, question.key, item.key, item.nextQuestion)}>{item.value}</div>)
                                             }
                                         </div>
                                     }
