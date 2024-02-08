@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const QuizCard = ({ questions, queLoading }) => {
     const [question, setNextQue] = useState(questions[0]); // Current Que
@@ -17,6 +17,23 @@ const QuizCard = ({ questions, queLoading }) => {
     const [nextOrderIndex, setNextOrderIndex] = useState([])
     const [storedRes, setStoredRes] = useState([])
 
+    console.log("recNextQue", recNextQue)
+    console.log("storedRes", storedRes)
+
+    // useEffect(() => {
+    //     const existingQue = storedRes.find(res => res?.question === question.key);
+    //     if (existingQue) {
+    //         let matchedQuestions = [];
+    //         question.options.forEach(option => {
+    //             if (existingQue?.answer?.includes(option.key)) {
+    //                 matchedQuestions.push(option.nextQuestion);
+    //             }
+    //         });
+
+    //         console.log("matchedQuestions", matchedQuestions)
+    //     }
+    // }, [question.key, storedRes, question.options])
+
     if (queLoading) {
         return <div className="three col">
             <div className="loader" id="loader-1">
@@ -32,7 +49,11 @@ const QuizCard = ({ questions, queLoading }) => {
         setIsShowNext(true)
         let nextQue = [...recNextQue]
         if (next) {
-            nextQue.push(next)
+            if (nextQue.includes(next)) {
+                nextQue = recNextQue.filter(res => res !== next)
+            } else {
+                nextQue.push(next)
+            }
             setNextOrderIndex([])
         }
 
@@ -75,6 +96,18 @@ const QuizCard = ({ questions, queLoading }) => {
                     }
                 }
                 setStoredRes(updatedResponses);
+
+                const existingQue = storedRes.find(res => res?.question === question.key);
+                if (existingQue) {
+                    let matchedQuestions = [];
+                    question.options.forEach(option => {
+                        if (existingQue?.answer?.includes(option.key)) {
+                            matchedQuestions.push(option.nextQuestion);
+                        }
+                    });
+
+                    console.log("matchedQuestions", matchedQuestions)
+                }
 
                 break;
             case 'input':
