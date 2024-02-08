@@ -17,11 +17,6 @@ const QuizCard = ({ questions, queLoading }) => {
     const [nextOrderIndex, setNextOrderIndex] = useState([])
     const [storedRes, setStoredRes] = useState([])
 
-    console.log("storedRes : ", storedRes)
-    console.log("orderIndex : ", orderIndex)
-    console.log("nextOrderIndex : ", nextOrderIndex)
-
-
     if (queLoading) {
         return <div className="three col">
             <div className="loader" id="loader-1">
@@ -54,7 +49,6 @@ const QuizCard = ({ questions, queLoading }) => {
                 if (existingResponseIndex !== -1) {
                     updatedResponses[existingResponseIndex] = { question: que, answer: key };
                     setStoredRes(updatedResponses)
-                    setNextRecQue(next);
                 } else {
                     setStoredRes(prevResponses => [...prevResponses, { question: que, answer: key }]);
                 };
@@ -74,7 +68,11 @@ const QuizCard = ({ questions, queLoading }) => {
                 if (isOptionSelected) {
                     updatedResponses[updatedQuestionIndex].answer = updatedResponses[updatedQuestionIndex].answer.filter(item => item !== key);
                 } else {
-                    updatedResponses[updatedQuestionIndex].answer.push(key);
+                    if (updatedResponses[updatedQuestionIndex].answer.length <= 2) {
+                        updatedResponses[updatedQuestionIndex].answer.push(key);
+                    } else {
+                        alert("you can select max three option")
+                    }
                 }
                 setStoredRes(updatedResponses);
 
@@ -157,7 +155,6 @@ const QuizCard = ({ questions, queLoading }) => {
                     },
                     body: JSON.stringify({
                         userDetails: userDetails,
-                        // response: finalArr
                         response: storedRes
                     }),
                 });
