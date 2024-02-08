@@ -19,6 +19,7 @@ const QuizCard = ({ questions, queLoading }) => {
 
     console.log("storedRes : ", storedRes)
     console.log("orderIndex : ", orderIndex)
+    console.log("nextOrderIndex : ", nextOrderIndex)
 
 
     if (queLoading) {
@@ -37,6 +38,7 @@ const QuizCard = ({ questions, queLoading }) => {
         let nextQue = [...recNextQue]
         if (next) {
             nextQue.push(next)
+            setNextOrderIndex([])
         }
 
         const uniqueQue = [...new Set(nextQue)]
@@ -70,10 +72,8 @@ const QuizCard = ({ questions, queLoading }) => {
                 const isOptionSelected = updatedResponses[updatedQuestionIndex].answer.includes(key);
 
                 if (isOptionSelected) {
-
                     updatedResponses[updatedQuestionIndex].answer = updatedResponses[updatedQuestionIndex].answer.filter(item => item !== key);
                 } else {
-
                     updatedResponses[updatedQuestionIndex].answer.push(key);
                 }
                 setStoredRes(updatedResponses);
@@ -104,49 +104,47 @@ const QuizCard = ({ questions, queLoading }) => {
 
     const nextQue = (val) => {
         let que;
-        // const que = questions?.find((item) => item.key === val)
-        if (nextOrderIndex.length > 0) {
-            que = questions?.find((item) => item.key === nextOrderIndex[0])
-        } else {
-            que = questions?.find((item) => item.key === val)
+        const targetKey = nextOrderIndex.length > 0 ? nextOrderIndex[0] : val;
+        que = questions?.find((item) => item.key === targetKey);
+        const queIndex = storedRes.findIndex(item => item.question === que?.key);
+        if (queIndex !== -1) {
+            setStoredRes(storedRes.slice(0, queIndex));
         }
-        nextOrderIndex.shift()
+
+        nextOrderIndex.shift();
         const updatedIndex = [...orderIndex];
-        const questionIndex = updatedIndex.findIndex(option => option === que)
-        if (que !== undefined) {
-            setNextQue(que)
-            if (questionIndex === -1) {
+        if (que) {
+            setNextQue(que);
+            if (!updatedIndex.includes(que.key)) {
                 updatedIndex.push(que.key);
             }
-            setOrderIndex(updatedIndex)
+            setOrderIndex(updatedIndex);
         } else {
-            setIsSubmit(true)
-            setIsShowPrev(false)
+            setIsSubmit(true);
+            setIsShowPrev(false);
         }
-        // setIsShowNext(false)
-        setIsShowPrev(true)
-        recNextQue.shift()
+        setIsShowPrev(true);
+        recNextQue.shift();
 
-        if (nextOrderIndex.length === 0) {
-            setIsShowNext(false);
-        }
+        setIsShowNext(nextOrderIndex.length === 0 ? false : true);
     };
 
     const prevQue = () => {
-        setIsShowNext(true)
-        const nextOrder = [...nextOrderIndex]
-        nextOrder.push(orderIndex[orderIndex.length - 1])
-        setNextOrderIndex(nextOrder.sort())
-        orderIndex.pop()
-        const lastQue = orderIndex.at(orderIndex.length - 1)
-        const que = questions?.find((item) => item.key === lastQue)
-        if (que !== undefined) {
-            setNextQue(que)
+        setIsShowNext(true);
+        const lastOrderIndex = orderIndex[orderIndex.length - 1];
+        const nextOrder = [...nextOrderIndex, lastOrderIndex].sort();
+        setNextOrderIndex(nextOrder);
+        orderIndex.pop();
+        const lastQue = orderIndex.at(-1);
+        const que = questions.find((item) => item.key === lastQue);
+        if (que) {
+            setNextQue(que);
         } else {
-            setNextQue(questions[0])
-            setIsShowPrev(false)
+            setNextQue(questions[0]);
+            setIsShowPrev(false);
         }
     };
+
 
     const submitUserData = async () => {
         setIsLoading(true)
