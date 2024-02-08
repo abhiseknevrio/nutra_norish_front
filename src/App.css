@@ -139,7 +139,7 @@
     width: 100%;
     border-radius: 5px;
     border: 1px solid rgba(18, 18, 17, 0.30);
-    background: #FFF;
+    background: #FAF5EF;
 }
 
 .qualityCard {
@@ -275,6 +275,10 @@
 
 .multiSelectCard {
     padding: 20px 40px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .desktopBlock {
@@ -285,9 +289,23 @@
     display: none;
 }
 
+.stickycode{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+    background: #faf5ee;
+}
+
+.heropadding{
+    padding-top: 200px;
+}
 /* Re-factor */
 
 @media screen and (max-width: 767px) {
+    .heropadding{
+        padding-top: 100px;
+    }
 
     .mx-common {
         margin: 0px 10px;
@@ -452,6 +470,10 @@
 
     .multiSelectCard {
         padding: 10px 20px;
+        height: 125px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .desktopBlock {

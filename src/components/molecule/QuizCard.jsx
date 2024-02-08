@@ -66,27 +66,31 @@ const QuizCard = ({ questions, queLoading }) => {
         } else {
             setNextRecQue(next)
         }
+
+
     };
 
 
     const handleRadioChange = (que, key, next) => {
-        setIsShowNext(true)
+
+        setIsShowNext(true);
         const existingResponseIndex = singleSelectInput.findIndex(response => response.question === que);
 
         if (existingResponseIndex !== -1) {
             const updatedResponses = [...singleSelectInput];
             updatedResponses[existingResponseIndex] = { question: que, answer: key };
-            setSingleSelectInput(updatedResponses)
+            setSingleSelectInput(updatedResponses);
             setNextRecQue(next);
         } else {
             setSingleSelectInput(prevResponses => [...prevResponses, { question: que, answer: key }]);
-        };
+        }
 
         if (recNextQue.length > 0) {
-            setNextRecQue(recNextQue[0])
+            setNextRecQue(recNextQue[0]);
         } else {
-            setNextRecQue(next)
+            setNextRecQue(next);
         }
+
     };
 
     const handleInputChange = (que, key, next) => {
@@ -108,6 +112,8 @@ const QuizCard = ({ questions, queLoading }) => {
     };
 
     const nextQue = (val) => {
+        window.scrollTo(0, 500);
+
         let que;
         // const que = questions?.find((item) => item.key === val)
         if (nextOrderIndex.length > 0) {
@@ -137,19 +143,41 @@ const QuizCard = ({ questions, queLoading }) => {
         }
     };
 
+    // const prevQue = () => {
+    //     setIsShowNext(true)
+    //     const nextOrder = [...nextOrderIndex]
+    //     nextOrder.push(orderIndex[orderIndex.length - 1])
+    //     setNextOrderIndex(nextOrder.sort())
+    //     orderIndex.pop()
+    //     const lastQue = orderIndex.at(orderIndex.length - 1)
+    //     const que = questions?.find((item) => item.key === lastQue)
+    //     if (que !== undefined) {
+    //         setNextQue(que)
+    //     } else {
+    //         setNextQue(questions[0])
+    //         setIsShowPrev(false)
+    //     }
+    // };
+
     const prevQue = () => {
-        setIsShowNext(true)
-        const nextOrder = [...nextOrderIndex]
-        nextOrder.push(orderIndex[orderIndex.length - 1])
-        setNextOrderIndex(nextOrder.sort())
-        orderIndex.pop()
-        const lastQue = orderIndex.at(orderIndex.length - 1)
-        const que = questions?.find((item) => item.key === lastQue)
+        setIsShowNext(true);
+        const nextOrder = [...nextOrderIndex];
+        nextOrder.push(orderIndex[orderIndex.length - 1]);
+        setNextOrderIndex(nextOrder.sort());
+
+        // Remove last element from orderIndex without using pop()
+        const lastIndex = orderIndex.length - 1;
+        const updatedOrderIndex = orderIndex.slice(0, lastIndex);
+        setOrderIndex(updatedOrderIndex);
+
+        const lastQue = updatedOrderIndex[updatedOrderIndex.length - 1];
+        const que = questions?.find((item) => item.key === lastQue);
+
         if (que !== undefined) {
-            setNextQue(que)
+            setNextQue(que);
         } else {
-            setNextQue(questions[0])
-            setIsShowPrev(false)
+            setNextQue(questions[0]);
+            setIsShowPrev(false);
         }
     };
 
@@ -199,7 +227,7 @@ const QuizCard = ({ questions, queLoading }) => {
                                                 <div key={item.key} >
                                                     <div
                                                         onClick={() => handleRadioChange(question.key, item.key, item.nextQuestion)}
-                                                        className={`${question.options.length > 2 ? "multiSelectCard rounded-md" : "rounded-full inline-block border border-borderGreen"} hover:bg-hover hover:text-nutraWhite cursor-pointer text-lg  py-2.5 px-10 ${singleSelectInput.find(obj => obj.question === question.key && obj.answer === item.key) ? 'bg-btnBg text-nutraWhite' : 'bg-cardBg'}`}>
+                                                        className={`${question.options.length > 2 ? "multiSelectCard rounded-md" : "rounded-full inline-block border border-borderGreen"} hover:bg-hover hover:text-nutraWhite cursor-pointer text-lg  py-3.5 px-12 ${singleSelectInput.find(obj => obj.question === question.key && obj.answer === item.key) ? 'bg-btnBg text-nutraWhite' : 'bg-cardBg'}`}>
                                                         {item.value}
                                                     </div>
                                                 </div>
@@ -238,8 +266,8 @@ const QuizCard = ({ questions, queLoading }) => {
                                     }
                                 </div>
                                 <div div className={`flex ${isShowPrev ? 'justify-between' : 'justify-end'} text-lg font-bold mt-20`} >
-                                    {isShowPrev && <button className='py-2 px-7 bg-cardBg hover:bg-hover hover:text-nutraWhite rounded-md' onClick={() => prevQue()}>Previous</button>}
-                                    {isShowNext && <button className='py-2 px-7 bg-cardBg hover:bg-hover hover:text-nutraWhite rounded-md' onClick={() => nextQue(nextRecQue)}>Next</button>}
+                                    {isShowPrev && <button className='py-3 px-9 bg-cardBg hover:bg-hover hover:text-nutraWhite rounded-md' onClick={() => prevQue()}>Previous</button>}
+                                    {isShowNext && <button className='py-3 px-9 bg-cardBg hover:bg-hover hover:text-nutraWhite rounded-md' onClick={() => nextQue(nextRecQue)}>Next</button>}
                                 </div>
 
                             </div>

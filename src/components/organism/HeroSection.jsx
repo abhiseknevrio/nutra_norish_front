@@ -29,7 +29,7 @@ const HeroSection = () => {
 
     return (
         <>
-            <section className='padb-117'>
+            <section className='padb-117 heropadding' id="quizSection">
                 <div>
                     <img className='fixed bottom-0 right-0 whatsIcon' src='https://cdn.shopify.com/s/files/1/0606/0703/7648/files/whatsapp-rr.svg' alt='' />
                 </div>

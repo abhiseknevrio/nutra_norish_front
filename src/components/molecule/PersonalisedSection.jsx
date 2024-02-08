@@ -18,7 +18,9 @@ const PersonalisedSection = () => {
                                 Get 10% off your first order + free shipping. You can cancel or change up your subscription any time.
                             </div>
                             <div className='mt-30'>
+                                <a href="#quizSection">
                                 <Button text={"TAKE THE QUIZ"} />
+                                </a>
                             </div>
                         </div>
                     </div>
