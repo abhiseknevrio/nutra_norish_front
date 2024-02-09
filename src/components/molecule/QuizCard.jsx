@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
-const QuizCard = ({ questions, queLoading }) => {
+const QuizCard = ({questions, queLoading}) => {
     const [question, setNextQue] = useState(questions[0]); // Current Que
     const [userInput, setUserInput] = useState([]);
     const [singleSelectInput, setSingleSelectInput] = useState([]);
@@ -45,7 +45,7 @@ const QuizCard = ({ questions, queLoading }) => {
         const updatedSelectedOptions = [...multiSelectInput];
         const questionIndex = updatedSelectedOptions.findIndex(option => option.question === que);
         if (questionIndex === -1) {
-            updatedSelectedOptions.push({ question: que, answer: [] });
+            updatedSelectedOptions.push({question: que, answer: []});
         }
 
         const updatedQuestionIndex = updatedSelectedOptions.findIndex(option => option.question === que);
@@ -78,11 +78,11 @@ const QuizCard = ({ questions, queLoading }) => {
 
         if (existingResponseIndex !== -1) {
             const updatedResponses = [...singleSelectInput];
-            updatedResponses[existingResponseIndex] = { question: que, answer: key };
+            updatedResponses[existingResponseIndex] = {question: que, answer: key};
             setSingleSelectInput(updatedResponses);
             setNextRecQue(next);
         } else {
-            setSingleSelectInput(prevResponses => [...prevResponses, { question: que, answer: key }]);
+            setSingleSelectInput(prevResponses => [...prevResponses, {question: que, answer: key}]);
         }
 
         if (recNextQue.length > 0) {
@@ -98,11 +98,12 @@ const QuizCard = ({ questions, queLoading }) => {
         const existingResponseIndex = userInput.findIndex(response => response.question === que);
         if (existingResponseIndex !== -1) {
             const updatedResponses = [...userInput];
-            updatedResponses[existingResponseIndex] = { question: que, answer: key };
+            updatedResponses[existingResponseIndex] = {question: que, answer: key};
             setUserInput(updatedResponses)
         } else {
-            setUserInput(prevResponses => [...prevResponses, { question: que, answer: key }]);
-        };
+            setUserInput(prevResponses => [...prevResponses, {question: que, answer: key}]);
+        }
+        ;
 
         if (recNextQue.length > 0) {
             setNextRecQue(recNextQue[0])
@@ -216,84 +217,103 @@ const QuizCard = ({ questions, queLoading }) => {
         <>
             {
                 responseData.length <= 0 ? <>
-                    {
-                        !isSubmit ?
-                            <div className='text-center p-5 lg:p-20 quizBox'>
-                                <div className='title50'>{question?.question}</div>
-                                <div className='mt-9'>
-                                    {question.type === "single_select" &&
-                                        <div className={`${question.options.length <= 2 ? "flex justify-center gap-x-10" : "grid md:grid-cols-2 gap-5"}`}>
-                                            {question?.options?.map((item) => (
-                                                <div key={item.key} >
-                                                    <div
-                                                        onClick={() => handleRadioChange(question.key, item.key, item.nextQuestion)}
-                                                        className={`${question.options.length > 2 ? "multiSelectCard rounded-md" : "rounded-full inline-block border border-borderGreen"} hover:bg-hover hover:text-nutraWhite cursor-pointer text-lg  py-3.5 px-12 ${singleSelectInput.find(obj => obj.question === question.key && obj.answer === item.key) ? 'bg-btnBg text-nutraWhite' : 'bg-cardBg'}`}>
-                                                        {item.value}
+                        {
+                            !isSubmit ?
+                                <div className='text-center p-5 lg:p-20 quizBox'>
+                                    <div className='title50'>{question?.question}</div>
+                                    <div className='mt-9'>
+                                        {question.type === "single_select" &&
+                                            <div
+                                                className={`${question.options.length <= 2 ? "flex justify-center gap-x-10" : "grid md:grid-cols-2 gap-5"}`}>
+                                                {question?.options?.map((item) => (
+                                                    <div key={item.key}>
+                                                        <div
+                                                            onClick={() => handleRadioChange(question.key, item.key, item.nextQuestion)}
+                                                            className={`${question.options.length > 2 ? "multiSelectCard rounded-md" : "rounded-full inline-block border border-borderGreen"} hover:bg-hover hover:text-nutraWhite cursor-pointer text-lg  py-3.5 px-12 ${singleSelectInput.find(obj => obj.question === question.key && obj.answer === item.key) ? 'bg-btnBg text-nutraWhite' : 'bg-cardBg'}`}>
+                                                            {item.value}
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    }
-                                    {question.type === "input" &&
-                                        <>
-                                            {question?.options?.map((item) => (
-                                                <div key={item.key}>
-                                                    <input
-                                                        onChange={(e) => handleInputChange(question.key, e.target.value, item.nextQuestion)}
-                                                        className='quizInput rounded-full title40'
-                                                        type='text'
-                                                    />
-                                                    {/* <img
+                                                ))}
+                                            </div>
+                                        }
+                                        {question.type === "input" &&
+                                            <>
+                                                {question?.options?.map((item) => (
+                                                    <div key={item.key}>
+                                                        <input
+                                                            onChange={(e) => handleInputChange(question.key, e.target.value, item.nextQuestion)}
+                                                            className='quizInput rounded-full title40'
+                                                            type='text'
+                                                        />
+                                                        {/* <img
                                                 onClick={() => nextQue(nextRecQue)}
                                                 className='absolute cursor-pointer'
                                                 style={{ right: "40px" }}
                                                 src='/images/rightArrow-rr.svg'
                                                 alt=''
                                             /> */}
-                                                </div>
-                                            ))}
-                                        </>
-                                    }
+                                                    </div>
+                                                ))}
+                                            </>
+                                        }
 
-                                    {
-                                        question.type === "multi_select" &&
-                                        <div className='grid grid-cols-2 lg:grid-cols-3 cursor-pointer gap-5' >
-                                            {
-                                                question?.options?.map(item =>
-                                                    <div className={`multiSelectCard hover:bg-hover hover:text-nutraWhite flex justify-center items-center rounded-md ${multiSelectInput.find(obj => obj.question === question.key && obj.answer.includes(item.key)) ? 'bg-btnBg text-nutraWhite' : 'bg-cardBg'}`} key={item.key} onClick={() => handleCheckboxChange(question.key, item.key, item.nextQuestion)}>{item.value}</div>)
-                                            }
-                                        </div>
-                                    }
-                                </div>
-                                <div div className={`flex ${isShowPrev ? 'justify-between' : 'justify-end'} text-lg font-bold mt-20`} >
-                                    {isShowPrev && <button className='py-3 px-9 bg-cardBg hover:bg-hover hover:text-nutraWhite rounded-md' onClick={() => prevQue()}>Previous</button>}
-                                    {isShowNext && <button className='py-3 px-9 bg-cardBg hover:bg-hover hover:text-nutraWhite rounded-md' onClick={() => nextQue(nextRecQue)}>Next</button>}
-                                </div>
+                                        {
+                                            question.type === "multi_select" &&
+                                            <div className='grid grid-cols-2 lg:grid-cols-3 cursor-pointer gap-5'>
+                                                {
+                                                    question?.options?.map(item =>
+                                                        <div
+                                                            className={`multiSelectCard hover:bg-hover hover:text-nutraWhite flex justify-center items-center rounded-md ${multiSelectInput.find(obj => obj.question === question.key && obj.answer.includes(item.key)) ? 'bg-btnBg text-nutraWhite' : 'bg-cardBg'}`}
+                                                            key={item.key}
+                                                            onClick={() => handleCheckboxChange(question.key, item.key, item.nextQuestion)}>{item.value}</div>)
+                                                }
+                                            </div>
+                                        }
+                                    </div>
+                                    <div div
+                                         className={`flex ${isShowPrev ? 'justify-between' : 'justify-end'} text-lg font-bold mt-20`}>
+                                        {isShowPrev && <button
+                                            className='py-3 px-9 bg-cardBg hover:bg-hover hover:text-nutraWhite rounded-md'
+                                            onClick={() => prevQue()}>Previous</button>}
+                                        {isShowNext && <button
+                                            className='py-3 px-9 bg-cardBg hover:bg-hover hover:text-nutraWhite rounded-md'
+                                            onClick={() => nextQue(nextRecQue)}>Next</button>}
+                                    </div>
 
-                            </div>
-                            :
-                            (
-                                <div className='min-w-full'>
-                                    <div className='md:w-690 justify-center mx-auto'>
-                                        <div className=''>
-                                            <input onChange={e => setUserDetails({ ...userDetails, name: e.target.value })} className='formInput text-xl pl-5 py-5 mt-3' type="text" placeholder="Enter Name" />
-                                            <input onChange={e => setUserDetails({ ...userDetails, email: e.target.value })} className='formInput text-xl pl-5 py-5 mt-3' type="email" placeholder="Enter Email" />
-                                        </div>
-                                        {/* Bottom Border */}
-                                        <div className='border-b border-borderGreen mt-10'></div>
-                                        <div className='flex justify-center mt-4'>
-                                            <button disabled={isLoading} onClick={submitUserData} className={`bg-btnBg inline-block px-9 py-5 rounded-full ${isLoading && 'cursor-not-allowed'}`}>
-                                                <div className='flex gap-4'>
-                                                    <div className='font-bold text-lg text-nutraWhite'>{isLoading ? 'Submitting...' : 'Submit Form'}</div>
-                                                    <img src="https://cdn.shopify.com/s/files/1/0606/0703/7648/files/btnArrow-rr.svg" alt="" />
-                                                </div>
-                                            </button>
+                                </div>
+                                :
+                                (
+                                    <div className='min-w-full'>
+                                        <div className='md:w-690 justify-center mx-auto'>
+                                            <div className=''>
+                                                <input
+                                                    onChange={e => setUserDetails({...userDetails, name: e.target.value})}
+                                                    className='formInput text-xl pl-5 py-5 mt-3' type="text"
+                                                    placeholder="Enter Name"/>
+                                                <input
+                                                    onChange={e => setUserDetails({...userDetails, email: e.target.value})}
+                                                    className='formInput text-xl pl-5 py-5 mt-3' type="email"
+                                                    placeholder="Enter Email"/>
+                                            </div>
+                                            {/* Bottom Border */}
+                                            <div className='border-b border-borderGreen mt-10'></div>
+                                            <div className='flex justify-center mt-4'>
+                                                <button disabled={isLoading} onClick={submitUserData}
+                                                        className={`bg-btnBg inline-block px-9 py-5 rounded-full ${isLoading && 'cursor-not-allowed'}`}>
+                                                    <div className='flex gap-4'>
+                                                        <div
+                                                            className='font-bold text-lg text-nutraWhite'>{isLoading ? 'Submitting...' : 'Submit Form'}</div>
+                                                        <img
+                                                            src="https://cdn.shopify.com/s/files/1/0606/0703/7648/files/btnArrow-rr.svg"
+                                                            alt=""/>
+                                                    </div>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            )
-                    }
-                </>
+                                )
+                        }
+                    </>
 
                     :
 
@@ -303,17 +323,34 @@ const QuizCard = ({ questions, queLoading }) => {
                         <div className='md:h-96 md:overflow-y-scroll'>
                             {
                                 responseData?.recommendations?.map(item => (
-                                    <div key={item?.key} className='my-5 border p-2.5'>
-                                        <div className='text-xl'>Quetion: {item?.question}</div>
-                                        <div>Answer : {item?.option}</div>
-                                        <div>Rec : {item?.descriotion}</div>
-                                        <div>Product : {item?.product_name}</div>
-                                        <div>Price : {item?.price}</div>
-                                        <div>Properties : {item?.properties?.Dairy_free && "Dairy Free, "} {item?.properties?.Gluten_free && "Gluten Free, "} {item?.properties?.non_vegetarian && "Non Vegetarian, "} {item?.properties?.vegan && "Vegan"}</div>
-                                        <div className='hover:text-btnBg'>
-                                            <a href={item?.link} target='_blank' rel='noreferrer'>Click here for Product Info</a>
+                                    <>
+                                        <div className={'grid grid-cols-3'}>
+                                            <div>image</div>
+                                            <div>
+                                                <div className={'font-bold text-xl'}>{item?.product_name}</div>
+                                                <div>{item?.properties?.Dairy_free && "Dairy Free, "} {item?.properties?.Gluten_free && "Gluten Free, "} {item?.properties?.non_vegetarian && "Non Vegetarian, "} {item?.properties?.vegan && "Vegan"}</div>
+                                            </div>
+                                            <div>
+                                                <div>Price : {item?.price}</div>
+                                            </div>
                                         </div>
-                                    </div>
+
+
+
+                                        <div key={item?.key} className='my-5 border p-2.5'>
+                                            <div className='text-xl'>Quetion: {item?.question}</div>
+                                            <div>Answer : {item?.option}</div>
+                                            <div>Rec : {item?.descriotion}</div>
+                                            <div>Product : {item?.product_name}</div>
+                                            <div>Price : {item?.price}</div>
+                                            <div>Properties
+                                                : {item?.properties?.Dairy_free && "Dairy Free, "} {item?.properties?.Gluten_free && "Gluten Free, "} {item?.properties?.non_vegetarian && "Non Vegetarian, "} {item?.properties?.vegan && "Vegan"}</div>
+                                            <div className='hover:text-btnBg'>
+                                                <a href={item?.link} target='_blank' rel='noreferrer'>Click here for
+                                                    Product Info</a>
+                                            </div>
+                                        </div>
+                                    </>
                                 ))
                             }
                         </div>

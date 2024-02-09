@@ -29,7 +29,7 @@ const HeroSection = () => {
 
     return (
         <>
-            <section className='padb-117 heropadding' id="quizSection">
+            <section className='padb-117 heropadding'>
                 <div>
                     <img className='fixed bottom-0 right-0 whatsIcon' src='https://cdn.shopify.com/s/files/1/0606/0703/7648/files/whatsapp-rr.svg' alt='' />
                 </div>
@@ -44,10 +44,10 @@ const HeroSection = () => {
                                     <span className='left-border'></span>
                                     {"Personalised Vitamins".toUpperCase()}
                                 </div>
-                                <div className='title65 mt-10 md:mt-5 xl:w-1160'>
+                                <div className='title65 mt-10 md:mt-5 xl:w-1160' >
                                     Get the Nutrients You Need for Peak Performance
                                 </div>
-                                <p className='font-bold text-xl mt-8'>Instant access to expert designed personalised Supplement Plan made just For You</p>
+                                <p className='font-bold text-xl mt-8' id="quizSection">Instant access to expert designed personalised Supplement Plan made just For You</p>
                             </div>
                         </div>
                         {/* <div className='lg:hidden flex justify-center mt-14 mb-24'>
@@ -55,8 +55,8 @@ const HeroSection = () => {
                         </div> */}
 
                         {/* Importent Section */}
-                        <div className=''>
-                            <div className='flex justify-center mt-14'>
+                        <div className='' >
+                            <div className='flex justify-center mt-14' >
                                 {
                                     questions ?
                                         <QuizCard questions={questions} queLoading={queLoading} />
