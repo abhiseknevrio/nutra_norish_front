@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const QuizCard = ({ questions, queLoading }) => {
     const [question, setNextQue] = useState(questions[0]); // Current Que
@@ -16,23 +16,7 @@ const QuizCard = ({ questions, queLoading }) => {
     const [responseData, setResponseData] = useState([])
     const [nextOrderIndex, setNextOrderIndex] = useState([])
     const [storedRes, setStoredRes] = useState([])
-
-    console.log("recNextQue", recNextQue)
-    console.log("storedRes", storedRes)
-
-    // useEffect(() => {
-    //     const existingQue = storedRes.find(res => res?.question === question.key);
-    //     if (existingQue) {
-    //         let matchedQuestions = [];
-    //         question.options.forEach(option => {
-    //             if (existingQue?.answer?.includes(option.key)) {
-    //                 matchedQuestions.push(option.nextQuestion);
-    //             }
-    //         });
-
-    //         console.log("matchedQuestions", matchedQuestions)
-    //     }
-    // }, [question.key, storedRes, question.options])
+    const [existMatchQue, setExistMatchQue] = useState([])
 
     if (queLoading) {
         return <div className="three col">
@@ -50,7 +34,7 @@ const QuizCard = ({ questions, queLoading }) => {
         let nextQue = [...recNextQue]
         if (next) {
             if (nextQue.includes(next)) {
-                nextQue = recNextQue.filter(res => res !== next)
+                nextQue = nextQue.filter(res => res !== next)
             } else {
                 nextQue.push(next)
             }
@@ -59,6 +43,12 @@ const QuizCard = ({ questions, queLoading }) => {
 
         const uniqueQue = [...new Set(nextQue)]
         setRecNextQue(uniqueQue.sort())
+
+        if (existMatchQue.length > 0) {
+            setNextRecQue(existMatchQue?.[0])
+        } else {
+            setNextRecQue(next)
+        }
 
         const existingResponseIndex = storedRes.findIndex(response => response.question === que);
         const updatedResponses = [...storedRes];
@@ -98,15 +88,14 @@ const QuizCard = ({ questions, queLoading }) => {
                 setStoredRes(updatedResponses);
 
                 const existingQue = storedRes.find(res => res?.question === question.key);
-                if (existingQue) {
+                if (existingQue && existMatchQue.length <= 3) {
                     let matchedQuestions = [];
                     question.options.forEach(option => {
                         if (existingQue?.answer?.includes(option.key)) {
                             matchedQuestions.push(option.nextQuestion);
                         }
                     });
-
-                    console.log("matchedQuestions", matchedQuestions)
+                    setExistMatchQue(matchedQuestions)
                 }
 
                 break;
@@ -124,12 +113,6 @@ const QuizCard = ({ questions, queLoading }) => {
             default:
                 // Handle default case
                 console.log('Unknown type');
-        }
-
-        if (recNextQue.length > 0) {
-            setNextRecQue(recNextQue[0])
-        } else {
-            setNextRecQue(next)
         }
     }
 
@@ -155,7 +138,7 @@ const QuizCard = ({ questions, queLoading }) => {
             setIsShowPrev(false);
         }
         setIsShowPrev(true);
-        recNextQue.shift();
+        existMatchQue.shift();
 
         setIsShowNext(nextOrderIndex.length === 0 ? false : true);
     };
