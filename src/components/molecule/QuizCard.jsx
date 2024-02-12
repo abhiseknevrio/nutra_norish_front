@@ -407,27 +407,43 @@ const QuizCard = ({ questions, queLoading }) => {
           </p>
           <div className="md:h-96 md:overflow-y-scroll">
             {responseData?.recommendations?.map((item) => (
-              <div key={item?.key} className="my-5 border p-2.5">
-                <div className="text-xl">Question: {item?.question}</div>
-                <div>Answer : {item?.option}</div>
-                <div>Rec : {item?.descriotion}</div>
-                <div>Product : {item?.product_name}</div>
-                <div>Price : {item?.price}</div>
-                <div>
-                  Properties : {item?.properties?.Dairy_free && "Dairy Free, "}{" "}
-                  {item?.properties?.Gluten_free && "Gluten Free, "}{" "}
-                  {item?.properties?.non_vegetarian && "Non Vegetarian, "}{" "}
-                  {item?.properties?.vegan && "Vegan"}
+              <div key={item?.key} className="my-5 grid grid-cols-4 gap-5">
+                <div className="bg-nutraWhite flex items-center justify-center col-span-1">
+                  <img
+                    src="/images/no-image-rr.png"
+                    // src="https://nutranourish.shop/cdn/shop/products/orig-v775-06_236_2000x.png?v=1636620186"
+                    alt="product"
+                    className="w-full h-auto"
+                  />
                 </div>
-                <div className="hover:text-btnBg">
-                  <a href={item?.link} target="_blank" rel="noreferrer">
-                    Click here for Product Info
-                  </a>
+
+                <div className="bg-nutraWhite p-4 col-span-2">
+                  <div className="font-bold text-xl mb-2">DFH Complete Multi™</div>
+                  <p className="text-gray-700 leading-relaxed">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </p>
+                  <div className="mt-4">
+                    <div className="font-bold">DOSE</div>
+                    <p className="text-gray-700">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aperiam, praesentium.</p>
+                    <div className="font-bold mt-2">SCHEDULE</div>
+                    <p className="text-gray-700">Lorem ipsum dolor.</p>
+                  </div>
+                </div>
+
+                <div className="bg-nutraWhite p-4 col-span-1">
+                  <div>
+                    <div className="font-bold text-warning text-xl">${item?.price}</div>
+                  </div>
+                  <div className="mt-4">
+                    <a href={item?.link} target="_blank" rel="noreferrer" className="text-center bg-btnBg text-nutraWhite py-2 px-4 rounded hover:bg-btnBgDark transition duration-300">
+                      Buy Now
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-        </div>
+        </div >
       )}
     </>
   );
