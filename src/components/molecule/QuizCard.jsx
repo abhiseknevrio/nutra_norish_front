@@ -398,7 +398,7 @@ const QuizCard = ({ questions, queLoading }) => {
           )}
         </>
       ) : (
-        <div className=" md:w-874">
+        <div className={`${responseData.recommendations.length > 0 ? "" : " md:w-874"}`}>
           <h1 className="text-5xl font-bold mb-5">
             Response Based on your Answer
           </h1>
@@ -410,23 +410,20 @@ const QuizCard = ({ questions, queLoading }) => {
               <div key={item?.key} className="my-5 grid grid-cols-4 gap-5">
                 <div className="bg-nutraWhite flex items-center justify-center col-span-1">
                   <img
-                    src="/images/no-image-rr.png"
-                    // src="https://nutranourish.shop/cdn/shop/products/orig-v775-06_236_2000x.png?v=1636620186"
+                    src={item.product_image !== "link unvailable" ? item.product_image : "/images/no-image-rr.png"}
                     alt="product"
                     className="w-full h-auto"
                   />
                 </div>
 
                 <div className="bg-nutraWhite p-4 col-span-2">
-                  <div className="font-bold text-xl mb-2">DFH Complete Multi™</div>
+                  <div className="font-bold text-xl mb-2">{item.product_name}</div>
                   <p className="text-gray-700 leading-relaxed">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    {item.description}
                   </p>
                   <div className="mt-4">
-                    <div className="font-bold">DOSE</div>
-                    <p className="text-gray-700">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aperiam, praesentium.</p>
-                    <div className="font-bold mt-2">SCHEDULE</div>
-                    <p className="text-gray-700">Lorem ipsum dolor.</p>
+                    <div className="font-bold">DOSE & SCHEDULE</div>
+                    <p className="text-gray-700">{item?.recommended_use}.</p>
                   </div>
                 </div>
 
