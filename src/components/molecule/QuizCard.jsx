@@ -233,6 +233,9 @@ const QuizCard = ({ questions, queLoading }) => {
           {!isSubmit ? (
             <div className="text-center p-5 lg:p-20 quizBox">
               <div className="title50">{question?.question}</div>
+              {
+                question.type === 'multi_select' && <div className="flex justify-center items-center text-md font-bold text-warning">( Maximum Selection three )</div>
+              }
               <div className="mt-9">
                 {question.type === "single_select" && (
                   <div
