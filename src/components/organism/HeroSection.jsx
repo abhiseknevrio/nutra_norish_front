@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ClientGroup from '../molecule/ClientGroup';
 import QuizCard from '../molecule/QuizCard';
 import Button from '../atom/Button';
@@ -26,25 +26,6 @@ const HeroSection = () => {
         }
     };
 
-    // useEffect(() => {
-    //     const getAllQuestions = async () => {
-    //         try {
-    //             const response = await fetch(`${process.env.REACT_APP_BASE_URL}/getAllQuestions`);
-    //             const data = await response.json();
-    //             setQuestions(data.questions)
-    //             if (response.ok) {
-    //                 setTimeout(() => {
-    //                     setQueLoading(false)
-    //                 }, 800)
-    //             }
-    //         } catch (error) {
-    //             console.error(error);
-    //         }
-    //     };
-
-    //     getAllQuestions();
-    // }, []);
-
     return (
         <>
             <section className='padb-117'>
@@ -70,13 +51,13 @@ const HeroSection = () => {
                         </div>
 
                         {/* Importent Section */}
-                        <div className=''>
+                        <div>
                             <div className='flex justify-center mt-14'>
                                 {
                                     questions ?
                                         <QuizCard questions={questions} queLoading={queLoading} />
                                         :
-                                        <Button onClick={getAllQuestions} text={queLoading ? "Loading..." : "Start Quiz"} />
+                                        <Button onClick={getAllQuestions} text={queLoading ? "LOADING ..." : "START THE QUIZ"} />
                                 }
                             </div>
                         </div>

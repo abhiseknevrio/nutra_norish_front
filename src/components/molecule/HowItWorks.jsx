@@ -77,7 +77,9 @@ const HowItWorks = () => {
             </div>
             <div className='border-b border-borderGreen mt-24'></div>
             <div className='flex justify-center mt-30'>
-                <Button text={"Take The Quiz"} />
+                <a href='#quizsection'>
+                    <Button text="TAKE THE QUIZ" />
+                </a>
             </div>
         </section>
     )
