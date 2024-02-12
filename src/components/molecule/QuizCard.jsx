@@ -150,6 +150,7 @@ const QuizCard = ({ questions, queLoading }) => {
 
 
   const nextQue = (val) => {
+    window.scrollTo(0, 500);
     let que;
     const targetKey = nextOrderIndex.length > 0 ? nextOrderIndex[0] : val;
     que = questions?.find((item) => item.key === targetKey);
