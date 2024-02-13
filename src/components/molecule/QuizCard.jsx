@@ -20,11 +20,11 @@ const QuizCard = ({ questions, queLoading }) => {
   const [updateInProgess, setUpdateInProgress] = useState(false)
   const [next, setNext] = useState(null)
 
-  console.log("next", next)
+  // console.log("next", next)
 
   const checkExistMatchQue = (next) => {
     if (existMatchQue.length > 0) {
-      console.log("existMatchQue inside :", existMatchQue);
+      // console.log("existMatchQue inside :", existMatchQue);
       setNextRecQue(existMatchQue?.[0]);
     } else {
       setNextRecQue(next);
@@ -54,7 +54,7 @@ const QuizCard = ({ questions, queLoading }) => {
   }, [updateInProgess]);
   // }, [existMatchQue.length, question.key, question.type, question.options, storedRes]);
 
-  console.log("existMatchQue outside", existMatchQue)
+  // console.log("existMatchQue outside", existMatchQue)
 
   if (queLoading) {
     return (
@@ -69,7 +69,6 @@ const QuizCard = ({ questions, queLoading }) => {
   }
 
   const handleInputChange = (type, que, key, next) => {
-    console.log("next", next)
     setIsShowNext(true);
     let nextQue = [...recNextQue];
     if (next) {
@@ -79,7 +78,7 @@ const QuizCard = ({ questions, queLoading }) => {
       } else {
         nextQue.push(next);
       }
-      // setNextOrderIndex([]);
+      setNextOrderIndex([]);
     }
 
     const uniqueQue = [...new Set(nextQue)];
@@ -161,7 +160,6 @@ const QuizCard = ({ questions, queLoading }) => {
 
   const nextQue = (val) => {
     setNext(null)
-    debugger
     window.scrollTo(0, 300);
     let que;
     const targetKey = nextOrderIndex.length > 0 ? nextOrderIndex[0] : val;
@@ -190,6 +188,7 @@ const QuizCard = ({ questions, queLoading }) => {
   };
 
   const prevQue = () => {
+    setNext(null)
     window.scrollTo(0, 300);
     setIsShowNext(true);
     const lastOrderIndex = orderIndex[orderIndex.length - 1];
