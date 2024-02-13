@@ -418,7 +418,7 @@ const QuizCard = ({ questions, queLoading }) => {
           <p className="text-lg font-bold text-warning text-center mb-5">
             {responseData?.message?.[0]?.disclaimer}
           </p>
-          <div className="md:h-96 md:overflow-y-scroll">
+          <div className="">
             {responseData?.recommendations?.map((item) => (
               <div key={item?.key} className="my-5 grid grid-cols-4 gap-5">
                 <div className="bg-nutraWhite flex items-center justify-center col-span-1">
@@ -430,7 +430,7 @@ const QuizCard = ({ questions, queLoading }) => {
                 </div>
 
                 <div className="bg-nutraWhite p-4 col-span-2">
-                  <div className="font-bold text-xl mb-2">{item.product_name}</div>
+                  <div className="font-bold text-xl mb-2">{item.product_name.toUpperCase()}</div>
                   <p className="text-gray-700 leading-relaxed">
                     {item.description}
                   </p>
@@ -442,7 +442,7 @@ const QuizCard = ({ questions, queLoading }) => {
 
                 <div className="bg-nutraWhite p-4 col-span-1">
                   <div>
-                    <div className="font-bold text-warning text-xl">${item?.price}</div>
+                    <div className="font-bold text-2xl">${item?.price}</div>
                   </div>
                   <div className="mt-4">
                     <a href={item?.link} target="_blank" rel="noreferrer" className="text-center bg-btnBg text-nutraWhite py-2 px-4 rounded hover:bg-btnBgDark transition duration-300">
