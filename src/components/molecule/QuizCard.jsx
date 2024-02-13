@@ -17,20 +17,42 @@ const QuizCard = ({ questions, queLoading }) => {
   const [nextOrderIndex, setNextOrderIndex] = useState([]);
   const [storedRes, setStoredRes] = useState([]);
   const [existMatchQue, setExistMatchQue] = useState([]);
+  const [updateInProgess, setUpdateInProgress] = useState(false)
+  const [next, setNext] = useState(null)
+
+  console.log("next", next)
+
+  const checkExistMatchQue = (next) => {
+    if (existMatchQue.length > 0) {
+      console.log("existMatchQue inside :", existMatchQue);
+      setNextRecQue(existMatchQue?.[0]);
+    } else {
+      setNextRecQue(next);
+    }
+  };
 
   useEffect(() => {
-    const existingQue = storedRes.find((res) => res.question === question.key);
-    if (existingQue && existMatchQue.length <= 3 && question.type === 'multi_select') {
-      let matchedQuestions = [];
-      question.options.forEach((option) => {
-        if (existingQue.answer.includes(option.key)) {
-          matchedQuestions.push(option.nextQuestion);
-        }
-      });
-      const uniqueQue = [...new Set(matchedQuestions)];
-      setExistMatchQue(uniqueQue.sort());
+    if (updateInProgess) {
+      const existingQue = storedRes.find((res) => res.question === question.key);
+      if (existingQue && existMatchQue.length <= 3 && question.type === 'multi_select') {
+        let matchedQuestions = [];
+        question.options.forEach((option) => {
+          if (existingQue.answer.includes(option.key)) {
+            matchedQuestions.push(option.nextQuestion);
+          }
+        });
+        const uniqueQue = [...new Set(matchedQuestions)];
+        setExistMatchQue(uniqueQue.sort());
+      }
     }
-  }, [existMatchQue.length, question.key, question.type, question.options, storedRes]);
+
+    checkExistMatchQue(next)
+
+    return () => {
+      setUpdateInProgress(false)
+    }
+  }, [updateInProgess]);
+  // }, [existMatchQue.length, question.key, question.type, question.options, storedRes]);
 
   console.log("existMatchQue outside", existMatchQue)
 
@@ -47,15 +69,17 @@ const QuizCard = ({ questions, queLoading }) => {
   }
 
   const handleInputChange = (type, que, key, next) => {
+    console.log("next", next)
     setIsShowNext(true);
     let nextQue = [...recNextQue];
     if (next) {
+      setNext(next)
       if (nextQue.includes(next)) {
         nextQue = nextQue.filter((res) => res !== next);
       } else {
         nextQue.push(next);
       }
-      setNextOrderIndex([]);
+      // setNextOrderIndex([]);
     }
 
     const uniqueQue = [...new Set(nextQue)];
@@ -132,25 +156,13 @@ const QuizCard = ({ questions, queLoading }) => {
       default:
         console.log("Unknown type");
     }
-    checkExistMatchQue(next)
+    setUpdateInProgress(true)
   };
-
-  const checkExistMatchQue = (next) => {
-    setExistMatchQue((prevExistMatchQue) => {
-      if (prevExistMatchQue.length > 0) {
-        console.log("existMatchQue inside :", prevExistMatchQue);
-        setNextRecQue(prevExistMatchQue?.[0]);
-        return prevExistMatchQue;
-      } else {
-        setNextRecQue(next);
-        return prevExistMatchQue;
-      }
-    });
-  };
-
 
   const nextQue = (val) => {
-    window.scrollTo(0, 500);
+    setNext(null)
+    debugger
+    window.scrollTo(0, 300);
     let que;
     const targetKey = nextOrderIndex.length > 0 ? nextOrderIndex[0] : val;
     que = questions?.find((item) => item.key === targetKey);
@@ -178,6 +190,7 @@ const QuizCard = ({ questions, queLoading }) => {
   };
 
   const prevQue = () => {
+    window.scrollTo(0, 300);
     setIsShowNext(true);
     const lastOrderIndex = orderIndex[orderIndex.length - 1];
     const nextOrder = [...nextOrderIndex, lastOrderIndex].sort();
@@ -258,7 +271,7 @@ const QuizCard = ({ questions, queLoading }) => {
                           className={`${question.options.length > 2
                             ? "multiSelectCard rounded-md"
                             : "rounded-full inline-block border border-borderGreen"
-                            } hover:bg-hover hover:text-nutraWhite cursor-pointer text-lg  py-2.5 px-10 ${storedRes.find(
+                            } hover:bg-hover hover:text-nutraWhite cursor-pointer text-lg  py-2.5 px-10 flex items-center justify-center ${storedRes.find(
                               (obj) =>
                                 obj.question === question.key &&
                                 obj.answer === item.key
@@ -336,7 +349,7 @@ const QuizCard = ({ questions, queLoading }) => {
               >
                 {isShowPrev && (
                   <button
-                    className="py-2 px-7 bg-cardBg hover:bg-hover hover:text-nutraWhite rounded-md"
+                    className="py-3 px-8 bg-cardBg hover:bg-hover hover:text-nutraWhite rounded-md"
                     onClick={() => prevQue()}
                   >
                     Previous
@@ -344,7 +357,7 @@ const QuizCard = ({ questions, queLoading }) => {
                 )}
                 {isShowNext && (
                   <button
-                    className="py-2 px-7 bg-cardBg hover:bg-hover hover:text-nutraWhite rounded-md"
+                    className="py-3 px-8 bg-cardBg hover:bg-hover hover:text-nutraWhite rounded-md"
                     onClick={() => nextQue(nextRecQue)}
                   >
                     Next
@@ -399,7 +412,7 @@ const QuizCard = ({ questions, queLoading }) => {
         </>
       ) : (
         <div className={`${responseData.recommendations.length > 0 ? "" : " md:w-874"}`}>
-          <h1 className="text-5xl font-bold mb-5">
+          <h1 className="text-5xl font-bold mb-5 flex justify-center">
             Response Based on your Answer
           </h1>
           <p className="text-lg font-bold text-warning text-center mb-5">
