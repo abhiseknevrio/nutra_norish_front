@@ -1,31 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ClientGroup from '../molecule/ClientGroup';
 import QuizCard from '../molecule/QuizCard';
+import Button from '../atom/Button';
 
 
 const HeroSection = () => {
 
     const [questions, setQuestions] = useState(null)
-    const [queLoading, setQueLoading] = useState(true)
+    const [queLoading, setQueLoading] = useState(false)
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(`${process.env.REACT_APP_BASE_URL}/getAllQuestions`);
-                const data = await response.json();
-                setQuestions(data.questions)
-                if (response.ok) {
-                    setTimeout(() => {
-                        setQueLoading(false)
-                    }, 800)
-                }
-            } catch (error) {
-                console.error(error);
+    const getAllQuestions = async () => {
+        setQueLoading(true)
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BASE_URL}/getAllQuestions`);
+            const data = await response.json();
+            setQuestions(data.questions)
+            if (response.ok) {
+                setTimeout(() => {
+                    setQueLoading(false)
+                }, 800)
             }
-        };
-
-        fetchData();
-    }, []);
+        } catch (error) {
+            setQueLoading(false)
+            console.error(error);
+        }
+    };
 
     return (
         <>
@@ -50,23 +49,20 @@ const HeroSection = () => {
                                 <p className='font-bold text-xl mt-8'>Instant access to expert designed personalised Supplement Plan made just For You</p>
                             </div>
                         </div>
-                        {/* <div className='lg:hidden flex justify-center mt-14 mb-24'>
-                            <Button text="Take The Quiz" />
-                        </div> */}
 
                         {/* Importent Section */}
-                        <div className=''>
+                        <div>
                             <div className='flex justify-center mt-14'>
                                 {
                                     questions ?
                                         <QuizCard questions={questions} queLoading={queLoading} />
                                         :
-                                        null
+                                        <Button onClick={getAllQuestions} text={queLoading ? "LOADING ..." : "START THE QUIZ"} />
                                 }
                             </div>
-                            <div className='mt-24'>
-                                <ClientGroup />
-                            </div>
+                        </div>
+                        <div className='mt-24'>
+                            <ClientGroup />
                         </div>
                     </div>
                 </div>
