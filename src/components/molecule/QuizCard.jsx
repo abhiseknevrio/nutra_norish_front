@@ -20,6 +20,8 @@ const QuizCard = ({ questions, queLoading }) => {
   const [updateInProgess, setUpdateInProgress] = useState(false)
   const [next, setNext] = useState(null)
 
+  console.log("next", next)
+
   const checkExistMatchQue = (next) => {
     if (existMatchQue.length > 0) {
       console.log("existMatchQue inside :", existMatchQue);
@@ -77,7 +79,7 @@ const QuizCard = ({ questions, queLoading }) => {
       } else {
         nextQue.push(next);
       }
-      setNextOrderIndex([]);
+      // setNextOrderIndex([]);
     }
 
     const uniqueQue = [...new Set(nextQue)];
@@ -269,7 +271,7 @@ const QuizCard = ({ questions, queLoading }) => {
                           className={`${question.options.length > 2
                             ? "multiSelectCard rounded-md"
                             : "rounded-full inline-block border border-borderGreen"
-                            } hover:bg-hover hover:text-nutraWhite cursor-pointer text-lg  py-2.5 px-10 ${storedRes.find(
+                            } hover:bg-hover hover:text-nutraWhite cursor-pointer text-lg  py-2.5 px-10 flex items-center justify-center ${storedRes.find(
                               (obj) =>
                                 obj.question === question.key &&
                                 obj.answer === item.key
@@ -347,7 +349,7 @@ const QuizCard = ({ questions, queLoading }) => {
               >
                 {isShowPrev && (
                   <button
-                    className="py-2 px-7 bg-cardBg hover:bg-hover hover:text-nutraWhite rounded-md"
+                    className="py-3 px-8 bg-cardBg hover:bg-hover hover:text-nutraWhite rounded-md"
                     onClick={() => prevQue()}
                   >
                     Previous
@@ -355,7 +357,7 @@ const QuizCard = ({ questions, queLoading }) => {
                 )}
                 {isShowNext && (
                   <button
-                    className="py-2 px-7 bg-cardBg hover:bg-hover hover:text-nutraWhite rounded-md"
+                    className="py-3 px-8 bg-cardBg hover:bg-hover hover:text-nutraWhite rounded-md"
                     onClick={() => nextQue(nextRecQue)}
                   >
                     Next
