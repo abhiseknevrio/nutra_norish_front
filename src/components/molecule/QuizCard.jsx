@@ -17,20 +17,44 @@ const QuizCard = ({ questions, queLoading }) => {
   const [nextOrderIndex, setNextOrderIndex] = useState([]);
   const [storedRes, setStoredRes] = useState([]);
   const [existMatchQue, setExistMatchQue] = useState([]);
+  const [updateInProgess, setUpdateInProgress] = useState(false)
+  const [next, setNext] = useState(null)
+
+  console.log("nextRecQue", nextRecQue)
+  console.log("orderIndex", orderIndex)
+
+  const checkExistMatchQue = (next) => {
+    if (existMatchQue.length > 0) {
+      console.log("existMatchQue inside :", existMatchQue);
+      setNextRecQue(existMatchQue?.[0]);
+    } else {
+      setNextRecQue(next);
+    }
+  };
 
   useEffect(() => {
-    const existingQue = storedRes.find((res) => res.question === question.key);
-    if (existingQue && existMatchQue.length <= 3 && question.type === 'multi_select') {
-      let matchedQuestions = [];
-      question.options.forEach((option) => {
-        if (existingQue.answer.includes(option.key)) {
-          matchedQuestions.push(option.nextQuestion);
-        }
-      });
-      const uniqueQue = [...new Set(matchedQuestions)];
-      setExistMatchQue(uniqueQue.sort());
+    if (updateInProgess) {
+      const existingQue = storedRes.find((res) => res.question === question.key);
+      if (existingQue && question.type === 'multi_select') {
+        let matchedQuestions = [];
+        question.options.forEach((option) => {
+          if (existingQue.answer.includes(option.key)) {
+            matchedQuestions.push(option.nextQuestion);
+          }
+        });
+        const uniqueQue = [...new Set(matchedQuestions)];
+        setExistMatchQue(() => { return uniqueQue.sort() });
+      }
     }
-  }, [existMatchQue.length, question.key, question.type, question.options, storedRes]);
+    checkExistMatchQue(next)
+
+    return () => {
+      setUpdateInProgress(false)
+    }
+    // }, [existMatchQue.length, question.key, question.type, question.options, storedRes]);
+  }, [updateInProgess]);
+
+
 
   console.log("existMatchQue outside", existMatchQue)
 
@@ -50,6 +74,7 @@ const QuizCard = ({ questions, queLoading }) => {
     setIsShowNext(true);
     let nextQue = [...recNextQue];
     if (next) {
+      setNext(next)
       if (nextQue.includes(next)) {
         nextQue = nextQue.filter((res) => res !== next);
       } else {
@@ -132,25 +157,33 @@ const QuizCard = ({ questions, queLoading }) => {
       default:
         console.log("Unknown type");
     }
-    checkExistMatchQue(next)
+    setUpdateInProgress(true)
+    // checkExistMatchQue(next)
   };
 
-  const checkExistMatchQue = (next) => {
-    setExistMatchQue((prevExistMatchQue) => {
-      if (prevExistMatchQue.length > 0) {
-        console.log("existMatchQue inside :", prevExistMatchQue);
-        setNextRecQue(prevExistMatchQue?.[0]);
-        return prevExistMatchQue;
-      } else {
-        setNextRecQue(next);
-        return prevExistMatchQue;
-      }
-    });
-  };
+  // const checkExistMatchQue = (next) => {
+  //   // setExistMatchQue((prevExistMatchQue) => {
+  //   //   if (prevExistMatchQue.length > 0) {
+  //   //     console.log("existMatchQue inside :", prevExistMatchQue);
+  //   //     setNextRecQue(prevExistMatchQue?.[0]);
+  //   //     return prevExistMatchQue;
+  //   //   } else {
+  //   //     setNextRecQue(next);
+  //   //     return prevExistMatchQue;
+  //   //   }
+  //   // });
+  //   if (existMatchQue.length > 0) {
+  //     console.log("existMatchQue inside :", existMatchQue);
+  //     setNextRecQue(existMatchQue?.[0]);
+  //   } else {
+  //     setNextRecQue(next);
+  //   }
+  // };
 
 
   const nextQue = (val) => {
-    window.scrollTo(0, 500);
+    debugger
+    window.scrollTo(0, 300);
     let que;
     const targetKey = nextOrderIndex.length > 0 ? nextOrderIndex[0] : val;
     que = questions?.find((item) => item.key === targetKey);
@@ -178,6 +211,7 @@ const QuizCard = ({ questions, queLoading }) => {
   };
 
   const prevQue = () => {
+    window.scrollTo(0, 300);
     setIsShowNext(true);
     const lastOrderIndex = orderIndex[orderIndex.length - 1];
     const nextOrder = [...nextOrderIndex, lastOrderIndex].sort();
