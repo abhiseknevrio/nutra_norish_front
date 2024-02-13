@@ -34,7 +34,7 @@ const HeroSection = () => {
                 </div>
                 <div className='mx-common'>
                     <div>
-                        <div className='font-bold text-xl md:text-2xl mt-7 md:mt-14'>
+                        <div className='font-bold text-xl md:text-2xl pt-32 md:pt-48'>
                             ⭐⭐⭐⭐⭐ “I feel better than ever”
                         </div>
                         <div className='flex justify-center mt-5 md:mt-2'>
