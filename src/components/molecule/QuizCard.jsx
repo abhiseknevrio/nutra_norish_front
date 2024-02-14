@@ -269,7 +269,7 @@ const QuizCard = ({ questions, queLoading }) => {
                           className={`${question.options.length > 2
                             ? "multiSelectCard rounded-md"
                             : "rounded-full inline-block border border-borderGreen"
-                            } md:hover:bg-hover md:hover:text-nutraWhite cursor-pointer text-lg  py-2.5 px-10 flex items-center justify-center ${storedRes.find(
+                            } md:hover:bg-hover md:hover:text-nutraWhite cursor-pointer text-lg py-1.5 px-5 md:py-2.5 md:px-10 flex items-center justify-center ${storedRes.find(
                               (obj) =>
                                 obj.question === question.key &&
                                 obj.answer === item.key
