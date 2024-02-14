@@ -28,7 +28,7 @@ const HeroSection = () => {
 
     return (
         <>
-            <section id="quizsection" className='padb-117'>
+            <section className='padb-117'>
                 <div>
                     <img className='fixed bottom-0 right-0 whatsIcon' src='https://cdn.shopify.com/s/files/1/0606/0703/7648/files/whatsapp-rr.svg' alt='' />
                 </div>
@@ -37,7 +37,7 @@ const HeroSection = () => {
                         <div className='font-bold text-xl md:text-2xl pt-32 md:pt-48'>
                             ⭐⭐⭐⭐⭐ “I feel better than ever”
                         </div>
-                        <div className='flex justify-center mt-5 md:mt-2'>
+                        <div id="quizsection" className='flex justify-center mt-5 md:mt-2'>
                             <div className='text-center'>
                                 <div className='font-bold text-xl md:text-2xl'>
                                     <span className='left-border'></span>
