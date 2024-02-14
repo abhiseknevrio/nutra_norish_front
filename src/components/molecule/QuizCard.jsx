@@ -297,7 +297,7 @@ const QuizCard = ({ questions, queLoading }) => {
                               item.nextQuestion
                             )
                           }
-                          className="quizInput rounded-full title40"
+                          className="quizInput rounded-full"
                           type="text"
                         />
                         {/* <img
