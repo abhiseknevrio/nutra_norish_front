@@ -59,7 +59,17 @@ const HeroSection = () => {
                                     questions ?
                                         <QuizCard questions={questions} queLoading={queLoading} isSmallScreen={isSmallScreen} />
                                         :
-                                        <Button onClick={getAllQuestions} text={queLoading ? "LOADING ..." : "START THE QUIZ"} />
+                                        queLoading ? (
+                                            <div className="three col">
+                                                <div className="loader" id="loader-1">
+                                                    <span></span>
+                                                    <span></span>
+                                                    <span></span>
+                                                </div>
+                                            </div>
+                                        )
+                                            :
+                                            <Button onClick={getAllQuestions} text={"START THE QUIZ"} />
                                 }
                             </div>
                         </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const QuizCard = ({ questions, queLoading, isSmallScreen }) => {
+const QuizCard = ({ questions, isSmallScreen }) => {
   const [question, setNextQue] = useState(questions[0]); // Current Que
   const [nextRecQue, setNextRecQue] = useState(null);
   const [orderIndex, setOrderIndex] = useState([]);
@@ -55,18 +55,6 @@ const QuizCard = ({ questions, queLoading, isSmallScreen }) => {
   // }, [existMatchQue.length, question.key, question.type, question.options, storedRes]);
 
   // console.log("existMatchQue outside", existMatchQue)
-
-  if (queLoading) {
-    return (
-      <div className="three col">
-        <div className="loader" id="loader-1">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-    );
-  }
 
   const handleInputChange = (type, que, key, next) => {
     setIsShowNext(true);
@@ -129,7 +117,7 @@ const QuizCard = ({ questions, queLoading, isSmallScreen }) => {
           if (updatedResponses[updatedQuestionIndex].answer.length <= 2) {
             updatedResponses[updatedQuestionIndex].answer.push(key);
           } else {
-            alert("you can select max three option");
+            // alert("you can select max three option");
           }
         }
         setStoredRes(updatedResponses);
