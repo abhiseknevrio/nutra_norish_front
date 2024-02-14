@@ -287,6 +287,12 @@
     display: none;
 }
 
+.optionsGrid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
 /* Re-factor */
 .headerCta{
     display: block;
@@ -460,9 +466,9 @@
     }
 
     .multiSelectCard {
-        height: 110px;
-        font-size: 1rem;
-        padding: 10px 20px;
+        height: 50px;
+        font-size: 12px;
+        padding: 10px;
     }
 
     .desktopBlock {
@@ -471,6 +477,12 @@
 
     .mobileBlock {
         display: block;
+    }
+
+    .optionsGrid {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
