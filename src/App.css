@@ -412,7 +412,7 @@
 
     .personalised-right {
         width: 100%;
-        padding: 70px;
+        padding: 70px 30px;
     }
 
     .footerSec {
@@ -456,7 +456,7 @@
     }
 
     .title50 {
-        font-size: 25px;
+        font-size: 24px;
         font-weight: 700;
     }
 
