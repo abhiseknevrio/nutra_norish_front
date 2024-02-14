@@ -344,11 +344,11 @@ const QuizCard = ({ questions, queLoading }) => {
               <div
                 div
                 className={`flex ${isShowPrev ? "justify-between" : "justify-end"
-                  } text-lg font-bold mt-10 md:mt-20`}
+                  } text-lg font-bold mt-5 md:mt-20`}
               >
                 {isShowPrev && (
                   <button
-                    className="py-3 px-8 bg-cardBg md:hover:bg-hover md:hover:text-nutraWhite rounded-md"
+                    className="py-1.5 px-4 md:py-3 md:px-8 bg-cardBg md:hover:bg-hover md:hover:text-nutraWhite rounded-md"
                     onClick={() => prevQue()}
                   >
                     Previous
@@ -356,7 +356,7 @@ const QuizCard = ({ questions, queLoading }) => {
                 )}
                 {isShowNext && (
                   <button
-                    className="py-3 px-8 bg-cardBg md:hover:bg-hover md:hover:text-nutraWhite rounded-md"
+                    className="py-1.5 px-4 md:py-3 md:px-8 bg-cardBg md:hover:bg-hover md:hover:text-nutraWhite rounded-md"
                     onClick={() => nextQue(nextRecQue)}
                   >
                     Next
