@@ -288,8 +288,15 @@
 }
 
 /* Re-factor */
+.headerCta{
+    display: block;
+}
 
 @media screen and (max-width: 767px) {
+
+    .headerCta{
+        display: none;
+    }
 
     .mx-common {
         margin: 0px 10px;
