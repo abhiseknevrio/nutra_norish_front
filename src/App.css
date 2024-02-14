@@ -679,6 +679,7 @@
     border-radius: 100%;
     position: relative;
     margin: 0 auto;
+    border: none;
 }
 
 #loader-1 span {
