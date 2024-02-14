@@ -12,14 +12,31 @@ import FeedbackSectionByClient from './components/molecule/FeedbackSectionByClie
 import PersonalisedSection from './components/molecule/PersonalisedSection';
 import BlogSection from './components/molecule/BlogSection';
 import Footer from './components/molecule/Footer';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      setShowNavbar(prevScrollPos > currentScrollPos || currentScrollPos === 0);
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [prevScrollPos]);
 
   return (
     <>
       <div>
         <div className='heroBg'>
-          <Header />
+          <Header showNavbar={showNavbar} />
           <HeroSection />
         </div>
         <DifferenceSection />
