@@ -247,12 +247,12 @@ const QuizCard = ({ questions, queLoading }) => {
               {
                 question.type === 'multi_select' && <div className="flex justify-center items-center text-md font-bold text-warning">( Maximum Selection three )</div>
               }
-              <div className="mt-9">
+              <div className="mt-5 md:mt-9">
                 {question.type === "single_select" && (
                   <div
                     className={`${question.options.length <= 2
                       ? "flex justify-center gap-x-10"
-                      : "grid md:grid-cols-2 gap-5"
+                      : "grid md:grid-cols-2 gap-2.5"
                       }`}
                   >
                     {question?.options?.map((item) => (
@@ -269,7 +269,7 @@ const QuizCard = ({ questions, queLoading }) => {
                           className={`${question.options.length > 2
                             ? "multiSelectCard rounded-md"
                             : "rounded-full inline-block border border-borderGreen"
-                            } md:hover:bg-hover md:hover:text-nutraWhite cursor-pointer text-lg  py-2.5 px-10 flex items-center justify-center ${storedRes.find(
+                            } md:hover:bg-hover md:hover:text-nutraWhite cursor-pointer md:text-lg py-1.5 px-5 md:py-2.5 md:px-10 flex items-center justify-center ${storedRes.find(
                               (obj) =>
                                 obj.question === question.key &&
                                 obj.answer === item.key
@@ -297,7 +297,7 @@ const QuizCard = ({ questions, queLoading }) => {
                               item.nextQuestion
                             )
                           }
-                          className="quizInput rounded-full title40"
+                          className="quizInput rounded-full"
                           type="text"
                         />
                         {/* <img
@@ -344,11 +344,11 @@ const QuizCard = ({ questions, queLoading }) => {
               <div
                 div
                 className={`flex ${isShowPrev ? "justify-between" : "justify-end"
-                  } text-lg font-bold mt-10 md:mt-20`}
+                  } text-lg font-bold mt-5 md:mt-20`}
               >
                 {isShowPrev && (
                   <button
-                    className="py-3 px-8 bg-cardBg md:hover:bg-hover md:hover:text-nutraWhite rounded-md"
+                    className="py-1.5 px-4 md:py-3 md:px-8 bg-cardBg md:hover:bg-hover md:hover:text-nutraWhite rounded-md"
                     onClick={() => prevQue()}
                   >
                     Previous
@@ -356,7 +356,7 @@ const QuizCard = ({ questions, queLoading }) => {
                 )}
                 {isShowNext && (
                   <button
-                    className="py-3 px-8 bg-cardBg md:hover:bg-hover md:hover:text-nutraWhite rounded-md"
+                    className="py-1.5 px-4 md:py-3 md:px-8 bg-cardBg md:hover:bg-hover md:hover:text-nutraWhite rounded-md"
                     onClick={() => nextQue(nextRecQue)}
                   >
                     Next
