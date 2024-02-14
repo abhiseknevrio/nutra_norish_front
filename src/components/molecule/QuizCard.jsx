@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const QuizCard = ({ questions, queLoading }) => {
+const QuizCard = ({ questions, queLoading, isSmallScreen }) => {
   const [question, setNextQue] = useState(questions[0]); // Current Que
   const [nextRecQue, setNextRecQue] = useState(null);
   const [orderIndex, setOrderIndex] = useState([]);
@@ -161,7 +161,12 @@ const QuizCard = ({ questions, queLoading }) => {
   const nextQue = (val) => {
     setIsShowNext(false)
     setNext(null)
-    window.scrollTo(0, 450);
+    if (isSmallScreen) {
+      window.scrollTo(0, 500);
+    } else {
+      window.scrollTo(0, 450);
+    }
+
     let que;
     const targetKey = nextOrderIndex.length > 0 ? nextOrderIndex[0] : val;
     que = questions?.find((item) => item.key === targetKey);
@@ -188,7 +193,11 @@ const QuizCard = ({ questions, queLoading }) => {
 
   const prevQue = () => {
     setNext(null)
-    window.scrollTo(0, 450);
+    if (isSmallScreen) {
+      window.scrollTo(0, 500);
+    } else {
+      window.scrollTo(0, 450);
+    }
     setIsShowNext(true);
     const lastOrderIndex = orderIndex[orderIndex.length - 1];
     const nextOrder = [...nextOrderIndex, lastOrderIndex].sort();
@@ -344,7 +353,7 @@ const QuizCard = ({ questions, queLoading }) => {
               <div
                 div
                 className={`flex ${isShowPrev ? "justify-between" : "justify-end"
-                  } text-lg font-bold mt-5 md:mt-20`}
+                  } md:text-lg font-bold mt-5 md:mt-20`}
               >
                 {isShowPrev && (
                   <button
