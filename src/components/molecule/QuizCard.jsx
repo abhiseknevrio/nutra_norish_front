@@ -323,10 +323,9 @@ const QuizCard = ({ questions, queLoading, isSmallScreen }) => {
 
                 {question.type === "multi_select" && (
                   <div className="optionsGrid">
-                    {/* <div className="grid grid-cols-2 lg:grid-cols-3 cursor-pointer gap-5"> */}
                     {question?.options?.map((item) => (
                       <div
-                        className={`multiSelectCard md:hover:bg-hover md:hover:text-nutraWhite flex justify-center items-center rounded-md ${storedRes.find(
+                        className={`multiSelectCard cursor-pointer md:hover:bg-hover md:hover:text-nutraWhite flex justify-center items-center rounded-md ${storedRes.find(
                           (obj) =>
                             obj.question === question.key &&
                             obj.answer.includes(item.key)
