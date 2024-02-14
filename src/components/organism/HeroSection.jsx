@@ -60,8 +60,8 @@ const HeroSection = () => {
                                         <QuizCard questions={questions} queLoading={queLoading} isSmallScreen={isSmallScreen} />
                                         :
                                         queLoading ? (
-                                            <div className="three col">
-                                                <div className="loader" id="loader-1">
+                                            <div className="threes cols">
+                                                <div className="loaderQue" id="loader-1-que">
                                                     <span></span>
                                                     <span></span>
                                                     <span></span>
