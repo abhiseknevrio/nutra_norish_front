@@ -161,7 +161,7 @@ const QuizCard = ({ questions, queLoading }) => {
   const nextQue = (val) => {
     setIsShowNext(false)
     setNext(null)
-    window.scrollTo(0, 300);
+    window.scrollTo(0, 450);
     let que;
     const targetKey = nextOrderIndex.length > 0 ? nextOrderIndex[0] : val;
     que = questions?.find((item) => item.key === targetKey);
@@ -188,7 +188,7 @@ const QuizCard = ({ questions, queLoading }) => {
 
   const prevQue = () => {
     setNext(null)
-    window.scrollTo(0, 300);
+    window.scrollTo(0, 450);
     setIsShowNext(true);
     const lastOrderIndex = orderIndex[orderIndex.length - 1];
     const nextOrder = [...nextOrderIndex, lastOrderIndex].sort();
