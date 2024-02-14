@@ -20,8 +20,6 @@ const QuizCard = ({ questions, queLoading }) => {
   const [updateInProgess, setUpdateInProgress] = useState(false)
   const [next, setNext] = useState(null)
 
-  // console.log("next", next)
-
   const checkExistMatchQue = (next) => {
     if (existMatchQue.length > 0) {
       // console.log("existMatchQue inside :", existMatchQue);
@@ -34,11 +32,14 @@ const QuizCard = ({ questions, queLoading }) => {
   useEffect(() => {
     if (updateInProgess) {
       const existingQue = storedRes.find((res) => res.question === question.key);
+      // console.log("existingQue", existingQue)
       if (existingQue && existMatchQue.length <= 3 && question.type === 'multi_select') {
         let matchedQuestions = [];
         question.options.forEach((option) => {
           if (existingQue.answer.includes(option.key)) {
+            debugger
             matchedQuestions.push(option.nextQuestion);
+          } else {
           }
         });
         const uniqueQue = [...new Set(matchedQuestions)];
@@ -159,6 +160,7 @@ const QuizCard = ({ questions, queLoading }) => {
   };
 
   const nextQue = (val) => {
+    setIsShowNext(false)
     setNext(null)
     window.scrollTo(0, 300);
     let que;
@@ -183,8 +185,6 @@ const QuizCard = ({ questions, queLoading }) => {
     }
     setIsShowPrev(true);
     existMatchQue.shift();
-
-    setIsShowNext(nextOrderIndex.length === 0 ? false : true);
   };
 
   const prevQue = () => {
