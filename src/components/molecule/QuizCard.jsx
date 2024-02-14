@@ -411,9 +411,9 @@ const QuizCard = ({ questions, queLoading }) => {
         </>
       ) : (
         <div className={`${responseData.recommendations.length > 0 ? "" : " md:w-874"}`}>
-          <h1 className="text-5xl font-bold mb-5 flex justify-center">
+          <div className="text-5xl font-bold mb-5 flex justify-center">
             Response Based on your Answer
-          </h1>
+          </div>
           <p className="text-lg font-bold text-warning text-center mb-5">
             {responseData?.message?.[0]?.disclaimer}
           </p>

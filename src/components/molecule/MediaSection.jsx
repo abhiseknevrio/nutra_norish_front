@@ -41,7 +41,7 @@ const MediaSection = () => {
     return (
         <section className='mediaSec'>
             <div className='flex justify-center'>
-                <h1 className='title55'>Media</h1>
+                <div className='title55'>Media</div>
             </div>
             <div className='mt-10'>
                 <div>
