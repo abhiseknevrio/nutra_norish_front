@@ -383,7 +383,7 @@
     }
 
     .contactSec {
-        padding: 100px 20px;
+        padding: 80px 20px;
     }
 
     .heroBg {
@@ -466,7 +466,7 @@
     }
 
     .title58 {
-        font-size: 40px;
+        font-size: 36px;
         font-weight: 700;
     }
 
@@ -507,6 +507,11 @@
         padding: 5px 50px;
         font-size: 20px;
         font-weight: 700;
+    }
+
+    .premiumBg {
+        background-position: center;
+        background-size: cover;
     }
 }
 
