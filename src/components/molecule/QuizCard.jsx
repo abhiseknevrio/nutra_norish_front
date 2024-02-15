@@ -411,7 +411,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
               <div key={item?.key} className="my-5 grid grid-cols-4 gap-5">
                 <div className="bg-nutraWhite flex items-center justify-center col-span-1">
                   <img
-                    src={item.product_image !== "link unvailable" ? item.product_image : "/images/no-image-rr.png"}
+                    src={item.product_image !== "link unvailable" ? item.product_image : "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/no-image-rr.png"}
                     alt="product"
                     className="w-full h-auto"
                   />
