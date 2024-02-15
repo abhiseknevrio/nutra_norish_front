@@ -2,7 +2,7 @@ import React from 'react';
 
 const ResponseGrid = ({ response: item }) => {
     return (
-        <div className="my-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:gap-5">
+        <div className="my-5 grid grid-cols-1 lg:grid-cols-4 lg:gap-5">
             <div className="bg-nutraWhite flex items-center justify-center">
                 <img
                     src={item.product_image !== "link unvailable" ? item.product_image : "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/no-image-rr.png"}
@@ -11,7 +11,7 @@ const ResponseGrid = ({ response: item }) => {
                 />
             </div>
 
-            <div className="bg-nutraWhite p-4 md:col-span-2">
+            <div className="bg-nutraWhite p-4 lg:col-span-2">
                 <div className="font-bold text-xl mb-2">{item.product_name.toUpperCase()}</div>
                 <p className="text-gray-700 leading-relaxed">
                     {item.description}
