@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const QuizCard = ({ questions, isSmallScreen }) => {
+const QuizCard = ({ questions, scrollToDiv }) => {
   const [question, setNextQue] = useState(questions[0]); // Current Que
   const [nextRecQue, setNextRecQue] = useState(null);
   const [orderIndex, setOrderIndex] = useState([]);
@@ -149,11 +149,7 @@ const QuizCard = ({ questions, isSmallScreen }) => {
   const nextQue = (val) => {
     setIsShowNext(false)
     setNext(null)
-    if (isSmallScreen) {
-      window.scrollTo(0, 600);
-    } else {
-      window.scrollTo(0, 450);
-    }
+    scrollToDiv()
 
     let que;
     const targetKey = nextOrderIndex.length > 0 ? nextOrderIndex[0] : val;
@@ -181,11 +177,8 @@ const QuizCard = ({ questions, isSmallScreen }) => {
 
   const prevQue = () => {
     setNext(null)
-    if (isSmallScreen) {
-      window.scrollTo(0, 600);
-    } else {
-      window.scrollTo(0, 450);
-    }
+    scrollToDiv()
+
     setIsShowNext(true);
     const lastOrderIndex = orderIndex[orderIndex.length - 1];
     const nextOrder = [...nextOrderIndex, lastOrderIndex].sort();
