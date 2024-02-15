@@ -22,19 +22,16 @@ const QuizCard = ({ questions, scrollToDiv }) => {
 
   const checkExistMatchQue = (next) => {
     if (existMatchQue.length > 0) {
-      // console.log("existMatchQue inside :", existMatchQue);
       setNextRecQue(existMatchQue?.[0]);
     } else {
       setNextRecQue(next);
     }
   };
 
-  console.log("nextOrder", nextOrderIndex)
 
   useEffect(() => {
     if (updateInProgess) {
       const existingQue = storedRes.find((res) => res.question === question.key);
-      // console.log("existingQue", existingQue)
       if (existingQue && existMatchQue.length <= 3 && question.type === 'multi_select') {
         let matchedQuestions = [];
         question.options.forEach((option) => {
@@ -56,7 +53,6 @@ const QuizCard = ({ questions, scrollToDiv }) => {
   }, [updateInProgess]);
   // }, [existMatchQue.length, question.key, question.type, question.options, storedRes]);
 
-  // console.log("existMatchQue outside", existMatchQue)
 
   const handleInputChange = (type, que, key, next) => {
     setIsShowNext(true);
@@ -69,7 +65,9 @@ const QuizCard = ({ questions, scrollToDiv }) => {
       } else {
         nextQue.push(next);
         const nextOrder = [...nextOrderIndex]
-        nextOrder.push(next);
+        if (nextOrderIndex.length <= 2) {
+          nextOrder.push(next);
+        }
         setNextOrderIndex(nextOrder.sort())
       }
     }
