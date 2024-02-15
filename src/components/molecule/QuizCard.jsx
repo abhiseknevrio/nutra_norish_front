@@ -150,7 +150,7 @@ const QuizCard = ({ questions, isSmallScreen }) => {
     setIsShowNext(false)
     setNext(null)
     if (isSmallScreen) {
-      window.scrollTo(0, 500);
+      window.scrollTo(0, 600);
     } else {
       window.scrollTo(0, 450);
     }
@@ -182,7 +182,7 @@ const QuizCard = ({ questions, isSmallScreen }) => {
   const prevQue = () => {
     setNext(null)
     if (isSmallScreen) {
-      window.scrollTo(0, 500);
+      window.scrollTo(0, 600);
     } else {
       window.scrollTo(0, 450);
     }
@@ -240,7 +240,7 @@ const QuizCard = ({ questions, isSmallScreen }) => {
         <>
           {!isSubmit ? (
             <div className="text-center p-5 lg:p-20 quizBox">
-              <div className="title50">{question?.question}</div>
+              <div className="text-lg md:text-5xl font-bold">{question?.question}</div>
               {
                 question.type === 'multi_select' && <div className="flex justify-center items-center text-md font-bold text-warning">( Maximum Selection three )</div>
               }
