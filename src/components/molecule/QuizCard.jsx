@@ -390,10 +390,13 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                       <div className="font-bold text-lg text-nutraWhite">
                         {isLoading ? "Submitting..." : "Submit Form"}
                       </div>
-                      <img
-                        src="https://cdn.shopify.com/s/files/1/0606/0703/7648/files/btnArrow-rr.svg"
-                        alt=""
-                      />
+                      {
+                        !isLoading &&
+                        <img
+                          src="https://cdn.shopify.com/s/files/1/0606/0703/7648/files/btnArrow-rr.svg"
+                          alt=""
+                        />
+                      }
                     </div>
                   </button>
                 </div>
