@@ -52,7 +52,6 @@ const QuizCard = ({ questions, scrollToDiv }) => {
     }
   }, [updateInProgess]);
 
-
   const handleInputChange = (type, que, key, next) => {
     setIsShowNext(true);
     let nextQue = [...recNextQue];
@@ -285,7 +284,9 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                             )
                           }
                           className="quizInput rounded-full"
-                          type="text"
+                          type="number"
+                          placeholder="$"
+                          value={storedRes.find((obj) => obj.question === question.key ? obj.answer : '')?.answer || ''}
                         />
                         {/* <img
                                                 onClick={() => nextQue(nextRecQue)}
@@ -361,6 +362,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                     className="formInput text-xl pl-5 py-5 mt-3"
                     type="text"
                     placeholder="Enter Name"
+                    disabled={isLoading}
                   />
                   <input
                     onChange={(e) =>
@@ -369,6 +371,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                     className="formInput text-xl pl-5 py-5 mt-3"
                     type="email"
                     placeholder="Enter Email"
+                    disabled={isLoading}
                   />
                 </div>
                 {/* Bottom Border */}
@@ -382,7 +385,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                   >
                     <div className="flex gap-4">
                       <div className="font-bold text-lg text-nutraWhite">
-                        {isLoading ? "Submitting..." : "Submit Form"}
+                        {isLoading ? <div className="loaderRes">Hold on...</div> : "Submit Form"}
                       </div>
                       {
                         !isLoading &&
