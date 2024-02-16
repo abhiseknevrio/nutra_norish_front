@@ -1,23 +1,15 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import ClientGroup from '../molecule/ClientGroup';
 import QuizCard from '../molecule/QuizCard';
 import Button from '../atom/Button';
 import useMediaQuery from '../../useMediaQuery'
 
 
-const HeroSection = () => {
+const HeroSection = ({ targetDivRef, scrollToDiv }) => {
 
     const [questions, setQuestions] = useState(null)
     const [queLoading, setQueLoading] = useState(false)
     const isSmallScreen = useMediaQuery('(max-width: 768px)');
-    const targetDivRef = useRef(null);
-
-    const scrollToDiv = () => {
-        if (targetDivRef.current) {
-            const yOffset = targetDivRef.current.getBoundingClientRect().top + window.pageYOffset - 130;
-            window.scrollTo({ top: yOffset, behavior: 'smooth' });
-        }
-    };
 
     const getAllQuestions = async () => {
         setQueLoading(true)

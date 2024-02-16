@@ -12,11 +12,12 @@ import FeedbackSectionByClient from './components/molecule/FeedbackSectionByClie
 import PersonalisedSection from './components/molecule/PersonalisedSection';
 import BlogSection from './components/molecule/BlogSection';
 import Footer from './components/molecule/Footer';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function App() {
   const [showNavbar, setShowNavbar] = useState(true);
   const [prevScrollPosistion, setPrevScrollPosistion] = useState(0);
+  const targetDivRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,25 +33,29 @@ function App() {
     };
   }, [prevScrollPosistion]);
 
-  function takeQuizhandle() {
-    window.location.href = "#quizsection"
-  }
+
+  const scrollToDiv = () => {
+    if (targetDivRef.current) {
+      const yOffset = targetDivRef.current.getBoundingClientRect().top + window.pageYOffset - 130;
+      window.scrollTo({ top: yOffset, behavior: 'smooth' });
+    }
+  };
 
   return (
     <>
       <div>
         <div className='heroBg'>
-          <Header showNavbar={showNavbar} onClick={takeQuizhandle} />
-          <HeroSection />
+          <Header showNavbar={showNavbar} onClick={scrollToDiv} />
+          <HeroSection targetDivRef={targetDivRef} scrollToDiv={scrollToDiv} />
         </div>
         <DifferenceSection />
         <MediaSection />
         <HealthierHappierSection />
         <NewWorldSection />
-        <HowItWorks onClick={takeQuizhandle} />
+        <HowItWorks onClick={scrollToDiv} />
         <PremiumQuality />
         <FeedbackSectionByClient />
-        <PersonalisedSection onClick={takeQuizhandle} />
+        <PersonalisedSection onClick={scrollToDiv} />
         <BlogSection />
         <ContactFormSection />
         <Footer />
