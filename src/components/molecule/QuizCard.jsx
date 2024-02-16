@@ -31,6 +31,9 @@ const QuizCard = ({ questions, scrollToDiv }) => {
     }
   };
 
+
+  // console.log("nextOrderIndex", nextOrderIndex)
+
   useEffect(() => {
     if (updateInProgess) {
       const existingQue = storedRes.find((res) => res.question === question.key);
@@ -62,10 +65,13 @@ const QuizCard = ({ questions, scrollToDiv }) => {
       setNext(next)
       if (nextQue.includes(next)) {
         nextQue = nextQue.filter((res) => res !== next);
+        if (type === 'multi_select') {
+          setNextOrderIndex(nextOrderIndex.filter(res => res !== next))
+        }
       } else {
         nextQue.push(next);
+        setNextOrderIndex([]);
       }
-      setNextOrderIndex([]);
     }
 
     const uniqueQue = [...new Set(nextQue)];
@@ -233,7 +239,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
       {responseData.length <= 0 ? (
         <>
           {!isSubmit ? (
-            <div className="text-center p-5 lg:p-20 quizBox">
+            <div className="text-center p-5 lg:p-16 quizBox">
               <div className={` ${isAnimate ? "animate__animated animate__fadeIn" : ''}`}>
                 <div className="text-lg md:text-5xl font-bold">{question?.question}</div>
                 {
