@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '../atom/Button';
 
-const PersonalisedSection = () => {
+const PersonalisedSection = ({ onClick }) => {
 
     return (
         <section>
@@ -18,9 +18,7 @@ const PersonalisedSection = () => {
                                 Get 10% off your first order + free shipping. You can cancel or change up your subscription any time.
                             </div>
                             <div className='mt-30'>
-                                <a href='#quizsection'>
-                                    <Button text="TAKE THE QUIZ" />
-                                </a>
+                                <Button onClick={onClick} text="TAKE THE QUIZ" />
                             </div>
                         </div>
                     </div>
