@@ -313,7 +313,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                   )}
 
                   {question.type === "multi_select" && (
-                    <div className="optionsGrid">
+                    <div className={question?.options?.length > 5 ? 'optionsGrid' : 'optionsGridSmall'}>
                       {question?.options?.map((item) => (
                         <div
                           className={`multiSelectCard cursor-pointer md:hover:bg-hover md:hover:text-nutraWhite flex justify-center items-center rounded-md ${storedRes.find(
