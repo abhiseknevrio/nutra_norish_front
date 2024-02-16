@@ -318,6 +318,10 @@
     font-weight: 700;
 }
 
+.textCenterLeft {
+    text-align: left;
+}
+
 /* Re-factor */
 
 @media screen and (max-width: 767px) {
@@ -512,6 +516,10 @@
     .premiumBg {
         background-position: center;
         background-size: cover;
+    }
+
+    .textCenterLeft {
+        text-align: center;
     }
 }
 
