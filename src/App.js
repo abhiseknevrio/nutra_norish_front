@@ -16,13 +16,13 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [showNavbar, setShowNavbar] = useState(true);
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [prevScrollPosistion, setPrevScrollPosistion] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
-      setShowNavbar(prevScrollPos > currentScrollPos || currentScrollPos === 0);
-      setPrevScrollPos(currentScrollPos);
+      const currentScrollPosition = window.pageYOffset;
+      setShowNavbar(prevScrollPosistion > currentScrollPosition || currentScrollPosition === 0);
+      setPrevScrollPosistion(currentScrollPosition);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -30,23 +30,27 @@ function App() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [prevScrollPos]);
+  }, [prevScrollPosistion]);
+
+  function takeQuizhandle() {
+    window.location.href = "#quizsection"
+  }
 
   return (
     <>
       <div>
         <div className='heroBg'>
-          <Header showNavbar={showNavbar} />
+          <Header showNavbar={showNavbar} onClick={takeQuizhandle} />
           <HeroSection />
         </div>
         <DifferenceSection />
         <MediaSection />
         <HealthierHappierSection />
         <NewWorldSection />
-        <HowItWorks />
+        <HowItWorks onClick={takeQuizhandle} />
         <PremiumQuality />
         <FeedbackSectionByClient />
-        <PersonalisedSection />
+        <PersonalisedSection onClick={takeQuizhandle} />
         <BlogSection />
         <ContactFormSection />
         <Footer />
