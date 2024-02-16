@@ -285,7 +285,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                           }
                           className="quizInput rounded-full"
                           type="number"
-                          placeholder="$"
+                          // placeholder="$"
                           value={storedRes.find((obj) => obj.question === question.key ? obj.answer : '')?.answer || ''}
                         />
                         {/* <img
@@ -379,7 +379,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                 <div className="flex justify-center mt-4">
                   <button
                     disabled={isLoading}
-                    onClick={submitUserData}
+                    onClick={() => submitUserData()}
                     className={`bg-btnBg inline-block px-9 py-5 rounded-full ${isLoading && "cursor-not-allowed"
                       }`}
                   >
