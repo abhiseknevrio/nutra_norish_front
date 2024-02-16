@@ -17,8 +17,8 @@ const ContactFormSection = () => {
                     <Input type={"text"} label={"Question"} placeholder={"Enter Your Quetion"} />
                 </div>
                 {/* Bottom Border */}
-                <div className='border-b border-borderGreen mt-24'></div>
-                <div className='flex justify-center mt-14'>
+                <div className='border-b border-borderGreen mt-12 md:mt-24'></div>
+                <div className='flex justify-center mt-7 md:mt-14'>
                     <Button text={"SEND US MESSAGE"} />
                 </div>
             </div>

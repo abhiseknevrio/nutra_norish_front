@@ -5,7 +5,7 @@ const NewWorldCard = ({ item, index }) => {
         <>
             <div className=''>
                 <div className={`mt-16 flex ${(index % 2 !== 0) ? 'flex-col md:flex-row-reverse' : 'flex-col md:flex-row'}`} style={{ background: item.bgRightColor }}>
-                    <div className=' flex justify-center items-center newWCard-left' style={{ background: item.bgLeftColor }}>
+                    <div className='flex justify-center items-center newWCard-left p-5' style={{ background: item.bgLeftColor }}>
                         <div>
                             <img className={`${index === 3 ? "pt-5" : "rounded-full"}`} src={item.image} alt='' />
                             {
@@ -17,7 +17,7 @@ const NewWorldCard = ({ item, index }) => {
                             }
                         </div>
                     </div>
-                    <div className='my-12 md:my-24 newWCard-right'>
+                    <div className='my-12 newWCard-right'>
                         <div className='title40 font-medium'>{item.id}</div>
                         <div className='title42 mt-30'>{item.title}</div>
                         <div className='text-2xl font-semibold mt-30'>{item.content}</div>
