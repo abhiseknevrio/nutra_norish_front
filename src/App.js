@@ -12,47 +12,58 @@ import FeedbackSectionByClient from './components/molecule/FeedbackSectionByClie
 import PersonalisedSection from './components/molecule/PersonalisedSection';
 import BlogSection from './components/molecule/BlogSection';
 import Footer from './components/molecule/Footer';
-import { useEffect, useState } from 'react';
-
+import { useEffect, useRef, useState } from 'react';
 function App() {
-  const [showNavbar, setShowNavbar] = useState(true);
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
-      setShowNavbar(prevScrollPos > currentScrollPos || currentScrollPos === 0);
-      setPrevScrollPos(currentScrollPos);
+    const [showNavbar, setShowNavbar] = useState(true);
+    const [prevScrollPosistion, setPrevScrollPosistion] = useState(0);
+    const targetDivRef = useRef(null);
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollPosition = window.pageYOffset;
+            setShowNavbar(prevScrollPosistion > currentScrollPosition || currentScrollPosition === 0);
+            setPrevScrollPosistion(currentScrollPosition);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [prevScrollPosistion]);
+    const scrollToDiv = () => {
+        if (targetDivRef.current) {
+            const yOffset = targetDivRef.current.getBoundingClientRect().top + window.pageYOffset - 130;
+            window.scrollTo({ top: yOffset, behavior: 'smooth' });
+        }
     };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [prevScrollPos]);
-
-  return (
-    <>
-      <div>
-        <div className='heroBg'>
-          <Header showNavbar={showNavbar} />
-          <HeroSection />
-        </div>
-        <DifferenceSection />
-        <MediaSection />
-        <HealthierHappierSection />
-        <NewWorldSection />
-        <HowItWorks />
-        <PremiumQuality />
-        <FeedbackSectionByClient />
-        <PersonalisedSection />
-        <BlogSection />
-        <ContactFormSection />
-        <Footer />
-      </div>
-    </>
-  );
+    return (
+        <>
+            <div>
+                <div className='heroBg'>
+                    <Header showNavbar={showNavbar} onClick={scrollToDiv} />
+                    <HeroSection targetDivRef={targetDivRef} scrollToDiv={scrollToDiv} />
+                </div>
+                <DifferenceSection />
+                <MediaSection />
+                <HealthierHappierSection />
+                <NewWorldSection />
+                <HowItWorks onClick={scrollToDiv} />
+                <PremiumQuality />
+                <FeedbackSectionByClient />
+                <PersonalisedSection onClick={scrollToDiv} />
+                <BlogSection />
+                <ContactFormSection />
+                <Footer />
+            </div>
+        </>
+    );
 }
-
 export default App;
+
+
+
+
+
+
+
+
+
+

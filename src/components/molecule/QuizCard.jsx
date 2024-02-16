@@ -29,6 +29,9 @@ const QuizCard = ({ questions, scrollToDiv }) => {
     }
   };
 
+
+  // console.log("nextOrderIndex", nextOrderIndex)
+
   useEffect(() => {
     if (updateInProgess) {
       const existingQue = storedRes.find((res) => res.question === question.key);
@@ -60,10 +63,13 @@ const QuizCard = ({ questions, scrollToDiv }) => {
       setNext(next)
       if (nextQue.includes(next)) {
         nextQue = nextQue.filter((res) => res !== next);
+        if (type === 'multi_select') {
+          setNextOrderIndex(nextOrderIndex.filter(res => res !== next))
+        }
       } else {
         nextQue.push(next);
+        setNextOrderIndex([]);
       }
-      setNextOrderIndex([]);
     }
 
     const uniqueQue = [...new Set(nextQue)];
@@ -229,6 +235,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
       {responseData.length <= 0 ? (
         <>
           {!isSubmit ? (
+<<<<<<< HEAD
             <div className="text-center p-5 lg:p-20 quizBox">
               <div className="text-lg md:text-5xl font-bold">{question?.question}</div>
               {
@@ -244,6 +251,84 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                   >
                     {question?.options?.map((item) => (
                       <div key={item.key}>
+=======
+            <div className="text-center p-5 lg:p-16 quizBox">
+              <div className={` ${isAnimate ? "animate__animated animate__fadeIn" : ''}`}>
+                <div className="text-lg md:text-5xl font-bold">{question?.question}</div>
+                {
+                  question.type === 'multi_select' && <div className="flex justify-center items-center text-md font-bold text-warning">( Maximum Selection three )</div>
+                }
+                <div className="mt-5 md:mt-9">
+                  {question.type === "single_select" && (
+                    <div
+                      className={`${question.options.length <= 2
+                        ? "flex justify-center gap-x-10"
+                        : "grid md:grid-cols-2 gap-2.5"
+                        }`}
+                    >
+                      {question?.options?.map((item) => (
+                        <div key={item.key}>
+                          <div
+                            onClick={() =>
+                              handleInputChange(
+                                question.type,
+                                question.key,
+                                item.key,
+                                item.nextQuestion
+                              )
+                            }
+                            className={`${question.options.length > 2
+                              ? "multiSelectCard rounded-md"
+                              : "rounded-full inline-block border border-borderGreen"
+                              } md:hover:bg-hover md:hover:text-nutraWhite cursor-pointer md:text-lg py-1.5 px-5 md:py-2.5 md:px-10 flex items-center justify-center ${storedRes.find(
+                                (obj) =>
+                                  obj.question === question.key &&
+                                  obj.answer === item.key
+                              )
+                                ? "bg-btnBg text-nutraWhite"
+                                : "bg-cardBg"
+                              }`}
+                          >
+                            {item.value}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {question.type === "input" && (
+                    <>
+                      {question?.options?.map((item) => (
+                        <div key={item.key}>
+                          <input
+                            onChange={(e) =>
+                              handleInputChange(
+                                question.type,
+                                question.key,
+                                e.target.value,
+                                item.nextQuestion
+                              )
+                            }
+                            className="quizInput rounded-full"
+                            type="number"
+                            // placeholder="$"
+                            value={storedRes.find((obj) => obj.question === question.key ? obj.answer : '')?.answer || ''}
+                          />
+                          {/* <img
+                                                onClick={() => nextQue(nextRecQue)}
+                                                className='absolute cursor-pointer'
+                                                style={{ right: "40px" }}
+                                                src='/images/rightArrow-rr.svg'
+                                                alt=''
+                                            /> */}
+                        </div>
+                      ))}
+                    </>
+                  )}
+
+                  {question.type === "multi_select" && (
+                    <div className="optionsGrid">
+                      {question?.options?.map((item) => (
+>>>>>>> 45a19f3cca0f7731ea290a88077b49547ed2a8b0
                         <div
                           onClick={() =>
                             handleInputChange(
