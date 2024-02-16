@@ -77,7 +77,7 @@ const HeroSection = () => {
                                             </div>
                                         )
                                             :
-                                            <Button onClick={getAllQuestions} text={"START THE QUIZ"} />
+                                            <Button onClick={() => getAllQuestions()} text={"START THE QUIZ"} />
                                 }
                             </div>
                         </div>
