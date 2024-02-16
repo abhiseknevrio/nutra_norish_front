@@ -51,7 +51,6 @@ const QuizCard = ({ questions, scrollToDiv }) => {
       setUpdateInProgress(false)
     }
   }, [updateInProgess]);
-  // }, [existMatchQue.length, question.key, question.type, question.options, storedRes]);
 
 
   const handleInputChange = (type, que, key, next) => {
@@ -61,15 +60,10 @@ const QuizCard = ({ questions, scrollToDiv }) => {
       setNext(next)
       if (nextQue.includes(next)) {
         nextQue = nextQue.filter((res) => res !== next);
-        setNextOrderIndex(nextOrderIndex.filter(res => res !== next))
       } else {
         nextQue.push(next);
-        const nextOrder = [...nextOrderIndex]
-        if (nextOrderIndex.length <= 2) {
-          nextOrder.push(next);
-        }
-        setNextOrderIndex(nextOrder.sort())
       }
+      setNextOrderIndex([]);
     }
 
     const uniqueQue = [...new Set(nextQue)];
