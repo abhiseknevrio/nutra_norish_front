@@ -31,6 +31,9 @@ const QuizCard = ({ questions, scrollToDiv }) => {
     }
   };
 
+
+  // console.log("nextOrderIndex", nextOrderIndex)
+
   useEffect(() => {
     if (updateInProgess) {
       const existingQue = storedRes.find((res) => res.question === question.key);
@@ -62,10 +65,13 @@ const QuizCard = ({ questions, scrollToDiv }) => {
       setNext(next)
       if (nextQue.includes(next)) {
         nextQue = nextQue.filter((res) => res !== next);
+        if (type === 'multi_select') {
+          setNextOrderIndex(nextOrderIndex.filter(res => res !== next))
+        }
       } else {
         nextQue.push(next);
+        setNextOrderIndex([]);
       }
-      setNextOrderIndex([]);
     }
 
     const uniqueQue = [...new Set(nextQue)];
