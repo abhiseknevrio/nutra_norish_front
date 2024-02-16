@@ -239,7 +239,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
       {responseData.length <= 0 ? (
         <>
           {!isSubmit ? (
-            <div className="text-center p-5 lg:p-20 quizBox">
+            <div className="text-center p-5 lg:p-16 quizBox">
               <div className={` ${isAnimate ? "animate__animated animate__fadeIn" : ''}`}>
                 <div className="text-lg md:text-5xl font-bold">{question?.question}</div>
                 {
