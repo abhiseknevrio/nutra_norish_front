@@ -6,10 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="30fc42ad-9889-4a4b-ba70-c298cbcd284b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/atom/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atom/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/molecule/HowItWorks.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecule/HowItWorks.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/molecule/PersonalisedSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecule/PersonalisedSection.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/molecule/QuizCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecule/QuizCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organism/HeroSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organism/HeroSection.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

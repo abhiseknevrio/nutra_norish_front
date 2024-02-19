@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../atom/Button';
 
-const HowItWorks = () => {
+const HowItWorks = ({onClick}) => {
 
     return (
         <section className='howItWorkSec'>
@@ -77,9 +77,9 @@ const HowItWorks = () => {
             </div>
             <div className='border-b border-borderGreen mt-24'></div>
             <div className='flex justify-center mt-30'>
-                <a href='#quizsection'>
-                    <Button text="TAKE THE QUIZ" />
-                </a>
+
+                    <Button text="TAKE THE QUIZ" onClick={onClick} />
+
             </div>
         </section>
     )

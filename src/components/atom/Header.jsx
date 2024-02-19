@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Button from './Button'
 import useMediaQuery from '../../useMediaQuery';
 
-const Header = ({ showNavbar }) => {
+const Header = ({ showNavbar, onClick }) => {
 
     const [colorChange, setColorChange] = useState(false);
     const isSmallScreen = useMediaQuery('(max-width: 768px)');
@@ -31,9 +31,9 @@ const Header = ({ showNavbar }) => {
                     <img src='https://cdn.shopify.com/s/files/1/0606/0703/7648/files/nutranourish-logo-rr.svg' className='h-11 md:h-16 my-7' alt='' />
                 </a>
                 <div className='headerCta'>
-                    <a href='#quizsection'>
-                        <Button text="TAKE THE QUIZ" />
-                    </a>
+
+                        <Button text="TAKE THE QUIZ" onClick={onClick}/>
+
                 </div>
             </div>
         </header>
