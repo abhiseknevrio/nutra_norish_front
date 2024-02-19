@@ -30,9 +30,9 @@
     margin-right: 33px;
 }
 
-.boreder-l-5 {
+.border-l-5 {
     border-left: 5px solid;
-    height: 88px;
+    height: auto;
 }
 
 .padb-117 {
@@ -156,7 +156,7 @@
 
 .feedbackSec {
     background: #FFF;
-    padding: 60px 293px;
+    padding: 60px 169px;
 }
 
 .personalisedSec {
@@ -184,7 +184,8 @@
 
 .clientFeeedbackCard {
     /* width: 586px; */
-    height: 384px;
+    /* height: 384px; */
+    min-height: 536px;
     text-align: center;
     padding: 40px;
 }

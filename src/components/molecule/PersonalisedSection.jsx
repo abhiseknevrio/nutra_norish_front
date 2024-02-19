@@ -11,11 +11,13 @@ const PersonalisedSection = ({onClick}) => {
                         <div className='personalised-left'>
                             <img className='p-5' src='https://cdn.shopify.com/s/files/1/0606/0703/7648/files/personalised-rr.svg' alt='' />
                         </div>
-                        <div className='personalised-right text-center lg:text-left'>
-                            <div className='title55'>Personalized Plans,Best Value</div>
+                        <div className='personalised-right text-center'>
+                            <div className='title55'>Personalized Plans, Best Value</div>
                             <div className='text-xl font-semibold mt-30'>
-                                We have worked hard to eliminate middlemen and overheads, so you get premium supplements at lowest prices. <br /> <br />
-                                Get 10% off your first order + free shipping. You can cancel or change up your subscription any time.
+                                Get 10% off your first order + free shipping.
+                            </div>
+                            <div className='text-xl font-semibold mt-30'>
+                                Want to monthly subscription? You can cancel or change up your subscription any time.
                             </div>
                             <div className='mt-30'>
 
