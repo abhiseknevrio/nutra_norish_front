@@ -287,6 +287,12 @@
     display: none;
 }
 
+.optionsGridSmall {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
 .optionsGrid {
     display: grid;
     gap: 10px;
@@ -316,6 +322,10 @@
     background: #FAF5EF;
     font-size: 40px;
     font-weight: 700;
+}
+
+.textCenterLeft {
+    text-align: left;
 }
 
 /* Re-factor */
@@ -504,6 +514,12 @@
         display: block;
     }
 
+    .optionsGridSmall {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .optionsGrid {
         display: grid;
         gap: 10px;
@@ -519,6 +535,10 @@
     .premiumBg {
         background-position: center;
         background-size: cover;
+    }
+
+    .textCenterLeft {
+        text-align: center;
     }
 }
 

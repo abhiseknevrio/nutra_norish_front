@@ -36,7 +36,7 @@ const HeroSection = ({ targetDivRef, scrollToDiv }) => {
                 </div>
                 <div className='mx-common'>
                     <div>
-                        <div className='font-bold text-xl md:text-2xl pt-32 md:pt-48 text-center lg:text-left'>
+                        <div className='font-bold text-xl md:text-2xl pt-32 md:pt-48 textCenterLeft'>
                             ⭐⭐⭐⭐⭐ “I feel better than ever”
                         </div>
                         <div id="quizsection" className='flex justify-center mt-5 md:mt-2'>
