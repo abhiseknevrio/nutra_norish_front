@@ -11,7 +11,7 @@ const QualityCard = ({ image, text }) => {
             className='qualityCard flex justify-center items-center'>
             <div className=''>
                 <div className='flex justify-center'>
-                    <img className={`${hover && 'invert'}`} src={image} alt='' />
+                    <img loading='lazy' className={`${hover && 'invert'}`} src={image} alt='' />
                 </div>
                 <div className='text-base md:text-xl font-bold text-center pt-5'>{text}</div>
             </div>
