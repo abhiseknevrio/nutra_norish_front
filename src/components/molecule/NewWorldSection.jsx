@@ -10,7 +10,7 @@ const NewWorldSection = () => {
             content: "You are unique. Our experts consider your goals, lifestyle and diet to formulate your personalised plan",
             image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/newWorld01-rr.svg",
             name: "Dr Menka Gupta",
-            designation: "MD, IFMCP",
+            designation: "IFMCP",
             bgLeftColor: "#C5CADE",
             bgRightColor: "#CDD1E3"
         },

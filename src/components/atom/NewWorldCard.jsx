@@ -12,7 +12,7 @@ const NewWorldCard = ({ item, index }) => {
                                 item.name && item.designation && <div className='mt-8'>
                                     <div className='text-3xl font-bold text-center'>Dr Menka Gupta</div>
 
-                                    <div className='text-3xl font-semibold text-healthText text-center'>MD, IFMCP</div>
+                                    <div className='text-3xl font-semibold text-healthText text-center'>IFMCP</div>
                                 </div>
                             }
                         </div>
