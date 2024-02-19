@@ -329,15 +329,8 @@
 }
 
 /* Re-factor */
-.headerCta{
-    display: block;
-}
 
 @media screen and (max-width: 767px) {
-
-    .headerCta{
-        display: none;
-    }
 
     .mx-common {
         margin: 0px 10px;
@@ -739,4 +732,16 @@
     60% {
         opacity: 1;
     }
+}
+
+/* Hide input type number */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
 }
