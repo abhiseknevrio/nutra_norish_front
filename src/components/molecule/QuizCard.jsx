@@ -235,15 +235,16 @@ const QuizCard = ({ questions, scrollToDiv }) => {
   };
 
   const addToCart = async (product) => {
+    console.log("addToCart :", product)
     const productId = "6821550424272";
     const quantity = 1;
-    const addToCartUrl = 'https://1l5d49h8w21ssbx5-60607037648.shopifypreview.com/cart/add.js';
+    // const addToCartUrl = 'https://1l5d49h8w21ssbx5-60607037648.shopifypreview.com/cart/add.js';
     const formData = new FormData();
     formData.append('quantity', quantity);
     formData.append('id', 40475239678160);
 
     try {
-      const response = await fetch(addToCartUrl, {
+      const response = await fetch("https://1l5d49h8w21ssbx5-60607037648.shopifypreview.com/cart/add.js", {
         method: 'POST',
         body: new URLSearchParams(formData), // Encode FormData as URLSearchParams
         headers: {
