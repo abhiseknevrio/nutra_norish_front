@@ -461,8 +461,13 @@
         top: 128px;
     }
 
-    .title42 {
+    .title40 {
         font-size: 30px;
+        font-weight: 500;
+    }
+
+    .title42 {
+        font-size: 1.5rem;
         font-weight: 700;
     }
 

@@ -17,10 +17,10 @@ const NewWorldCard = ({ item, index }) => {
                             }
                         </div>
                     </div>
-                    <div className='my-12 newWCard-right'>
+                    <div className='my-4 lg:my-12 newWCard-right'>
                         <div className='title40 font-medium'>{item.id}</div>
-                        <div className='title42 mt-30'>{item.title}</div>
-                        <div className='text-2xl font-semibold mt-30'>{item.content}</div>
+                        <div className='title42 mt-2.5 lg:mt-7'>{item.title}</div>
+                        <div className='text-xl lg:text-2xl font-semibold mt-2.5 lg:mt-7'>{item.content}</div>
                     </div>
                 </div>
             </div>
