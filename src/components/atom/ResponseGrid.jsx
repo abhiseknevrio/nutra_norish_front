@@ -5,6 +5,7 @@ const ResponseGrid = ({ response: item }) => {
         <div className="my-5 grid grid-cols-1 lg:grid-cols-4 lg:gap-5">
             <div className="bg-nutraWhite flex items-center justify-center">
                 <img
+                    loading='lazy'
                     src={item.product_image !== "link unvailable" ? item.product_image : "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/no-image-rr.png"}
                     alt="product"
                     className="w-full h-auto"
