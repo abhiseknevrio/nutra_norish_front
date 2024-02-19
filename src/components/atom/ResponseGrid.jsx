@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ResponseGrid = ({ response: item }) => {
+const ResponseGrid = ({ response: item, addToCart }) => {
     return (
         <div className="my-5 grid grid-cols-1 lg:grid-cols-4 lg:gap-5">
             <div className="bg-nutraWhite flex items-center justify-center">
@@ -28,9 +28,12 @@ const ResponseGrid = ({ response: item }) => {
                     <div className="font-bold text-xl md:text-2xl">${item?.price}</div>
                 </div>
                 <div className="mt-4">
-                    <a href={item?.link} target="_blank" rel="noreferrer" className="text-center bg-btnBg text-nutraWhite py-2 px-4 rounded md:hover:bg-btnBgDark transition duration-300">
+                    <div onClick={() => addToCart()} className="text-center bg-btnBg text-nutraWhite py-2 px-4 rounded md:hover:bg-btnBgDark transition duration-300">
                         Buy Now
-                    </a>
+                    </div>
+                    {/* <a href={item?.link} target="_blank" rel="noreferrer" className="text-center bg-btnBg text-nutraWhite py-2 px-4 rounded md:hover:bg-btnBgDark transition duration-300">
+                        Buy Now
+                    </a> */}
                 </div>
             </div>
         </div>

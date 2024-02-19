@@ -206,7 +206,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
     if (userDetails.name !== null || userDetails.email !== null) {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_BASE_URL}saveUserDataFunction`,
+          `https://us-central1-nutra-nourish.cloudfunctions.net/saveUserDataFunction`,
           {
             method: "POST",
             headers: {
@@ -233,6 +233,32 @@ const QuizCard = ({ questions, scrollToDiv }) => {
       setIsLoading(false);
     }
   };
+
+  const addToCart = async (product) => {
+    const productId = "6821550424272";
+    const quantity = 1;
+    const addToCartUrl = 'https://1l5d49h8w21ssbx5-60607037648.shopifypreview.com/cart/add.js';
+    const formData = new FormData();
+    formData.append('quantity', quantity);
+    formData.append('id', 40475239678160);
+
+    try {
+      const response = await fetch(addToCartUrl, {
+        method: 'POST',
+        body: new URLSearchParams(formData), // Encode FormData as URLSearchParams
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded' // Set the correct content type
+        }
+      });
+      if (response.ok) {
+        alert('Product added to cart!');
+      } else {
+        throw new Error('Failed to add product to cart');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <>
@@ -425,7 +451,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
           <div className="">
             {responseData?.recommendations?.map((item) => (
               <div key={item?.key}>
-                <ResponseGrid response={item} />
+                <ResponseGrid response={item} addToCart={addToCart} />
               </div>
             ))}
           </div>

@@ -14,7 +14,7 @@ const HeroSection = ({ targetDivRef, scrollToDiv }) => {
     const getAllQuestions = async () => {
         setQueLoading(true)
         try {
-            const response = await fetch(`${process.env.REACT_APP_BASE_URL}/getAllQuestions`);
+            const response = await fetch(`https://us-central1-nutra-nourish.cloudfunctions.net//getAllQuestions`);
             const data = await response.json();
             setQuestions(data.questions)
             if (response.ok) {
