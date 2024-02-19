@@ -180,7 +180,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
     if (userDetails.name !== null || userDetails.email !== null) {
       try {
         const response = await fetch(
-            `${process.env.REACT_APP_BASE_URL}saveUserDataFunction`,
+            `https://us-central1-nutra-nourish.cloudfunctions.net//saveUserDataFunction`,
             {
               method: "POST",
               headers: {

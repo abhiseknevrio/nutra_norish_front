@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="30fc42ad-9889-4a4b-ba70-c298cbcd284b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/molecule/QuizCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecule/QuizCard.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,6 +67,7 @@
       <workItem from="1707823763255" duration="419000" />
       <workItem from="1707883178498" duration="3463000" />
       <workItem from="1708317592643" duration="1698000" />
+      <workItem from="1708327502264" duration="1052000" />
     </task>
     <servers />
   </component>
