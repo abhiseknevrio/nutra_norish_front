@@ -32,8 +32,6 @@ const QuizCard = ({ questions, scrollToDiv }) => {
   };
 
 
-  console.log("storedRes", storedRes)
-
   useEffect(() => {
     if (updateInProgess) {
       const existingQue = storedRes.find((res) => res.question === question.key);
