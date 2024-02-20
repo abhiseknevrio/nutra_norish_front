@@ -1,14 +1,37 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Button from './Button'
+import useMediaQuery from '../../useMediaQuery';
 
-const Header = () => {
+const Header = ({ showNavbar, onClick }) => {
+
+    const [colorChange, setColorChange] = useState(false);
+    const isSmallScreen = useMediaQuery('(max-width: 768px)');
+
+    const changeNavbarColor = useCallback(() => {
+        if (window.scrollY >= 20) {
+            setColorChange(true);
+        } else {
+            setColorChange(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        window.addEventListener('scroll', changeNavbarColor);
+        return () => {
+            window.removeEventListener('scroll', changeNavbarColor);
+        };
+    }, [changeNavbarColor]);
+
+    const backGround = colorChange ? "bg-cardBg" : "";
 
     return (
-        <header className='border-b border-borderCol'>
+        <header className={`min-w-full border-b border-borderCol fixed top-0 z-20 ${backGround} ${isSmallScreen && !showNavbar ? 'hidden' : 'block'}`}>
             <div className='mx-common flex justify-center lg:justify-between items-center'>
-                <img src='/images/nutranourish-logo.svg' className='h-11 md:h-16 my-7' alt='' />
-                <div className='hidden lg:block'>
-                    <Button text="Take The Quiz" />
+                <a href='/'>
+                    <img src='https://cdn.shopify.com/s/files/1/0606/0703/7648/files/nutranourish-logo-rr.svg' className='h-11 md:h-16 my-7' alt='' />
+                </a>
+                <div className='desktopBlock'>
+                    <Button onClick={onClick} text="TAKE THE QUIZ" />
                 </div>
             </div>
         </header>

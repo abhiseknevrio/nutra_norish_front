@@ -16,6 +16,9 @@ module.exports = {
       newWorldSection: "#FFF8EF",
       borderGreen: "#A2AE85",
       contact: "#FBF5F0",
+      cardBg: "#FAF5EF",
+      warning: "#F43B14",
+      hover: "#4C6D5D"
     },
     width: {
       '261': '261px',
@@ -29,10 +32,6 @@ module.exports = {
       '1250': '1250px',
       '1320': '1320px',
       '1580': '1580px',
-    },
-    inset: {
-      'right0': '0px',
-      '100': '100px'
     },
     extend: {},
   },

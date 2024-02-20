@@ -1,9 +1,16 @@
 .heroBg {
-    background: url("../public/images/heroBg.svg");
+    background: url("https://cdn.shopify.com/s/files/1/0606/0703/7648/files/heroBg-rr.svg");
+    background-repeat: no-repeat;
 }
 
 .premiumBg {
-    background: url("../public/images/quality/bg.svg");
+    background: url("https://cdn.shopify.com/s/files/1/0606/0703/7648/files/premiumbg-rr.svg");
+    background-repeat: no-repeat;
+    background-position: top;
+}
+
+.quizBoxBg {
+    background: url("https://cdn.shopify.com/s/files/1/0606/0703/7648/files/contactFormBg-rr.svg");
     background-repeat: no-repeat;
     background-position: top;
 }
@@ -30,9 +37,9 @@
     margin-right: 33px;
 }
 
-.boreder-l-5 {
+.border-l-5 {
     border-left: 5px solid;
-    height: 88px;
+    height: auto;
 }
 
 .padb-117 {
@@ -156,7 +163,7 @@
 
 .feedbackSec {
     background: #FFF;
-    padding: 60px 293px;
+    padding: 60px 169px;
 }
 
 .personalisedSec {
@@ -184,13 +191,14 @@
 
 .clientFeeedbackCard {
     /* width: 586px; */
-    height: 384px;
+    /* height: 384px; */
+    min-height: 536px;
     text-align: center;
     padding: 40px;
 }
 
 .contactSec {
-    background: url("../public/images/contactFormBg.svg");
+    background: url("https://cdn.shopify.com/s/files/1/0606/0703/7648/files/contactFormBg-rr.svg");
     background-repeat: no-repeat;
     background-position: top;
     margin-top: 19px;
@@ -207,7 +215,7 @@
 }
 
 .personalisedBg {
-    background: url("../public/images/personalised/bg.svg");
+    background: url("https://cdn.shopify.com/s/files/1/0606/0703/7648/files/personalisedbg-rr.svg");
     padding: 90px 169px;
 }
 
@@ -230,7 +238,7 @@
 }
 
 .lineCss {
-    top: 74px;
+    top: 150px;
 }
 
 .howItWorkSec {
@@ -269,6 +277,65 @@
     font-weight: 700;
 }
 
+.whatsIcon {
+    width: 143px;
+}
+
+.multiSelectCard {
+    font-size: 1.125rem;
+    height: 100px;
+    padding: 20px 40px;
+}
+
+.desktopBlock {
+    display: block;
+}
+
+.mobileBlock {
+    display: none;
+}
+
+.optionsGridSmall {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.optionsGrid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.quizBox {
+    max-width: 1250px;
+    border-radius: 25px;
+    border: 2px dashed #FFF;
+    background: #F1E4DB;
+    box-shadow: 0px 20px 50px 0px rgba(209, 178, 114, 0.25);
+}
+
+.quizInputContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.quizInput {
+    text-align: center;
+    width: 100%;
+    padding: 15px 50px;
+    border: 3px solid #FFF;
+    background: #FAF5EF;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.textCenterLeft {
+    text-align: left;
+}
+
 /* Re-factor */
 
 @media screen and (max-width: 767px) {
@@ -291,7 +358,6 @@
 
     .whatsIcon {
         width: 80px;
-        top: -40px;
     }
 
     .mediaSec {
@@ -335,7 +401,7 @@
     }
 
     .contactSec {
-        padding: 100px 20px;
+        padding: 80px 20px;
     }
 
     .heroBg {
@@ -364,7 +430,7 @@
 
     .personalised-right {
         width: 100%;
-        padding: 70px;
+        padding: 70px 30px;
     }
 
     .footerSec {
@@ -402,13 +468,18 @@
         top: 128px;
     }
 
-    .title42 {
+    .title40 {
         font-size: 30px;
+        font-weight: 500;
+    }
+
+    .title42 {
+        font-size: 1.5rem;
         font-weight: 700;
     }
 
     .title50 {
-        font-size: 25px;
+        font-size: 24px;
         font-weight: 700;
     }
 
@@ -418,12 +489,12 @@
     }
 
     .title58 {
-        font-size: 40px;
+        font-size: 36px;
         font-weight: 700;
     }
 
     .title65 {
-        font-size: 45px;
+        font-size: 40px;
         font-weight: 700;
     }
 
@@ -435,6 +506,46 @@
         display: none;
     }
 
+    .multiSelectCard {
+        height: 50px;
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .desktopBlock {
+        display: none;
+    }
+
+    .mobileBlock {
+        display: block;
+    }
+
+    .optionsGridSmall {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .optionsGrid {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .quizInput {
+        padding: 5px 50px;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .premiumBg {
+        background-position: center;
+        background-size: cover;
+    }
+
+    .textCenterLeft {
+        text-align: center;
+    }
 }
 
 @media only screen and (max-width: 1440px) and (min-width: 768px) {
@@ -457,7 +568,6 @@
 
     .whatsIcon {
         width: 80px;
-        top: -40px;
     }
 
     .mediaSec {
@@ -579,42 +689,72 @@
     margin-left: 15px;
 }
 
+/* Loader */
+.threes {
+    padding: 50px 0;
+}
 
-.dropdown-container {
-    position: relative;
+.cols {
     display: block;
+    float: left;
+    margin: 1% 0 1% 1.6%;
 }
 
-.dropdown-trigger {
-    cursor: pointer;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
+.cols:first-of-type {
+    margin-left: 0;
 }
 
-.dropdown-list {
-    height: 200px;
-    width: 100%;
-    overflow-y: scroll;
-    list-style: none;
-    padding: 0 10px;
-    position: absolute;
-    background: #FAF5EF;
-    border: 1px solid rgba(0, 0, 0, 0.30);
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(244, 243, 243, 0.1);
-    display: flex;
-    flex-direction: column;
+.loaderQue {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    position: relative;
+    margin: 0 auto;
+    border: none;
 }
 
-.dropdown-list li {
-    padding: 10px;
+#loader-1-que span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: #1F4934;
+    margin: 35px 5px;
+    opacity: 0;
 }
 
-.dropdown-list label {
-    display: flex;
-    align-items: center;
+#loader-1-que span:nth-child(1) {
+    animation: opacitychange 1s ease-in-out infinite;
 }
 
-/* Add more styles as needed */
+#loader-1-que span:nth-child(2) {
+    animation: opacitychange 1s ease-in-out 0.33s infinite;
+}
+
+#loader-1-que span:nth-child(3) {
+    animation: opacitychange 1s ease-in-out 0.66s infinite;
+}
+
+@keyframes opacitychange {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    60% {
+        opacity: 1;
+    }
+}
+
+/* Hide input type number */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}

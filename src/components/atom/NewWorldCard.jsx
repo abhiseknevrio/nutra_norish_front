@@ -3,51 +3,27 @@ import React from 'react'
 const NewWorldCard = ({ item, index }) => {
     return (
         <>
-            {/* For Desktop */}
             <div className=''>
                 <div className={`mt-16 flex ${(index % 2 !== 0) ? 'flex-col md:flex-row-reverse' : 'flex-col md:flex-row'}`} style={{ background: item.bgRightColor }}>
-                    <div className=' flex justify-center items-center newWCard-left' style={{ background: item.bgLeftColor }}>
+                    <div className='flex justify-center items-center newWCard-left p-5' style={{ background: item.bgLeftColor }}>
                         <div>
-                            <img className={`${index === 3 ? "pt-5" : "rounded-full"}`} src={item.image} alt='' />
+                            <img loading='lazy' className={`${index === 3 ? "pt-5" : "rounded-full"}`} src={item.image} alt='' />
                             {
                                 item.name && item.designation && <div className='mt-8'>
                                     <div className='text-3xl font-bold text-center'>Dr Menka Gupta</div>
 
-                                    <div className='text-3xl font-semibold text-healthText text-center'>MD, IFMCP</div>
+                                    <div className='text-3xl font-semibold text-healthText text-center'>IFMCP</div>
                                 </div>
                             }
                         </div>
                     </div>
-                    <div className='my-12 md:my-24 newWCard-right'>
+                    <div className='my-4 lg:my-12 newWCard-right'>
                         <div className='title40 font-medium'>{item.id}</div>
-                        <div className='title42 mt-30'>{item.title}</div>
-                        <div className='text-2xl font-semibold mt-30'>{item.content}</div>
+                        <div className='title42 mt-2.5 lg:mt-7'>{item.title}</div>
+                        <div className='text-xl lg:text-2xl font-semibold mt-2.5 lg:mt-7'>{item.content}</div>
                     </div>
                 </div>
             </div>
-
-            {/* For Mobile */}
-            {/* <div className=' md:hidden'>
-                <div className={`mt-16 flex ${(index % 2 !== 0) ? 'flex-col-reverse' : 'flex-col'}`} style={{ background: item.bgRightColor }}>
-                    <div className='p-5' style={{ background: item.bgLeftColor }}>
-                        <div>
-                            <img className={`${index === 3 ? "mt-5" : "rounded-full p-5"}`} src={item.image} alt='' />
-                            {item.name &&
-                                <div className='text-25px md:text-30px font-bold text-center'>Dr Menka Gupta</div>
-                            }
-                            {item.designation &&
-                                <div className='text-25px md:text-30px font-semibold text-healthText text-center'>MD, IFMCP</div>
-                            }
-                        </div>
-                    </div>
-                    <div className='my-10 px-5'>
-                        <div className='text-center'>
-                            <div className='text-30px font-bold'>{item.title}</div>
-                            <div className='text-25px font-semibold mt-10'>{item.content}</div>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
         </>
     )
 }

@@ -47,58 +47,53 @@ const BlogSection = () => {
     const blogs = [
         {
             id: "01",
-            date: "October 5, 2023",
+            date: "November 30, 2023",
             by: "Dr Menka Gupta",
-            title: "Understanding Female Hormones: Types and Functions",
-            image: "/images/blogs/01.svg",
+            title: "9 BEST SUPPLEMENTS FOR PCOS: KEY TO HORMONAL BALANCE",
+            image: "https://nutranourish.com/wp-content/uploads/2023/11/Best_Supplements_for_Pcos.jpg",
             bgColor: "#F1E4DB",
-            redirectTo: ""
+            redirectTo: "https://nutranourish.com/blog/best-supplements-for-pcos"
         },
         {
             id: "02",
             date: "September 30, 2023",
             by: "Dr Menka Gupta",
-            title: "Benefits Of Yoga For Digestion",
-            image: "/images/blogs/02.svg",
+            title: "WHAT IS FIBER? IS FIBER SUITABLE FOR DIABETICS?",
+            image: "https://nutranourish.com/wp-content/uploads/2023/12/Does_Fiber_Intake_Affect_Blood_Sugar.jpg",
             bgColor: "#CDD1E3",
-            redirectTo: ""
+            redirectTo: "https://nutranourish.com/blog/what-is-fiber"
         },
         {
             id: "03",
-            date: "October 5, 2023",
+            date: "July 23, 2023",
             by: "Dr Menka Gupta",
-            title: "How to Flush Out Excess Estrogen from the Body?",
-            image: "/images/blogs/03.svg",
+            title: "HEALING A LEAKY GUT: A STEP-BY-STEP GUIDE",
+            image: "https://nutranourish.com/wp-content/uploads/2023/07/Embrace-Gut-Friendly-Food-1-scaled.jpg",
             bgColor: "#E3E3E3",
-            redirectTo: "https://nutranourish.com/blog/how-to-flush-out-excess-estrogen"
+            redirectTo: "https://nutranourish.com/blog/healing-a-leaky-gut-a-step-by-step-guide-functional-medicine"
         },
     ]
 
     const videos = [
         {
             id: "01",
-            title: "“Dr Brent Dorval PhD, our CSO, talking about the Food Sensitivity Testing at the recent A4M Gastroenterology Conference” - Dr Brent Dorval",
-            image: "/images/videos/01.svg",
-            redirectTo: "https://www.youtube.com/watch?v=ApuWHhya2Uk"
+            title: "“Food Sensitivity Webinar”",
+            image: "https://nutranourish.com/wp-content/uploads/2024/01/flyer_food-sensitivity-webinar-1024x576.jpeg",
+            redirectTo: "https://nutranourish.com/health-videos/food-sensitivity-webinar/"
         },
         {
             id: "02",
-            title: "Dr. Joel Evans, recently spoke abroad regarding food sensitivity testing, inflammation, and leaky gut. -Dr. Joel Evans",
-            image: "/images/videos/02.svg",
-            redirectTo: "https://www.youtube.com/watch?v=ApuWHhya2Uk"
+            title: "“Gut Health Webinar”",
+            image: "https://scontent.fixc1-3.fna.fbcdn.net/v/t15.5256-10/294930645_3099021943687167_2183607538998614586_n.jpg?stp=dst-jpg_p600x600&_nc_cat=110&ccb=1-7&_nc_sid=869369&_nc_ohc=r49o8HqqZJwAX-E1GPo&_nc_ht=scontent.fixc1-3.fna&edm=AGo2L-IEAAAA&oh=00_AfAKJTWUsBRp68Rya_e-abiOyS2LnJE0WV3wI8sgNt4yDQ&oe=65D81502",
+            redirectTo: "https://nutranourish.com/health-videos/gut-health-webinar/"
         },
         {
             id: "03",
-            title: "“Dr Brent Dorval PhD, our CSO, talking about the Food Sensitivity Testing at the recent A4M Gastroenterology Conference” - Dr Brent Dorval",
-            image: "/images/videos/01.svg",
-            redirectTo: "https://www.youtube.com/watch?v=ApuWHhya2Uk"
+            title: "“Mental Health Webinar”",
+            image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/video01-rr.jpg",
+            redirectTo: "https://nutranourish.com/health-videos/mental-health-webinar/"
         },
-        {
-            id: "04",
-            title: "Dr. Joel Evans, recently spoke abroad regarding food sensitivity testing, inflammation, and leaky gut. -Dr. Joel Evans",
-            image: "/images/videos/02.svg",
-            redirectTo: "https://www.youtube.com/watch?v=ApuWHhya2Uk"
-        },
+
     ]
 
     return (
