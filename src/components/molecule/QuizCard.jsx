@@ -32,8 +32,6 @@ const QuizCard = ({ questions, scrollToDiv }) => {
   };
 
 
-  // console.log("nextOrderIndex", nextOrderIndex)
-
   useEffect(() => {
     if (updateInProgess) {
       const existingQue = storedRes.find((res) => res.question === question.key);
@@ -134,13 +132,13 @@ const QuizCard = ({ questions, scrollToDiv }) => {
         if (existingResponseIndex !== -1) {
           updatedResponses[existingResponseIndex] = {
             question: que,
-            answer: key,
+            answer: Number(key),
           };
           setStoredRes(updatedResponses);
         } else {
           setStoredRes((prevResponses) => [
             ...prevResponses,
-            { question: que, answer: key },
+            { question: que, answer: Number(key) },
           ]);
         }
 
