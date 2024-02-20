@@ -233,24 +233,26 @@ const QuizCard = ({ questions, scrollToDiv }) => {
   };
 
   const addToCart = async (product) => {
-    console.log("addToCart :", product)
+
+    console.log("addToCart : ", product)
+
     const productId = "6821550424272";
     const quantity = 1;
-    // const addToCartUrl = 'https://1l5d49h8w21ssbx5-60607037648.shopifypreview.com/cart/add.js';
-    const formData = new FormData();
-    formData.quantity = quantity;
-    formData.id = 40475239678160;
 
-    console.log("formData", formData)
+    // Construct form data
+    const formData = new URLSearchParams();
+    formData.append('id', productId);
+    formData.append('quantity', quantity);
 
     try {
-      const response = await fetch("https://1l5d49h8w21ssbx5-60607037648.shopifypreview.com/cart/add.js", {
+      const response = await fetch("https://nutranourish.shop/cart/add.js", {
         method: 'POST',
-        body: new URLSearchParams(formData), // Encode FormData as URLSearchParams
+        body: formData,
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded' // Set the correct content type
         }
       });
+
       if (response.ok) {
         alert('Product added to cart!');
       } else {
