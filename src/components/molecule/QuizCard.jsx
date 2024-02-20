@@ -236,7 +236,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
 
     console.log("addToCart : ", product)
 
-    const productId = "6821550424272";
+    const productId = "40475239678160";
     const quantity = 1;
 
     // Construct form data
