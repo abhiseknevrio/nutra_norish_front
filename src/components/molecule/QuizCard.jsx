@@ -233,34 +233,33 @@ const QuizCard = ({ questions, scrollToDiv }) => {
   };
 
   const addToCart = async (product) => {
-
     console.log("addToCart : ", product)
 
-    const productId = "40475239678160";
-    const quantity = 1;
+    // const productId = "40475239678160";
+    // const quantity = 1;
 
-    // Construct form data
-    const formData = new URLSearchParams();
-    formData.append('id', productId);
-    formData.append('quantity', quantity);
+    // // Construct form data
+    // const formData = new URLSearchParams();
+    // formData.append('id', productId);
+    // formData.append('quantity', quantity);
 
-    try {
-      const response = await fetch("https://nutranourish.shop/cart/add.js", {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded' // Set the correct content type
-        }
-      });
+    // try {
+    //   const response = await fetch("https://nutranourish.shop/cart/add.js", {
+    //     method: 'POST',
+    //     body: formData,
+    //     headers: {
+    //       'Content-Type': 'application/x-www-form-urlencoded' // Set the correct content type
+    //     }
+    //   });
 
-      if (response.ok) {
-        alert('Product added to cart!');
-      } else {
-        throw new Error('Failed to add product to cart');
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    //   if (response.ok) {
+    //     alert('Product added to cart!');
+    //   } else {
+    //     throw new Error('Failed to add product to cart');
+    //   }
+    // } catch (error) {
+    //   console.error(error);
+    // }
   }
 
   return (
