@@ -239,14 +239,15 @@ const QuizCard = ({ questions, scrollToDiv }) => {
   }, [responseData.recommendations])
 
   const addToCart = async () => {
+
     // Construct form data
     const formData = new URLSearchParams();
 
     responseData?.recommendations?.forEach(product => {
       if (product.variant_id) {
-        formData.append('id', product.variant_id);
-        formData.append('quantity', 1);
-        formData.append('productId', product.product_id);
+        formData.append('id[]', product.variant_id);
+        formData.append('quantity[]', 1);
+        formData.append('productId[]', product.product_id);
       }
     });
 
