@@ -232,6 +232,12 @@ const QuizCard = ({ questions, scrollToDiv }) => {
     }
   };
 
+  useEffect(() => {
+    if (responseData.recommendations) {
+      addToCart();
+    }
+  }, [responseData.recommendations])
+
   const addToCart = async () => {
     // Construct form data
     const formData = new URLSearchParams();
@@ -445,7 +451,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
         </>
       ) : (
         <div className={`${responseData.recommendations.length > 0 ? "" : " md:w-874"}`}>
-          <div className="text-3xl md:text-5xl font-bold mb-5 text-center" onClick={() => addToCart()}>
+          <div className="text-3xl md:text-5xl font-bold mb-5 text-center">
             Response Based on your Answer
           </div>
           <p className="md:text-lg font-bold text-warning text-center mb-5">
