@@ -149,7 +149,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
     setUpdateInProgress(true)
   };
 
-  const nextQue = (val) => {
+  const nextQueHandler = (val) => {
     setIsAnimate(true)
     setIsShowNext(false)
     setNext(null)
@@ -232,34 +232,41 @@ const QuizCard = ({ questions, scrollToDiv }) => {
     }
   };
 
-  const addToCart = async (product) => {
-    console.log("addToCart : ", product)
+  useEffect(() => {
+    if (responseData.recommendations) {
+      addToCart();
+    }
+  }, [responseData.recommendations])
 
-    // const productId = "40475239678160";
-    // const quantity = 1;
+  const addToCart = async () => {
+    // Construct form data
+    const formData = new URLSearchParams();
 
-    // // Construct form data
-    // const formData = new URLSearchParams();
-    // formData.append('id', productId);
-    // formData.append('quantity', quantity);
+    responseData?.recommendations?.forEach(product => {
+      if (product.variant_id) {
+        formData.append('id', product.variant_id);
+        formData.append('quantity', 1);
+        formData.append('productId', product.product_id);
+      }
+    });
 
-    // try {
-    //   const response = await fetch("https://nutranourish.shop/cart/add.js", {
-    //     method: 'POST',
-    //     body: formData,
-    //     headers: {
-    //       'Content-Type': 'application/x-www-form-urlencoded' // Set the correct content type
-    //     }
-    //   });
+    try {
+      const response = await fetch("https://nutranourish.shop/cart/add.js", {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded' // Set the correct content type
+        }
+      });
 
-    //   if (response.ok) {
-    //     alert('Product added to cart!');
-    //   } else {
-    //     throw new Error('Failed to add product to cart');
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    // }
+      if (response.ok) {
+        alert('Product added to cart!');
+      } else {
+        throw new Error('Failed to add product to cart');
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -384,7 +391,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                   {isShowNext && (
                     <button
                       className="py-1.5 px-4 md:py-3 md:px-8 bg-cardBg md:hover:bg-hover md:hover:text-nutraWhite rounded-md"
-                      onClick={() => nextQue(nextRecQue)}
+                      onClick={() => nextQueHandler(nextRecQue)}
                     >
                       Next
                     </button>
@@ -453,7 +460,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
           <div className="">
             {responseData?.recommendations?.map((item) => (
               <div key={item?.key}>
-                <ResponseGrid response={item} addToCart={addToCart} />
+                <ResponseGrid response={item} />
               </div>
             ))}
           </div>
