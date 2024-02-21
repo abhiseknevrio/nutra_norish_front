@@ -333,7 +333,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                             }
                             className="quizInput rounded-full"
                             type="number"
-                            // placeholder="$"
+                            placeholder={item.key === 'age' ? "enter your age" : "$"}
                             value={storedRes.find((obj) => obj.question === question.key ? obj.answer : '')?.answer || ''}
                           />
                           {/* <img
