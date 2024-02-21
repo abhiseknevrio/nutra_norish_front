@@ -22,6 +22,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
   const [updateInProgess, setUpdateInProgress] = useState(false)
   const [next, setNext] = useState(null)
   const [isAnimate, setIsAnimate] = useState(false)
+  const [isSingleSelectedCall, setIsSingleSelectedCall] = useState(false)
 
   const checkExistMatchQue = (next) => {
     if (existMatchQue.length > 0) {
@@ -31,6 +32,15 @@ const QuizCard = ({ questions, scrollToDiv }) => {
     }
   };
 
+  useEffect(() => {
+    if (nextRecQue) {
+      nextQueHandler(nextRecQue)
+    }
+
+    return () => {
+      setIsSingleSelectedCall(false)
+    }
+  }, [isSingleSelectedCall])
 
   useEffect(() => {
     if (updateInProgess) {
@@ -95,6 +105,10 @@ const QuizCard = ({ questions, scrollToDiv }) => {
             ...prevResponses,
             { question: que, answer: key },
           ]);
+        }
+
+        if (key) {
+          setIsSingleSelectedCall(true)
         }
 
         break;
