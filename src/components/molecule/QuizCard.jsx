@@ -149,7 +149,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
     setUpdateInProgress(true)
   };
 
-  const nextQue = (val) => {
+  const nextQueHandler = (val) => {
     setIsAnimate(true)
     setIsShowNext(false)
     setNext(null)
@@ -384,7 +384,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                   {isShowNext && (
                     <button
                       className="py-1.5 px-4 md:py-3 md:px-8 bg-cardBg md:hover:bg-hover md:hover:text-nutraWhite rounded-md"
-                      onClick={() => nextQue(nextRecQue)}
+                      onClick={() => nextQueHandler(nextRecQue)}
                     >
                       Next
                     </button>
