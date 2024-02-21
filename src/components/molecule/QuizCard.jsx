@@ -6,6 +6,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
   const [question, setNextQue] = useState(questions[0]); // Current Que
   const [nextRecQue, setNextRecQue] = useState(null);
   const [orderIndex, setOrderIndex] = useState([]);
+  const [nextOrderIndex, setNextOrderIndex] = useState([]);
   const [isShowPrev, setIsShowPrev] = useState(false);
   const [isShowNext, setIsShowNext] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
@@ -16,13 +17,15 @@ const QuizCard = ({ questions, scrollToDiv }) => {
   const [recNextQue, setRecNextQue] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [responseData, setResponseData] = useState([]);
-  const [nextOrderIndex, setNextOrderIndex] = useState([]);
   const [storedRes, setStoredRes] = useState([]);
   const [existMatchQue, setExistMatchQue] = useState([]);
   const [updateInProgess, setUpdateInProgress] = useState(false)
   const [next, setNext] = useState(null)
   const [isAnimate, setIsAnimate] = useState(false)
   const [isSingleSelectedCall, setIsSingleSelectedCall] = useState(false)
+
+  console.log("orderIndex : ", orderIndex)
+  console.log("nextOrderIndex : ", nextOrderIndex)
 
   const checkExistMatchQue = (next) => {
     if (existMatchQue.length > 0) {
@@ -163,6 +166,36 @@ const QuizCard = ({ questions, scrollToDiv }) => {
     setUpdateInProgress(true)
   };
 
+  // const nextQueHandler = (val) => {
+  //   setIsAnimate(true)
+  //   setIsShowNext(false)
+  //   setNext(null)
+  //   scrollToDiv()
+
+  //   let que;
+  //   const targetKey = nextOrderIndex.length > 0 ? nextOrderIndex[0] : val;
+  //   que = questions?.find((item) => item.key === targetKey);
+  //   const queIndex = storedRes.findIndex((item) => item.question === que?.key);
+  //   if (queIndex !== -1) {
+  //     setStoredRes(storedRes.slice(0, queIndex));
+  //   }
+
+  //   nextOrderIndex.shift();
+  //   const updatedIndex = [...orderIndex];
+  //   if (que) {
+  //     setNextQue(que);
+  //     if (!updatedIndex.includes(que.key)) {
+  //       updatedIndex.push(que.key);
+  //     }
+  //     setOrderIndex(updatedIndex);
+  //   } else {
+  //     setIsSubmit(true);
+  //     setIsShowPrev(false);
+  //   }
+  //   setIsShowPrev(true);
+  //   existMatchQue.shift();
+  // };
+
   const nextQueHandler = (val) => {
     setIsAnimate(true)
     setIsShowNext(false)
@@ -201,7 +234,8 @@ const QuizCard = ({ questions, scrollToDiv }) => {
     setIsShowNext(true);
     const lastOrderIndex = orderIndex[orderIndex.length - 1];
     const nextOrder = [...nextOrderIndex, lastOrderIndex].sort();
-    setNextOrderIndex(nextOrder);
+    setNextOrderIndex(nextOrder.slice(0, 1));
+    console.log("slice", nextOrder.slice(0, 1))
     orderIndex.pop();
     const lastQue = orderIndex.at(-1);
     const que = questions.find((item) => item.key === lastQue);
