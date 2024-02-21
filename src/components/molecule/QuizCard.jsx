@@ -5,7 +5,7 @@ import ResponseGrid from "../atom/ResponseGrid";
 const QuizCard = ({ questions, scrollToDiv }) => {
   const [question, setNextQue] = useState(questions[0]); // Current Que
   const [nextRecQue, setNextRecQue] = useState(null);
-  const [orderIndex, setOrderIndex] = useState([]);
+  const [questionOrder, setQuestionOrder] = useState([]);
   const [nextOrderIndex, setNextOrderIndex] = useState([]);
   const [isShowPrev, setIsShowPrev] = useState(false);
   const [isShowNext, setIsShowNext] = useState(false);
@@ -15,78 +15,76 @@ const QuizCard = ({ questions, scrollToDiv }) => {
     email: null,
   });
   const [recNextQue, setRecNextQue] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [responseData, setResponseData] = useState([]);
   const [storedRes, setStoredRes] = useState([]);
   const [existMatchQue, setExistMatchQue] = useState([]);
   const [updateInProgess, setUpdateInProgress] = useState(false)
-  const [next, setNext] = useState(null)
   const [isAnimate, setIsAnimate] = useState(false)
   const [isSingleSelectedCall, setIsSingleSelectedCall] = useState(false)
 
-  console.log("orderIndex : ", orderIndex)
-  console.log("nextOrderIndex : ", nextOrderIndex)
+  // new
+  const [next, setNext] = useState(null)
+  const [previous, setPrevious] = useState(null)
+  const [multiOptionOrder, setMultiOptionOrder] = useState([])
+  const [responseData, setResponseData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const checkExistMatchQue = (next) => {
-    if (existMatchQue.length > 0) {
-      setNextRecQue(existMatchQue?.[0]);
-    } else {
-      setNextRecQue(next);
-    }
-  };
-
-  useEffect(() => {
-    if (nextRecQue) {
-      nextQueHandler(nextRecQue)
-    }
-
-    return () => {
-      setIsSingleSelectedCall(false)
-    }
-  }, [isSingleSelectedCall])
+  console.log("multiOptionOrder :", multiOptionOrder)
+  console.log("questionOrder :", questionOrder)
 
   useEffect(() => {
-    if (updateInProgess) {
-      const existingQue = storedRes.find((res) => res.question === question.key);
-      if (existingQue && existMatchQue.length <= 3 && question.type === 'multi_select') {
-        let matchedQuestions = [];
-        question.options.forEach((option) => {
-          if (existingQue.answer.includes(option.key)) {
-            matchedQuestions.push(option.nextQuestion);
-          } else {
-          }
-        });
-        const uniqueQue = [...new Set(matchedQuestions)];
-        setExistMatchQue(uniqueQue.sort());
+    if (next) {
+      const queIndex = questions.findIndex(res => res.key === next.key);
+      const updatedIndex = [...questionOrder];
+      if (queIndex !== -1) {
+        updatedIndex.push(questions[queIndex].key);
       }
+      setQuestionOrder(updatedIndex);
     }
+  }, [next]);
 
-    checkExistMatchQue(next)
-
-    return () => {
-      setUpdateInProgress(false)
-    }
-  }, [updateInProgess]);
 
   const handleInputChange = (type, que, key, next) => {
-    setIsAnimate(false)
-    setIsShowNext(true);
-    let nextQue = [...recNextQue];
+
     if (next) {
-      setNext(next)
-      if (nextQue.includes(next)) {
-        nextQue = nextQue.filter((res) => res !== next);
-        if (type === 'multi_select') {
-          setNextOrderIndex(nextOrderIndex.filter(res => res !== next))
+      const queIndex = questions.findIndex(res => res.key === next);
+      if (type === 'single_select') {
+        if (multiOptionOrder.length > 0) {
+          const multiQueIndex = questions.findIndex(res => res.key === multiOptionOrder[0]);
+          setNextQue(questions[multiQueIndex]);
+          setNext(questions[multiQueIndex])
+        } else {
+          setNextQue(questions[queIndex]);
+          setNext(questions[queIndex])
+        }
+        multiOptionOrder.shift();
+      } else if (type === 'input') {
+        setIsShowNext(true);
+        if (multiOptionOrder.length > 0) {
+          const multiQueIndex = questions.findIndex(res => res.key === multiOptionOrder[0]);
+          setNext(questions[multiQueIndex]);
+        } else {
+          setNext(questions[queIndex]);
         }
       } else {
-        nextQue.push(next);
-        setNextOrderIndex([]);
+        setIsShowNext(true);
+        let nextQue = [...multiOptionOrder];
+        if (nextQue.includes(next)) {
+          nextQue = nextQue.filter(res => res !== next);
+        } else {
+          nextQue.push(next);
+        }
+        setMultiOptionOrder(nextQue.sort());
+        if (multiOptionOrder.length > 0) {
+          const multiQueIndex = questions.findIndex(res => res.key === multiOptionOrder[0]);
+          setNext(questions[multiQueIndex]);
+        } else {
+          setNext(questions[queIndex])
+        }
       }
+    } else {
+      setIsSubmit(true)
     }
 
-    const uniqueQue = [...new Set(nextQue)];
-    setRecNextQue(uniqueQue.sort());
 
     const existingResponseIndex = storedRes.findIndex(
       (response) => response.question === que
@@ -166,85 +164,21 @@ const QuizCard = ({ questions, scrollToDiv }) => {
     setUpdateInProgress(true)
   };
 
-  // const nextQueHandler = (val) => {
-  //   setIsAnimate(true)
-  //   setIsShowNext(false)
-  //   setNext(null)
-  //   scrollToDiv()
-
-  //   let que;
-  //   const targetKey = nextOrderIndex.length > 0 ? nextOrderIndex[0] : val;
-  //   que = questions?.find((item) => item.key === targetKey);
-  //   const queIndex = storedRes.findIndex((item) => item.question === que?.key);
-  //   if (queIndex !== -1) {
-  //     setStoredRes(storedRes.slice(0, queIndex));
-  //   }
-
-  //   nextOrderIndex.shift();
-  //   const updatedIndex = [...orderIndex];
-  //   if (que) {
-  //     setNextQue(que);
-  //     if (!updatedIndex.includes(que.key)) {
-  //       updatedIndex.push(que.key);
-  //     }
-  //     setOrderIndex(updatedIndex);
-  //   } else {
-  //     setIsSubmit(true);
-  //     setIsShowPrev(false);
-  //   }
-  //   setIsShowPrev(true);
-  //   existMatchQue.shift();
-  // };
-
   const nextQueHandler = (val) => {
-    setIsAnimate(true)
+    setNextQue(val)
     setIsShowNext(false)
-    setNext(null)
-    scrollToDiv()
 
-    let que;
-    const targetKey = nextOrderIndex.length > 0 ? nextOrderIndex[0] : val;
-    que = questions?.find((item) => item.key === targetKey);
-    const queIndex = storedRes.findIndex((item) => item.question === que?.key);
-    if (queIndex !== -1) {
-      setStoredRes(storedRes.slice(0, queIndex));
-    }
-
-    nextOrderIndex.shift();
-    const updatedIndex = [...orderIndex];
-    if (que) {
-      setNextQue(que);
-      if (!updatedIndex.includes(que.key)) {
-        updatedIndex.push(que.key);
-      }
-      setOrderIndex(updatedIndex);
-    } else {
-      setIsSubmit(true);
-      setIsShowPrev(false);
-    }
-    setIsShowPrev(true);
-    existMatchQue.shift();
+    // remove multioption
+    multiOptionOrder.shift()
   };
 
-  const prevQue = () => {
-    setIsAnimate(false)
-    setNext(null)
-    scrollToDiv()
-
-    setIsShowNext(true);
-    const lastOrderIndex = orderIndex[orderIndex.length - 1];
-    const nextOrder = [...nextOrderIndex, lastOrderIndex].sort();
-    setNextOrderIndex(nextOrder.slice(0, 1));
-    console.log("slice", nextOrder.slice(0, 1))
-    orderIndex.pop();
-    const lastQue = orderIndex.at(-1);
-    const que = questions.find((item) => item.key === lastQue);
-    if (que) {
-      setNextQue(que);
+  const prevQue = (val) => {
+    if (val) {
+      setNextQue(val)
     } else {
-      setNextQue(questions[0]);
-      setIsShowPrev(false);
+      setNextQue(questions[0])
     }
+    questionOrder?.pop()
   };
 
   const submitUserData = async () => {
@@ -279,36 +213,6 @@ const QuizCard = ({ questions, scrollToDiv }) => {
       setIsLoading(false);
     }
   };
-
-  const addToCart = async (product) => {
-    console.log("addToCart : ", product)
-
-    // const productId = "40475239678160";
-    // const quantity = 1;
-
-    // // Construct form data
-    // const formData = new URLSearchParams();
-    // formData.append('id', productId);
-    // formData.append('quantity', quantity);
-
-    // try {
-    //   const response = await fetch("https://nutranourish.shop/cart/add.js", {
-    //     method: 'POST',
-    //     body: formData,
-    //     headers: {
-    //       'Content-Type': 'application/x-www-form-urlencoded' // Set the correct content type
-    //     }
-    //   });
-
-    //   if (response.ok) {
-    //     alert('Product added to cart!');
-    //   } else {
-    //     throw new Error('Failed to add product to cart');
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    // }
-  }
 
   return (
     <>
@@ -352,6 +256,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                                 : "bg-cardBg"
                               }`}
                           >
+                            <div className="bg-borderGreen p-4 font-bold"> {item.nextQuestion}</div> <br></br><br></br>
                             {item.value}
                           </div>
                         </div>
@@ -410,6 +315,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                             )
                           }
                         >
+                          <div className="bg-borderGreen p-4 font-bold"> {item.nextQuestion}</div> <br></br><br></br>
                           {item.value}
                         </div>
                       ))}
@@ -418,13 +324,13 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                 </div>
                 <div
                   div
-                  className={`flex ${isShowPrev ? "justify-between" : "justify-end"
+                  className={`flex ${(isShowPrev || storedRes.length > 0) ? "justify-between" : "justify-end"
                     } md:text-lg font-bold mt-5 md:mt-20`}
                 >
-                  {isShowPrev && (
+                  {(isShowPrev || storedRes.length > 0) && (
                     <button
                       className="py-1.5 px-4 md:py-3 md:px-8 bg-cardBg md:hover:bg-hover md:hover:text-nutraWhite rounded-md"
-                      onClick={() => prevQue()}
+                      onClick={() => prevQue(previous)}
                     >
                       Previous
                     </button>
@@ -432,7 +338,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                   {isShowNext && (
                     <button
                       className="py-1.5 px-4 md:py-3 md:px-8 bg-cardBg md:hover:bg-hover md:hover:text-nutraWhite rounded-md"
-                      onClick={() => nextQueHandler(nextRecQue)}
+                      onClick={() => nextQueHandler(next)}
                     >
                       Next
                     </button>
@@ -501,7 +407,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
           <div className="">
             {responseData?.recommendations?.map((item) => (
               <div key={item?.key}>
-                <ResponseGrid response={item} addToCart={addToCart} />
+                <ResponseGrid response={item} />
               </div>
             ))}
           </div>
