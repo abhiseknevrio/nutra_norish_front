@@ -232,34 +232,35 @@ const QuizCard = ({ questions, scrollToDiv }) => {
     }
   };
 
-  const addToCart = async (product) => {
-    console.log("addToCart : ", product)
+  const addToCart = async () => {
+    // Construct form data
+    const formData = new URLSearchParams();
 
-    // const productId = "40475239678160";
-    // const quantity = 1;
+    responseData?.recommendations?.forEach(product => {
+      if (product.variant_id) {
+        formData.append('id', product.variant_id);
+        formData.append('quantity', 1);
+        formData.append('productId', product.product_id);
+      }
+    });
 
-    // // Construct form data
-    // const formData = new URLSearchParams();
-    // formData.append('id', productId);
-    // formData.append('quantity', quantity);
+    try {
+      const response = await fetch("https://nutranourish.shop/cart/add.js", {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded' // Set the correct content type
+        }
+      });
 
-    // try {
-    //   const response = await fetch("https://nutranourish.shop/cart/add.js", {
-    //     method: 'POST',
-    //     body: formData,
-    //     headers: {
-    //       'Content-Type': 'application/x-www-form-urlencoded' // Set the correct content type
-    //     }
-    //   });
-
-    //   if (response.ok) {
-    //     alert('Product added to cart!');
-    //   } else {
-    //     throw new Error('Failed to add product to cart');
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    // }
+      if (response.ok) {
+        alert('Product added to cart!');
+      } else {
+        throw new Error('Failed to add product to cart');
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -444,7 +445,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
         </>
       ) : (
         <div className={`${responseData.recommendations.length > 0 ? "" : " md:w-874"}`}>
-          <div className="text-3xl md:text-5xl font-bold mb-5 text-center">
+          <div className="text-3xl md:text-5xl font-bold mb-5 text-center" onClick={() => addToCart()}>
             Response Based on your Answer
           </div>
           <p className="md:text-lg font-bold text-warning text-center mb-5">
@@ -453,7 +454,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
           <div className="">
             {responseData?.recommendations?.map((item) => (
               <div key={item?.key}>
-                <ResponseGrid response={item} addToCart={addToCart} />
+                <ResponseGrid response={item} />
               </div>
             ))}
           </div>
