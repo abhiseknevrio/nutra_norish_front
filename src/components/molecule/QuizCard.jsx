@@ -218,10 +218,17 @@ const QuizCard = ({ questions, scrollToDiv }) => {
     }
   };
 
+  function validateEmail(mail) {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+      return true;
+    }
+    return false;
+  }
+
 
   const submitUserData = async () => {
     setIsLoading(true);
-    if (userDetails.name !== null || userDetails.email !== null) {
+    if (userDetails.name !== null && userDetails.email !== null && validateEmail(userDetails.email)) {
       try {
         const response = await fetch(
           `https://us-central1-nutra-nourish.cloudfunctions.net/saveUserDataFunction`,
@@ -247,7 +254,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
         setIsLoading(false);
       }
     } else {
-      alert("Please fill all fields");
+      alert("Please fill all fields and correct details");
       setIsLoading(false);
     }
   };
@@ -434,6 +441,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                     type="text"
                     placeholder="Enter Name"
                     disabled={isLoading}
+                    required
                   />
                   <input
                     onChange={(e) =>
