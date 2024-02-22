@@ -28,8 +28,9 @@ const QuizCard = ({ questions, scrollToDiv }) => {
   const [responseData, setResponseData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log("multiOptionOrder :", multiOptionOrder)
+  console.log("storedRes :", storedRes)
   console.log("questionOrder :", questionOrder)
+  console.log("previous :", previous)
 
   useEffect(() => {
     if (next) {
@@ -43,8 +44,29 @@ const QuizCard = ({ questions, scrollToDiv }) => {
   }, [next]);
 
 
-  const handleInputChange = (type, que, key, next) => {
+  useEffect(() => {
+    if (updateInProgess) {
+      const existingQue = storedRes.find((res) => res.question === question.key);
+      if (existingQue && existMatchQue.length <= 3 && question.type === 'multi_select') {
+        let matchedQuestions = [];
+        question.options.forEach((option) => {
+          if (existingQue.answer.includes(option.key)) {
+            matchedQuestions.push(option.nextQuestion);
+          } else {
+          }
+        });
+        const uniqueQue = [...new Set(matchedQuestions)];
+        console.log("uniqueQue", uniqueQue)
+      }
+    }
 
+    return () => {
+      setUpdateInProgress(false)
+    }
+  }, [updateInProgess]);
+
+  const handleInputChange = (type, que, key, next) => {
+    setPrevious(question)
     if (next) {
       const queIndex = questions.findIndex(res => res.key === next);
       if (type === 'single_select') {
@@ -81,6 +103,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
           setNext(questions[queIndex])
         }
       }
+      setIsShowPrev(true)
     } else {
       setIsSubmit(true)
     }
@@ -167,19 +190,35 @@ const QuizCard = ({ questions, scrollToDiv }) => {
   const nextQueHandler = (val) => {
     setNextQue(val)
     setIsShowNext(false)
+    setIsShowPrev(true)
 
     // remove multioption
     multiOptionOrder.shift()
   };
 
-  const prevQue = (val) => {
-    if (val) {
-      setNextQue(val)
+  // const prevQue = (val) => {
+  //   if (val) {
+  //     setNextQue(val)
+  //   } else {
+  //     setNextQue(questions[0])
+  //   }
+  //   questionOrder?.pop()
+  // };
+
+  const prevQue = () => {
+    const previousQuestionKey = questionOrder[questionOrder.length - 2];
+    const previousQuestion = questions.find(q => q.key === previousQuestionKey);
+    if (previousQuestion) {
+      setNextQue(previousQuestion);
+      setIsShowNext(true);
+      setIsShowPrev(questionOrder.length > 1);
+      setQuestionOrder(prev => prev.slice(0, -1));
     } else {
-      setNextQue(questions[0])
+      setNextQue(questions[0]);
+      setIsShowPrev(false)
     }
-    questionOrder?.pop()
   };
+
 
   const submitUserData = async () => {
     setIsLoading(true);
@@ -324,10 +363,10 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                 </div>
                 <div
                   div
-                  className={`flex ${(isShowPrev || storedRes.length > 0) ? "justify-between" : "justify-end"
+                  className={`flex ${(isShowPrev) ? "justify-between" : "justify-end"
                     } md:text-lg font-bold mt-5 md:mt-20`}
                 >
-                  {(isShowPrev || storedRes.length > 0) && (
+                  {isShowPrev && (
                     <button
                       className="py-1.5 px-4 md:py-3 md:px-8 bg-cardBg md:hover:bg-hover md:hover:text-nutraWhite rounded-md"
                       onClick={() => prevQue(previous)}
