@@ -4,9 +4,7 @@ import ResponseGrid from "../atom/ResponseGrid";
 
 const QuizCard = ({ questions, scrollToDiv }) => {
   const [question, setNextQue] = useState(questions[0]); // Current Que
-  const [nextRecQue, setNextRecQue] = useState(null);
   const [questionOrder, setQuestionOrder] = useState([]);
-  const [nextOrderIndex, setNextOrderIndex] = useState([]);
   const [isShowPrev, setIsShowPrev] = useState(false);
   const [isShowNext, setIsShowNext] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
@@ -14,23 +12,17 @@ const QuizCard = ({ questions, scrollToDiv }) => {
     name: null,
     email: null,
   });
-  const [recNextQue, setRecNextQue] = useState([]);
   const [storedRes, setStoredRes] = useState([]);
-  const [existMatchQue, setExistMatchQue] = useState([]);
-  const [updateInProgess, setUpdateInProgress] = useState(false)
+  // const [existMatchQue, setExistMatchQue] = useState([]);
+  // const [updateInProgess, setUpdateInProgress] = useState(false)
   const [isAnimate, setIsAnimate] = useState(false)
-  const [isSingleSelectedCall, setIsSingleSelectedCall] = useState(false)
+  // const [isSingleSelectedCall, setIsSingleSelectedCall] = useState(false)
 
   // new
   const [next, setNext] = useState(null)
-  const [previous, setPrevious] = useState(null)
   const [multiOptionOrder, setMultiOptionOrder] = useState([])
   const [responseData, setResponseData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
-  console.log("storedRes :", storedRes)
-  console.log("questionOrder :", questionOrder)
-  console.log("previous :", previous)
 
   useEffect(() => {
     if (next) {
@@ -39,34 +31,34 @@ const QuizCard = ({ questions, scrollToDiv }) => {
       if (queIndex !== -1) {
         updatedIndex.push(questions[queIndex].key);
       }
-      setQuestionOrder(updatedIndex);
+      const uniqueQue = [...new Set(updatedIndex)];
+      setQuestionOrder(uniqueQue);
     }
   }, [next]);
 
+  // useEffect(() => {
+  //   if (updateInProgess) {
+  //     const existingQue = storedRes.find((res) => res.question === question.key);
+  //     if (existingQue && existMatchQue.length <= 3 && question.type === 'multi_select') {
+  //       // if (existingQue && existMatchQue.length <= 3) {
+  //       let matchedQuestions = [];
+  //       question.options.forEach((option) => {
+  //         if (existingQue.answer.includes(option.key)) {
+  //           matchedQuestions.push(option.nextQuestion);
+  //         } else {
+  //         }
+  //       });
+  //       const uniqueQue = [...new Set(matchedQuestions)];
+  //       setExistMatchQue(uniqueQue)
+  //     }
+  //   }
 
-  useEffect(() => {
-    if (updateInProgess) {
-      const existingQue = storedRes.find((res) => res.question === question.key);
-      if (existingQue && existMatchQue.length <= 3 && question.type === 'multi_select') {
-        let matchedQuestions = [];
-        question.options.forEach((option) => {
-          if (existingQue.answer.includes(option.key)) {
-            matchedQuestions.push(option.nextQuestion);
-          } else {
-          }
-        });
-        const uniqueQue = [...new Set(matchedQuestions)];
-        console.log("uniqueQue", uniqueQue)
-      }
-    }
-
-    return () => {
-      setUpdateInProgress(false)
-    }
-  }, [updateInProgess]);
+  //   return () => {
+  //     setUpdateInProgress(false)
+  //   }
+  // }, [updateInProgess]);
 
   const handleInputChange = (type, que, key, next) => {
-    setPrevious(question)
     if (next) {
       const queIndex = questions.findIndex(res => res.key === next);
       if (type === 'single_select') {
@@ -79,8 +71,11 @@ const QuizCard = ({ questions, scrollToDiv }) => {
           setNext(questions[queIndex])
         }
         multiOptionOrder.shift();
+        scrollToDiv()
+        setIsAnimate(false)
       } else if (type === 'input') {
         setIsShowNext(true);
+        setIsAnimate(false)
         if (multiOptionOrder.length > 0) {
           const multiQueIndex = questions.findIndex(res => res.key === multiOptionOrder[0]);
           setNext(questions[multiQueIndex]);
@@ -89,6 +84,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
         }
       } else {
         setIsShowNext(true);
+        setIsAnimate(false)
         let nextQue = [...multiOptionOrder];
         if (nextQue.includes(next)) {
           nextQue = nextQue.filter(res => res !== next);
@@ -131,9 +127,9 @@ const QuizCard = ({ questions, scrollToDiv }) => {
           ]);
         }
 
-        if (key) {
-          setIsSingleSelectedCall(true)
-        }
+        // if (key) {
+        //   setIsSingleSelectedCall(true)
+        // }
 
         break;
       case "multi_select":
@@ -184,33 +180,36 @@ const QuizCard = ({ questions, scrollToDiv }) => {
       default:
         console.log("Unknown type");
     }
-    setUpdateInProgress(true)
+    // setUpdateInProgress(true)
   };
+
+  useEffect(() => {
+    const queIndex = storedRes.findIndex((item) => item.question === question?.key);
+    if (queIndex !== -1) {
+      setStoredRes(storedRes.slice(0, queIndex));
+    }
+
+  }, [question])
 
   const nextQueHandler = (val) => {
     setNextQue(val)
     setIsShowNext(false)
     setIsShowPrev(true)
+    setIsAnimate(true)
+    scrollToDiv()
 
     // remove multioption
     multiOptionOrder.shift()
   };
 
-  // const prevQue = (val) => {
-  //   if (val) {
-  //     setNextQue(val)
-  //   } else {
-  //     setNextQue(questions[0])
-  //   }
-  //   questionOrder?.pop()
-  // };
-
   const prevQue = () => {
+    scrollToDiv()
+    setIsAnimate(false)
     const previousQuestionKey = questionOrder[questionOrder.length - 2];
     const previousQuestion = questions.find(q => q.key === previousQuestionKey);
     if (previousQuestion) {
       setNextQue(previousQuestion);
-      setIsShowNext(true);
+      // setIsShowNext(true);
       setIsShowPrev(questionOrder.length > 1);
       setQuestionOrder(prev => prev.slice(0, -1));
     } else {
@@ -253,13 +252,51 @@ const QuizCard = ({ questions, scrollToDiv }) => {
     }
   };
 
+  useEffect(() => {
+    if (responseData.recommendations) {
+      addToCart();
+    }
+  }, [responseData.recommendations])
+
+  const addToCart = async () => {
+
+    // Construct form data
+    const formData = new URLSearchParams();
+
+    responseData?.recommendations?.forEach(product => {
+      if (product.variant_id) {
+        formData.append('id[]', product.variant_id);
+        formData.append('quantity[]', 1);
+        formData.append('productId[]', product.product_id);
+      }
+    });
+
+    try {
+      const response = await fetch("https://nutranourish.shop/cart/add.js", {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded' // Set the correct content type
+        }
+      });
+
+      if (response.ok) {
+        alert('Product added to cart!');
+      } else {
+        throw new Error('Failed to add product to cart');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <>
       {responseData.length <= 0 ? (
         <>
           {!isSubmit ? (
             <div className="text-center p-5 lg:p-16 quizBox">
-              <div className={` ${isAnimate ? "animate__animated animate__fadeIn" : ''}`}>
+              <div className={` ${isAnimate ? "animate__animated animate__fadeIn animate__delay-0.5s" : ''}`}>
                 <div className="text-lg md:text-5xl font-bold">{question?.question}</div>
                 {
                   question.type === 'multi_select' && <div className="flex justify-center items-center text-md font-bold text-warning">( Maximum Selection three )</div>
@@ -295,7 +332,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                                 : "bg-cardBg"
                               }`}
                           >
-                            <div className="bg-borderGreen p-4 font-bold"> {item.nextQuestion}</div> <br></br><br></br>
+                            {/* <div className="bg-borderGreen p-4 font-bold"> {item.nextQuestion}</div> <br></br><br></br> */}
                             {item.value}
                           </div>
                         </div>
@@ -317,7 +354,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                             }
                             className="quizInput rounded-full"
                             type="number"
-                            // placeholder="$"
+                            placeholder={item.key === 'age' ? "enter your age" : "$"}
                             value={storedRes.find((obj) => obj.question === question.key ? obj.answer : '')?.answer || ''}
                           />
                           {/* <img
@@ -354,7 +391,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                             )
                           }
                         >
-                          <div className="bg-borderGreen p-4 font-bold"> {item.nextQuestion}</div> <br></br><br></br>
+                          {/* <div className="bg-borderGreen p-4 font-bold"> {item.nextQuestion}</div> <br></br><br></br> */}
                           {item.value}
                         </div>
                       ))}
@@ -369,7 +406,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                   {isShowPrev && (
                     <button
                       className="py-1.5 px-4 md:py-3 md:px-8 bg-cardBg md:hover:bg-hover md:hover:text-nutraWhite rounded-md"
-                      onClick={() => prevQue(previous)}
+                      onClick={() => prevQue()}
                     >
                       Previous
                     </button>
