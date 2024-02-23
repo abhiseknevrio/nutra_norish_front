@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import 'animate.css';
 import ResponseGrid from "../atom/ResponseGrid";
+import Button from "../atom/Button";
 
-const QuizCard = ({ questions, scrollToDiv }) => {
+const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
   const [question, setNextQue] = useState(questions[0]); // Current Que
-  const [nextRecQue, setNextRecQue] = useState(null);
-  const [orderIndex, setOrderIndex] = useState([]);
+  const [questionOrder, setQuestionOrder] = useState([]);
   const [isShowPrev, setIsShowPrev] = useState(false);
   const [isShowNext, setIsShowNext] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
@@ -13,67 +13,98 @@ const QuizCard = ({ questions, scrollToDiv }) => {
     name: null,
     email: null,
   });
-  const [recNextQue, setRecNextQue] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [responseData, setResponseData] = useState([]);
-  const [nextOrderIndex, setNextOrderIndex] = useState([]);
   const [storedRes, setStoredRes] = useState([]);
-  const [existMatchQue, setExistMatchQue] = useState([]);
-  const [updateInProgess, setUpdateInProgress] = useState(false)
-  const [next, setNext] = useState(null)
+  // const [existMatchQue, setExistMatchQue] = useState([]);
+  // const [updateInProgess, setUpdateInProgress] = useState(false)
   const [isAnimate, setIsAnimate] = useState(false)
+  // const [isSingleSelectedCall, setIsSingleSelectedCall] = useState(false)
 
-  const checkExistMatchQue = (next) => {
-    if (existMatchQue.length > 0) {
-      setNextRecQue(existMatchQue?.[0]);
-    } else {
-      setNextRecQue(next);
-    }
-  };
-
+  // new
+  const [next, setNext] = useState(null)
+  const [multiOptionOrder, setMultiOptionOrder] = useState([])
+  const [responseData, setResponseData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (updateInProgess) {
-      const existingQue = storedRes.find((res) => res.question === question.key);
-      if (existingQue && existMatchQue.length <= 3 && question.type === 'multi_select') {
-        let matchedQuestions = [];
-        question.options.forEach((option) => {
-          if (existingQue.answer.includes(option.key)) {
-            matchedQuestions.push(option.nextQuestion);
-          } else {
-          }
-        });
-        const uniqueQue = [...new Set(matchedQuestions)];
-        setExistMatchQue(uniqueQue.sort());
+    if (next) {
+      const queIndex = questions.findIndex(res => res.key === next.key);
+      const updatedIndex = [...questionOrder];
+      if (queIndex !== -1) {
+        updatedIndex.push(questions[queIndex].key);
       }
+      const uniqueQue = [...new Set(updatedIndex)];
+      setQuestionOrder(uniqueQue);
     }
+  }, [next]);
 
-    checkExistMatchQue(next)
+  // useEffect(() => {
+  //   if (updateInProgess) {
+  //     const existingQue = storedRes.find((res) => res.question === question.key);
+  //     if (existingQue && existMatchQue.length <= 3 && question.type === 'multi_select') {
+  //       // if (existingQue && existMatchQue.length <= 3) {
+  //       let matchedQuestions = [];
+  //       question.options.forEach((option) => {
+  //         if (existingQue.answer.includes(option.key)) {
+  //           matchedQuestions.push(option.nextQuestion);
+  //         } else {
+  //         }
+  //       });
+  //       const uniqueQue = [...new Set(matchedQuestions)];
+  //       setExistMatchQue(uniqueQue)
+  //     }
+  //   }
 
-    return () => {
-      setUpdateInProgress(false)
-    }
-  }, [updateInProgess]);
+  //   return () => {
+  //     setUpdateInProgress(false)
+  //   }
+  // }, [updateInProgess]);
 
   const handleInputChange = (type, que, key, next) => {
-    setIsAnimate(false)
-    setIsShowNext(true);
-    let nextQue = [...recNextQue];
     if (next) {
-      setNext(next)
-      if (nextQue.includes(next)) {
-        nextQue = nextQue.filter((res) => res !== next);
-        if (type === 'multi_select') {
-          setNextOrderIndex(nextOrderIndex.filter(res => res !== next))
+      const queIndex = questions.findIndex(res => res.key === next);
+      if (type === 'single_select') {
+        if (multiOptionOrder.length > 0) {
+          const multiQueIndex = questions.findIndex(res => res.key === multiOptionOrder[0]);
+          setNextQue(questions[multiQueIndex]);
+          setNext(questions[multiQueIndex])
+        } else {
+          setNextQue(questions[queIndex]);
+          setNext(questions[queIndex])
+        }
+        multiOptionOrder.shift();
+        scrollToDiv()
+        setIsAnimate(false)
+      } else if (type === 'input') {
+        setIsShowNext(true);
+        setIsAnimate(false)
+        if (multiOptionOrder.length > 0) {
+          const multiQueIndex = questions.findIndex(res => res.key === multiOptionOrder[0]);
+          setNext(questions[multiQueIndex]);
+        } else {
+          setNext(questions[queIndex]);
         }
       } else {
-        nextQue.push(next);
-        setNextOrderIndex([]);
+        setIsShowNext(true);
+        setIsAnimate(false)
+        let nextQue = [...multiOptionOrder];
+        if (nextQue.includes(next)) {
+          nextQue = nextQue.filter(res => res !== next);
+        } else {
+          nextQue.push(next);
+        }
+        setMultiOptionOrder(nextQue.sort());
+        if (multiOptionOrder.length > 0) {
+          const multiQueIndex = questions.findIndex(res => res.key === multiOptionOrder[0]);
+          setNext(questions[multiQueIndex]);
+        } else {
+          setNext(questions[queIndex])
+        }
       }
+      setIsShowPrev(true)
+    } else {
+      setIsSubmit(true)
     }
 
-    const uniqueQue = [...new Set(nextQue)];
-    setRecNextQue(uniqueQue.sort());
 
     const existingResponseIndex = storedRes.findIndex(
       (response) => response.question === que
@@ -96,6 +127,10 @@ const QuizCard = ({ questions, scrollToDiv }) => {
             { question: que, answer: key },
           ]);
         }
+
+        // if (key) {
+        //   setIsSingleSelectedCall(true)
+        // }
 
         break;
       case "multi_select":
@@ -146,62 +181,55 @@ const QuizCard = ({ questions, scrollToDiv }) => {
       default:
         console.log("Unknown type");
     }
-    setUpdateInProgress(true)
+    // setUpdateInProgress(true)
   };
 
-  const nextQue = (val) => {
-    setIsAnimate(true)
-    setIsShowNext(false)
-    setNext(null)
-    scrollToDiv()
-
-    let que;
-    const targetKey = nextOrderIndex.length > 0 ? nextOrderIndex[0] : val;
-    que = questions?.find((item) => item.key === targetKey);
-    const queIndex = storedRes.findIndex((item) => item.question === que?.key);
+  useEffect(() => {
+    const queIndex = storedRes.findIndex((item) => item.question === question?.key);
     if (queIndex !== -1) {
       setStoredRes(storedRes.slice(0, queIndex));
     }
 
-    nextOrderIndex.shift();
-    const updatedIndex = [...orderIndex];
-    if (que) {
-      setNextQue(que);
-      if (!updatedIndex.includes(que.key)) {
-        updatedIndex.push(que.key);
-      }
-      setOrderIndex(updatedIndex);
-    } else {
-      setIsSubmit(true);
-      setIsShowPrev(false);
-    }
-    setIsShowPrev(true);
-    existMatchQue.shift();
+  }, [question])
+
+  const nextQueHandler = (val) => {
+    setNextQue(val)
+    setIsShowNext(false)
+    setIsShowPrev(true)
+    setIsAnimate(true)
+    scrollToDiv()
+
+    // remove multioption
+    multiOptionOrder.shift()
   };
 
   const prevQue = () => {
-    setIsAnimate(false)
-    setNext(null)
     scrollToDiv()
-
-    setIsShowNext(true);
-    const lastOrderIndex = orderIndex[orderIndex.length - 1];
-    const nextOrder = [...nextOrderIndex, lastOrderIndex].sort();
-    setNextOrderIndex(nextOrder);
-    orderIndex.pop();
-    const lastQue = orderIndex.at(-1);
-    const que = questions.find((item) => item.key === lastQue);
-    if (que) {
-      setNextQue(que);
+    setIsAnimate(false)
+    const previousQuestionKey = questionOrder[questionOrder.length - 2];
+    const previousQuestion = questions.find(q => q.key === previousQuestionKey);
+    if (previousQuestion) {
+      setNextQue(previousQuestion);
+      // setIsShowNext(true);
+      setIsShowPrev(questionOrder.length > 1);
+      setQuestionOrder(prev => prev.slice(0, -1));
     } else {
       setNextQue(questions[0]);
-      setIsShowPrev(false);
+      setIsShowPrev(false)
     }
   };
 
+  function validateEmail(mail) {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+      return true;
+    }
+    return false;
+  }
+
+
   const submitUserData = async () => {
     setIsLoading(true);
-    if (userDetails.name !== null || userDetails.email !== null) {
+    if (userDetails.name !== null && userDetails.email !== null && validateEmail(userDetails.email)) {
       try {
         const response = await fetch(
           `https://us-central1-nutra-nourish.cloudfunctions.net/saveUserDataFunction`,
@@ -227,39 +255,53 @@ const QuizCard = ({ questions, scrollToDiv }) => {
         setIsLoading(false);
       }
     } else {
-      alert("Please fill all fields");
+      alert("Please fill all fields and correct details");
       setIsLoading(false);
     }
   };
 
-  const addToCart = async (product) => {
-    console.log("addToCart : ", product)
+  useEffect(() => {
+    if (responseData?.recommendations?.length > 0) {
+      addToCart();
+    }
+  }, [responseData.recommendations])
 
-    // const productId = "40475239678160";
-    // const quantity = 1;
 
-    // // Construct form data
-    // const formData = new URLSearchParams();
-    // formData.append('id', productId);
-    // formData.append('quantity', quantity);
+  const addToCart = async () => {
 
-    // try {
-    //   const response = await fetch("https://nutranourish.shop/cart/add.js", {
-    //     method: 'POST',
-    //     body: formData,
-    //     headers: {
-    //       'Content-Type': 'application/x-www-form-urlencoded' // Set the correct content type
-    //     }
-    //   });
+    // Construct form data
+    const formData = new URLSearchParams();
 
-    //   if (response.ok) {
-    //     alert('Product added to cart!');
-    //   } else {
-    //     throw new Error('Failed to add product to cart');
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    // }
+    responseData?.recommendations?.forEach(product => {
+      if (product.variant_id) {
+        formData.append('id[]', product.variant_id);
+        formData.append('quantity[]', 1);
+        formData.append('productId[]', product.product_id);
+      }
+    });
+
+    try {
+      const response = await fetch("https://nutranourish.shop/cart/add.js", {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded' // Set the correct content type
+        }
+      });
+
+      if (response.ok) {
+        alert('Product added to cart!');
+      } else {
+        throw new Error('Failed to add product to cart');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const restartQuiz = () => {
+    setQuestions(null)
+    scrollToDiv()
   }
 
   return (
@@ -268,10 +310,10 @@ const QuizCard = ({ questions, scrollToDiv }) => {
         <>
           {!isSubmit ? (
             <div className="text-center p-5 lg:p-16 quizBox">
-              <div className={` ${isAnimate ? "animate__animated animate__fadeIn" : ''}`}>
+              <div className={` ${isAnimate ? "animate__animated animate__fadeIn animate__delay-0.5s" : ''}`}>
                 <div className="text-lg md:text-5xl font-bold">{question?.question}</div>
                 {
-                  question.type === 'multi_select' && <div className="flex justify-center items-center text-md font-bold text-warning">( Maximum Selection three )</div>
+                  question.type === 'multi_select' && <div className="flex justify-center items-center text-md font-bold text-warning mt-3">Choose Up to Three Options</div>
                 }
                 <div className="mt-5 md:mt-9">
                   {question.type === "single_select" && (
@@ -304,6 +346,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                                 : "bg-cardBg"
                               }`}
                           >
+                            {/* <div className="bg-borderGreen p-4 font-bold"> {item.nextQuestion}</div> <br></br><br></br> */}
                             {item.value}
                           </div>
                         </div>
@@ -325,7 +368,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                             }
                             className="quizInput rounded-full"
                             type="number"
-                            // placeholder="$"
+                            placeholder={item.key === 'age' ? "enter your age" : "$"}
                             value={storedRes.find((obj) => obj.question === question.key ? obj.answer : '')?.answer || ''}
                           />
                           {/* <img
@@ -362,6 +405,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                             )
                           }
                         >
+                          {/* <div className="bg-borderGreen p-4 font-bold"> {item.nextQuestion}</div> <br></br><br></br> */}
                           {item.value}
                         </div>
                       ))}
@@ -370,7 +414,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                 </div>
                 <div
                   div
-                  className={`flex ${isShowPrev ? "justify-between" : "justify-end"
+                  className={`flex ${(isShowPrev) ? "justify-between" : "justify-end"
                     } md:text-lg font-bold mt-5 md:mt-20`}
                 >
                   {isShowPrev && (
@@ -384,7 +428,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                   {isShowNext && (
                     <button
                       className="py-1.5 px-4 md:py-3 md:px-8 bg-cardBg md:hover:bg-hover md:hover:text-nutraWhite rounded-md"
-                      onClick={() => nextQue(nextRecQue)}
+                      onClick={() => nextQueHandler(next)}
                     >
                       Next
                     </button>
@@ -404,6 +448,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                     type="text"
                     placeholder="Enter Name"
                     disabled={isLoading}
+                    required
                   />
                   <input
                     onChange={(e) =>
@@ -444,8 +489,13 @@ const QuizCard = ({ questions, scrollToDiv }) => {
         </>
       ) : (
         <div className={`${responseData.recommendations.length > 0 ? "" : " md:w-874"}`}>
-          <div className="text-3xl md:text-5xl font-bold mb-5 text-center">
-            Response Based on your Answer
+          <div className="flex flex-col lg:flex-row justify-between items-center mb-10 gap-5 lg:gap-0">
+            <div className="text-4xl md:text-5xl xl:text-6xl font-bold text-center md:text-left">
+              Response based on your answer
+            </div>
+            <a href="https://nutranourish.shop/cart" target="_blank" rel="noreferrer">
+              <Button text={"Go To Cart"} />
+            </a>
           </div>
           <p className="md:text-lg font-bold text-warning text-center mb-5">
             {responseData?.message?.[0]?.disclaimer}
@@ -453,9 +503,12 @@ const QuizCard = ({ questions, scrollToDiv }) => {
           <div className="">
             {responseData?.recommendations?.map((item) => (
               <div key={item?.key}>
-                <ResponseGrid response={item} addToCart={addToCart} />
+                <ResponseGrid response={item} />
               </div>
             ))}
+          </div>
+          <div className="flex justify-center items-center mt-10">
+            <Button onClick={restartQuiz} text={"Restart Quiz"} />
           </div>
         </div >
       )}

@@ -24,17 +24,7 @@ const ResponseGrid = ({ response: item, addToCart }) => {
             </div>
 
             <div className="bg-nutraWhite p-4 pb-8">
-                <div>
-                    <div className="font-bold text-xl md:text-2xl">${item?.price}</div>
-                </div>
-                <div className="mt-4">
-                    <div onClick={() => addToCart(item.product_name)} className="cursor-pointer text-center bg-btnBg text-nutraWhite py-2 px-4 rounded md:hover:bg-btnBgDark transition duration-300">
-                        Buy Now
-                    </div>
-                    {/* <a href={item?.link} target="_blank" rel="noreferrer" className="text-center bg-btnBg text-nutraWhite py-2 px-4 rounded md:hover:bg-btnBgDark transition duration-300">
-                        Buy Now
-                    </a> */}
-                </div>
+                <div className="font-bold text-xl md:text-2xl">${item?.price}</div>
             </div>
         </div>
     );
