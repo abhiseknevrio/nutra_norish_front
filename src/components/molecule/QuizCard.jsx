@@ -3,7 +3,7 @@ import 'animate.css';
 import ResponseGrid from "../atom/ResponseGrid";
 import Button from "../atom/Button";
 
-const QuizCard = ({ questions, scrollToDiv }) => {
+const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
   const [question, setNextQue] = useState(questions[0]); // Current Que
   const [questionOrder, setQuestionOrder] = useState([]);
   const [isShowPrev, setIsShowPrev] = useState(false);
@@ -299,6 +299,11 @@ const QuizCard = ({ questions, scrollToDiv }) => {
     }
   }
 
+  const restartQuiz = () => {
+    setQuestions(null)
+    scrollToDiv()
+  }
+
   return (
     <>
       {responseData.length <= 0 ? (
@@ -501,6 +506,9 @@ const QuizCard = ({ questions, scrollToDiv }) => {
                 <ResponseGrid response={item} />
               </div>
             ))}
+          </div>
+          <div className="flex justify-center items-center mt-10">
+            <Button onClick={restartQuiz} text={"Restart Quiz"} />
           </div>
         </div >
       )}
