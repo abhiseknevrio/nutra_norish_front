@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import 'animate.css';
 import ResponseGrid from "../atom/ResponseGrid";
+import Button from "../atom/Button";
 
 const QuizCard = ({ questions, scrollToDiv }) => {
   const [question, setNextQue] = useState(questions[0]); // Current Que
@@ -260,10 +261,11 @@ const QuizCard = ({ questions, scrollToDiv }) => {
   };
 
   useEffect(() => {
-    if (responseData.recommendations) {
+    if (responseData?.recommendations?.length > 0) {
       addToCart();
     }
   }, [responseData.recommendations])
+
 
   const addToCart = async () => {
 
@@ -306,7 +308,7 @@ const QuizCard = ({ questions, scrollToDiv }) => {
               <div className={` ${isAnimate ? "animate__animated animate__fadeIn animate__delay-0.5s" : ''}`}>
                 <div className="text-lg md:text-5xl font-bold">{question?.question}</div>
                 {
-                  question.type === 'multi_select' && <div className="flex justify-center items-center text-md font-bold text-warning">( Maximum Selection three )</div>
+                  question.type === 'multi_select' && <div className="flex justify-center items-center text-md font-bold text-warning mt-3">Choose Up to Three Options</div>
                 }
                 <div className="mt-5 md:mt-9">
                   {question.type === "single_select" && (
@@ -482,8 +484,13 @@ const QuizCard = ({ questions, scrollToDiv }) => {
         </>
       ) : (
         <div className={`${responseData.recommendations.length > 0 ? "" : " md:w-874"}`}>
-          <div className="text-3xl md:text-5xl font-bold mb-5 text-center">
-            Response Based on your Answer
+          <div className="flex flex-col lg:flex-row justify-between items-center mb-10 gap-5 lg:gap-0">
+            <div className="text-4xl md:text-5xl xl:text-6xl font-bold text-center md:text-left">
+              Response based on your answer
+            </div>
+            <a href="https://nutranourish.shop/cart" target="_blank" rel="noreferrer">
+              <Button text={"Go To Cart"} />
+            </a>
           </div>
           <p className="md:text-lg font-bold text-warning text-center mb-5">
             {responseData?.message?.[0]?.disclaimer}
