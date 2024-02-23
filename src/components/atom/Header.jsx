@@ -26,7 +26,7 @@ const Header = ({ showNavbar, onClick }) => {
 
     return (
         <header className={`min-w-full border-b border-borderCol fixed top-0 z-20 ${backGround} ${isSmallScreen && !showNavbar ? 'hidden' : 'block'}`}>
-            <div className='mx-common flex justify-center lg:justify-between items-center'>
+            <div className='mx-common flex justify-center md:justify-between items-center'>
                 <a href='/'>
                     <img src='https://cdn.shopify.com/s/files/1/0606/0703/7648/files/nutranourish-logo-rr.svg' className='h-11 md:h-16 my-7' alt='' />
                 </a>

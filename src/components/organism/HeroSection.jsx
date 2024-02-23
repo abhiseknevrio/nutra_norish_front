@@ -57,7 +57,7 @@ const HeroSection = ({ targetDivRef, scrollToDiv }) => {
                             <div className='flex justify-center mt-14'>
                                 {
                                     questions ?
-                                        <QuizCard questions={questions} queLoading={queLoading} isSmallScreen={isSmallScreen} scrollToDiv={scrollToDiv} />
+                                        <QuizCard questions={questions} setQuestions={setQuestions} queLoading={queLoading} isSmallScreen={isSmallScreen} scrollToDiv={scrollToDiv} />
                                         :
                                         queLoading ? (
                                             <div className="threes cols">
