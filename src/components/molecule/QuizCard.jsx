@@ -23,6 +23,7 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
   const [multiOptionOrder, setMultiOptionOrder] = useState([])
   const [responseData, setResponseData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isNextCall, setIsNextCall] = useState(false)
 
   useEffect(() => {
     if (next) {
@@ -58,16 +59,27 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
   //   }
   // }, [updateInProgess]);
 
+  useEffect(() => {
+    if (isNextCall && next && question.type === "single_select") {
+      nextQueHandler(next)
+    }
+
+    return () => {
+      setIsNextCall(false)
+    }
+  }, [isNextCall, next])
+
+
   const handleInputChange = (type, que, key, next) => {
     if (next) {
       const queIndex = questions.findIndex(res => res.key === next);
       if (type === 'single_select') {
         if (multiOptionOrder.length > 0) {
           const multiQueIndex = questions.findIndex(res => res.key === multiOptionOrder[0]);
-          setNextQue(questions[multiQueIndex]);
+          // setNextQue(questions[multiQueIndex]);
           setNext(questions[multiQueIndex])
         } else {
-          setNextQue(questions[queIndex]);
+          // setNextQue(questions[queIndex]);
           setNext(questions[queIndex])
         }
         multiOptionOrder.shift();
@@ -179,13 +191,15 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
     // setUpdateInProgress(true)
   };
 
-  useEffect(() => {
-    const queIndex = storedRes.findIndex((item) => item.question === question?.key);
-    if (queIndex !== -1) {
-      setStoredRes(storedRes.slice(0, queIndex));
-    }
+  // useEffect(() => {
+  //   const queIndex = storedRes.findIndex((item) => item.question === question?.key);
+  //   if (queIndex !== -1) {
+  //     setStoredRes(storedRes.slice(0, queIndex));
+  //   }
 
-  }, [question])
+  // }, [question])
+
+  console.log("storedRes", storedRes)
 
   const nextQueHandler = (val) => {
     setNextQue(val)
@@ -193,6 +207,11 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
     setIsShowPrev(true)
     setIsAnimate(true)
     scrollToDiv()
+
+    const queIndex = storedRes.findIndex((item) => item.question === next?.key);
+    if (queIndex !== -1) {
+      setStoredRes(storedRes.slice(0, queIndex));
+    }
 
     // remove multioption
     multiOptionOrder.shift()
@@ -321,13 +340,15 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
                       {question?.options?.map((item) => (
                         <div key={item.key}>
                           <div
-                            onClick={() =>
+                            onClick={() => {
                               handleInputChange(
                                 question.type,
                                 question.key,
                                 item.key,
                                 item.nextQuestion
                               )
+                              setIsNextCall(true)
+                            }
                             }
                             className={`${question.options.length > 2
                               ? "multiSelectCard rounded-md"
