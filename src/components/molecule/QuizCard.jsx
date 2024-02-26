@@ -17,7 +17,6 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
   // const [existMatchQue, setExistMatchQue] = useState([]);
   // const [updateInProgess, setUpdateInProgress] = useState(false)
   const [isAnimate, setIsAnimate] = useState(false)
-  // const [isSingleSelectedCall, setIsSingleSelectedCall] = useState(false)
 
   // new
   const [next, setNext] = useState(null)
@@ -127,10 +126,6 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
             { question: que, answer: key },
           ]);
         }
-
-        // if (key) {
-        //   setIsSingleSelectedCall(true)
-        // }
 
         break;
       case "multi_select":
