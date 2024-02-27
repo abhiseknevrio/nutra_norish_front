@@ -33,14 +33,26 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
     }
   };
 
-  console.log("isNextCall :", isNextCall)
-
   useEffect(() => {
-    if (isNextCall && nextRecQue && question.type === "single_select") {
+    // const handleClick = (event) => {
+    //   console.log("Target clicked", event.target);
+    //   // nextQueHandler(nextRecQue)
+    // };
+
+    // const targetElement = document.getElementById("single_select");
+    // if (targetElement) {
+    //   targetElement.addEventListener("click", handleClick);
+    // }
+
+    // return () => {
+    //   if (targetElement) {
+    //     targetElement.removeEventListener("click", handleClick);
+    //   }
+    // };
+    if (isNextCall && nextRecQue && question.type === 'single_select') {
       nextQueHandler(nextRecQue)
     }
-
-  }, [isNextCall, nextRecQue])
+  }, [isNextCall, nextRecQue]);
 
   useEffect(() => {
     if (updateInProgess) {
@@ -67,9 +79,10 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
 
   const handleInputChange = (type, que, key, next) => {
     setIsAnimate(false)
-    if (type !== 'single_select') {
-      setIsShowNext(true);
-    }
+    // if (type !== 'single_select') {
+    //   setIsShowNext(true);
+    // }
+    setIsShowNext(true);
     let nextQue = [...recNextQue];
     if (next) {
       setNext(next)
@@ -321,6 +334,7 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
                       {question?.options?.map((item) => (
                         <div key={item.key}>
                           <div
+                            id="single_select"
                             onClick={() => {
                               handleInputChange(question.type, question.key, item.key, item.nextQuestion);
                               setIsNextCall(true);
