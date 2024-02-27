@@ -5,7 +5,8 @@ import Button from "../atom/Button";
 
 const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
   const [question, setNextQue] = useState(questions[0]); // Current Que
-  const [questionOrder, setQuestionOrder] = useState([]);
+  const [nextRecQue, setNextRecQue] = useState(null);
+  const [orderIndex, setOrderIndex] = useState([]);
   const [isShowPrev, setIsShowPrev] = useState(false);
   const [isShowNext, setIsShowNext] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
@@ -13,98 +14,72 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
     name: null,
     email: null,
   });
-  const [storedRes, setStoredRes] = useState([]);
-  // const [existMatchQue, setExistMatchQue] = useState([]);
-  // const [updateInProgess, setUpdateInProgress] = useState(false)
-  const [isAnimate, setIsAnimate] = useState(false)
-  // const [isSingleSelectedCall, setIsSingleSelectedCall] = useState(false)
-
-  // new
-  const [next, setNext] = useState(null)
-  const [multiOptionOrder, setMultiOptionOrder] = useState([])
-  const [responseData, setResponseData] = useState([]);
+  const [recNextQue, setRecNextQue] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [responseData, setResponseData] = useState([]);
+  const [nextOrderIndex, setNextOrderIndex] = useState([]);
+  const [storedRes, setStoredRes] = useState([]);
+  const [existMatchQue, setExistMatchQue] = useState([]);
+  const [updateInProgess, setUpdateInProgress] = useState(false)
+  const [next, setNext] = useState(null)
+  const [isAnimate, setIsAnimate] = useState(false)
+  const [isNextCall, setIsNextCall] = useState(false)
+
+  const checkExistMatchQue = (next) => {
+    if (existMatchQue.length > 0) {
+      setNextRecQue(existMatchQue?.[0]);
+    } else {
+      setNextRecQue(next);
+    }
+  };
 
   useEffect(() => {
-    if (next) {
-      const queIndex = questions.findIndex(res => res.key === next.key);
-      const updatedIndex = [...questionOrder];
-      if (queIndex !== -1) {
-        updatedIndex.push(questions[queIndex].key);
+    if (updateInProgess) {
+      const existingQue = storedRes.find((res) => res.question === question.key);
+      if (existingQue && existMatchQue.length <= 3 && question.type === 'multi_select') {
+        let matchedQuestions = [];
+        question.options.forEach((option) => {
+          if (existingQue.answer.includes(option.key)) {
+            matchedQuestions.push(option.nextQuestion);
+          } else {
+          }
+        });
+        const uniqueQue = [...new Set(matchedQuestions)];
+        setExistMatchQue(uniqueQue.sort());
       }
-      const uniqueQue = [...new Set(updatedIndex)];
-      setQuestionOrder(uniqueQue);
     }
-  }, [next]);
 
-  // useEffect(() => {
-  //   if (updateInProgess) {
-  //     const existingQue = storedRes.find((res) => res.question === question.key);
-  //     if (existingQue && existMatchQue.length <= 3 && question.type === 'multi_select') {
-  //       // if (existingQue && existMatchQue.length <= 3) {
-  //       let matchedQuestions = [];
-  //       question.options.forEach((option) => {
-  //         if (existingQue.answer.includes(option.key)) {
-  //           matchedQuestions.push(option.nextQuestion);
-  //         } else {
-  //         }
-  //       });
-  //       const uniqueQue = [...new Set(matchedQuestions)];
-  //       setExistMatchQue(uniqueQue)
-  //     }
-  //   }
+    checkExistMatchQue(next)
 
-  //   return () => {
-  //     setUpdateInProgress(false)
-  //   }
-  // }, [updateInProgess]);
+    return () => {
+      setUpdateInProgress(false)
+    }
+  }, [updateInProgess]);
 
   const handleInputChange = (type, que, key, next) => {
+    setIsAnimate(false)
+    if (type !== 'single_select') {
+      setIsShowNext(true);
+    }
+    // setIsShowNext(true);
+    let nextQue = [...recNextQue];
     if (next) {
-      const queIndex = questions.findIndex(res => res.key === next);
-      if (type === 'single_select') {
-        if (multiOptionOrder.length > 0) {
-          const multiQueIndex = questions.findIndex(res => res.key === multiOptionOrder[0]);
-          setNextQue(questions[multiQueIndex]);
-          setNext(questions[multiQueIndex])
-        } else {
-          setNextQue(questions[queIndex]);
-          setNext(questions[queIndex])
-        }
-        multiOptionOrder.shift();
-        scrollToDiv()
-        setIsAnimate(false)
-      } else if (type === 'input') {
-        setIsShowNext(true);
-        setIsAnimate(false)
-        if (multiOptionOrder.length > 0) {
-          const multiQueIndex = questions.findIndex(res => res.key === multiOptionOrder[0]);
-          setNext(questions[multiQueIndex]);
-        } else {
-          setNext(questions[queIndex]);
+      setNext(next)
+      if (nextQue.includes(next)) {
+        nextQue = nextQue.filter((res) => res !== next);
+        if (type === 'multi_select') {
+          setNextOrderIndex(nextOrderIndex.filter(res => res !== next))
         }
       } else {
-        setIsShowNext(true);
-        setIsAnimate(false)
-        let nextQue = [...multiOptionOrder];
-        if (nextQue.includes(next)) {
-          nextQue = nextQue.filter(res => res !== next);
-        } else {
-          nextQue.push(next);
-        }
-        setMultiOptionOrder(nextQue.sort());
-        if (multiOptionOrder.length > 0) {
-          const multiQueIndex = questions.findIndex(res => res.key === multiOptionOrder[0]);
-          setNext(questions[multiQueIndex]);
-        } else {
-          setNext(questions[queIndex])
-        }
+        nextQue.push(next);
+        setNextOrderIndex([]);
       }
-      setIsShowPrev(true)
     } else {
       setIsSubmit(true)
     }
 
+    const uniqueQue = [...new Set(nextQue)];
+    setRecNextQue(uniqueQue.sort());
 
     const existingResponseIndex = storedRes.findIndex(
       (response) => response.question === que
@@ -127,10 +102,6 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
             { question: que, answer: key },
           ]);
         }
-
-        // if (key) {
-        //   setIsSingleSelectedCall(true)
-        // }
 
         break;
       case "multi_select":
@@ -181,43 +152,81 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
       default:
         console.log("Unknown type");
     }
-    // setUpdateInProgress(true)
+    setUpdateInProgress(true)
   };
 
-  useEffect(() => {
-    const queIndex = storedRes.findIndex((item) => item.question === question?.key);
+  const nextQueHandler = (val) => {
+    setIsAnimate(true)
+    setIsShowNext(false)
+    setNext(null)
+    scrollToDiv()
+
+    let que;
+    const targetKey = nextOrderIndex.length > 0 ? nextOrderIndex[0] : val;
+    que = questions?.find((item) => item.key === targetKey);
+    const queIndex = storedRes.findIndex((item) => item.question === que?.key);
     if (queIndex !== -1) {
       setStoredRes(storedRes.slice(0, queIndex));
     }
 
-  }, [question])
-
-  const nextQueHandler = (val) => {
-    setNextQue(val)
-    setIsShowNext(false)
-    setIsShowPrev(true)
-    setIsAnimate(true)
-    scrollToDiv()
-
-    // remove multioption
-    multiOptionOrder.shift()
+    nextOrderIndex.shift();
+    const updatedIndex = [...orderIndex];
+    if (que) {
+      setNextQue(que);
+      if (!updatedIndex.includes(que.key)) {
+        updatedIndex.push(que.key);
+      }
+      setOrderIndex(updatedIndex);
+    } else {
+      setIsSubmit(true);
+      setIsShowPrev(false);
+    }
+    setIsShowPrev(true);
+    existMatchQue.shift();
   };
+
+  useEffect(() => {
+    // const handleClick = (event) => {
+    //   console.log("Target clicked", event.target);
+    //   // nextQueHandler(nextRecQue)
+    // };
+
+    // const targetElement = document.getElementById("single_select");
+    // if (targetElement) {
+    //   targetElement.addEventListener("click", handleClick);
+    // }
+
+    // return () => {
+    //   if (targetElement) {
+    //     targetElement.removeEventListener("click", handleClick);
+    //   }
+    // };
+    if (isNextCall && nextRecQue && question.type === 'single_select') {
+      nextQueHandler(nextRecQue)
+    }
+
+  }, [isNextCall, nextRecQue]);
 
   const prevQue = () => {
-    scrollToDiv()
     setIsAnimate(false)
-    const previousQuestionKey = questionOrder[questionOrder.length - 2];
-    const previousQuestion = questions.find(q => q.key === previousQuestionKey);
-    if (previousQuestion) {
-      setNextQue(previousQuestion);
-      // setIsShowNext(true);
-      setIsShowPrev(questionOrder.length > 1);
-      setQuestionOrder(prev => prev.slice(0, -1));
+    setNext(null)
+    scrollToDiv()
+
+    setIsShowNext(true);
+    const lastOrderIndex = orderIndex[orderIndex.length - 1];
+    const nextOrder = [...nextOrderIndex, lastOrderIndex].sort();
+    setNextOrderIndex(nextOrder);
+    orderIndex.pop();
+    const lastQue = orderIndex.at(-1);
+    const que = questions.find((item) => item.key === lastQue);
+    if (que) {
+      setNextQue(que);
     } else {
       setNextQue(questions[0]);
-      setIsShowPrev(false)
+      setIsShowPrev(false);
     }
   };
+
 
   function validateEmail(mail) {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
@@ -326,14 +335,11 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
                       {question?.options?.map((item) => (
                         <div key={item.key}>
                           <div
-                            onClick={() =>
-                              handleInputChange(
-                                question.type,
-                                question.key,
-                                item.key,
-                                item.nextQuestion
-                              )
-                            }
+                            id="single_select"
+                            onClick={() => {
+                              handleInputChange(question.type, question.key, item.key, item.nextQuestion);
+                              setIsNextCall(true);
+                            }}
                             className={`${question.options.length > 2
                               ? "multiSelectCard rounded-md"
                               : "rounded-full inline-block border border-borderGreen"
@@ -428,7 +434,7 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
                   {isShowNext && (
                     <button
                       className="py-1.5 px-4 md:py-3 md:px-8 bg-cardBg md:hover:bg-hover md:hover:text-nutraWhite rounded-md"
-                      onClick={() => nextQueHandler(next)}
+                      onClick={() => nextQueHandler(nextRecQue)}
                     >
                       Next
                     </button>
