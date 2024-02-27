@@ -79,10 +79,10 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
 
   const handleInputChange = (type, que, key, next) => {
     setIsAnimate(false)
-    // if (type !== 'single_select') {
-    //   setIsShowNext(true);
-    // }
-    setIsShowNext(true);
+    if (type !== 'single_select') {
+      setIsShowNext(true);
+    }
+    // setIsShowNext(true);
     let nextQue = [...recNextQue];
     if (next) {
       setNext(next)
