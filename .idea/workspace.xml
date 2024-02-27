@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="30fc42ad-9889-4a4b-ba70-c298cbcd284b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/molecule/QuizCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecule/QuizCard.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +67,15 @@
       <workItem from="1707823763255" duration="419000" />
       <workItem from="1707883178498" duration="3463000" />
       <workItem from="1708317592643" duration="1698000" />
-      <workItem from="1708327502264" duration="3433000" />
+      <workItem from="1708327502264" duration="7050000" />
+      <workItem from="1708487360769" duration="1274000" />
+      <workItem from="1708510623910" duration="1320000" />
+      <workItem from="1708515550707" duration="3000" />
+      <workItem from="1708585827909" duration="304000" />
+      <workItem from="1708682250836" duration="186000" />
+      <workItem from="1708755172331" duration="210000" />
+      <workItem from="1708797003966" duration="531000" />
+      <workItem from="1709011772359" duration="39000" />
     </task>
     <servers />
   </component>

@@ -204,6 +204,7 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
   };
 
   const prevQue = () => {
+    debugger
     scrollToDiv()
     setIsAnimate(false)
     const previousQuestionKey = questionOrder[questionOrder.length - 2];
