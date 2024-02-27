@@ -34,28 +34,6 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
   };
 
   useEffect(() => {
-    // const handleClick = (event) => {
-    //   console.log("Target clicked", event.target);
-    //   // nextQueHandler(nextRecQue)
-    // };
-
-    // const targetElement = document.getElementById("single_select");
-    // if (targetElement) {
-    //   targetElement.addEventListener("click", handleClick);
-    // }
-
-    // return () => {
-    //   if (targetElement) {
-    //     targetElement.removeEventListener("click", handleClick);
-    //   }
-    // };
-    if (isNextCall && nextRecQue && question.type === 'single_select') {
-      nextQueHandler(nextRecQue)
-    }
-
-  }, [isNextCall, nextRecQue]);
-
-  useEffect(() => {
     if (updateInProgess) {
       const existingQue = storedRes.find((res) => res.question === question.key);
       if (existingQue && existMatchQue.length <= 3 && question.type === 'multi_select') {
@@ -206,6 +184,28 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
     setIsShowPrev(true);
     existMatchQue.shift();
   };
+
+  useEffect(() => {
+    // const handleClick = (event) => {
+    //   console.log("Target clicked", event.target);
+    //   // nextQueHandler(nextRecQue)
+    // };
+
+    // const targetElement = document.getElementById("single_select");
+    // if (targetElement) {
+    //   targetElement.addEventListener("click", handleClick);
+    // }
+
+    // return () => {
+    //   if (targetElement) {
+    //     targetElement.removeEventListener("click", handleClick);
+    //   }
+    // };
+    if (isNextCall && nextRecQue && question.type === 'single_select') {
+      nextQueHandler(nextRecQue)
+    }
+
+  }, [isNextCall, nextRecQue]);
 
   const prevQue = () => {
     setIsAnimate(false)
