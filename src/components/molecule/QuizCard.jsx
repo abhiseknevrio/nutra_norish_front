@@ -52,6 +52,7 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
     if (isNextCall && nextRecQue && question.type === 'single_select') {
       nextQueHandler(nextRecQue)
     }
+
   }, [isNextCall, nextRecQue]);
 
   useEffect(() => {
