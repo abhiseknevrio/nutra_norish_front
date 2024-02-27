@@ -200,7 +200,8 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
     }
   };
   function validateEmail(mail) {
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailRegex.test(mail)) {
       return true;
     }
     return false;
