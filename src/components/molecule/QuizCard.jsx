@@ -25,6 +25,8 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
   const [isAnimate, setIsAnimate] = useState(false)
   const [isNextCall, setIsNextCall] = useState(false)
 
+  console.log("responseData", responseData)
+
   const checkExistMatchQue = (next) => {
     if (existMatchQue.length > 0) {
       setNextRecQue(existMatchQue?.[0]);
@@ -505,7 +507,9 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
             </a>
           </div>
           <p className="md:text-lg font-bold text-warning text-center mb-5">
-            {responseData?.message?.[0]?.disclaimer}
+            {
+              responseData?.message?.map(res => res?.disclaimer)
+            }
           </p>
           <div className="">
             {responseData?.recommendations?.map((item) => (
