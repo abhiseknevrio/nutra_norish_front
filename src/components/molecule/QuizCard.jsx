@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import 'animate.css';
 import ResponseGrid from "../atom/ResponseGrid";
 import Button from "../atom/Button";
+
 const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
   const [question, setNextQue] = useState(questions[0]); // Current Que
   const [nextRecQue, setNextRecQue] = useState(null);
@@ -23,6 +24,9 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
   const [next, setNext] = useState(null)
   const [isAnimate, setIsAnimate] = useState(false)
   const [isNextCall, setIsNextCall] = useState(false)
+
+  console.log("responseData", responseData)
+
   const checkExistMatchQue = (next) => {
     if (existMatchQue.length > 0) {
       setNextRecQue(existMatchQue?.[0]);
@@ -30,6 +34,7 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
       setNextRecQue(next);
     }
   };
+
   useEffect(() => {
     if (updateInProgess) {
       const existingQue = storedRes.find((res) => res.question === question.key);
@@ -45,11 +50,14 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
         setExistMatchQue(uniqueQue.sort());
       }
     }
+
     checkExistMatchQue(next)
+
     return () => {
       setUpdateInProgress(false)
     }
   }, [updateInProgess]);
+
   const handleInputChange = (type, que, key, next) => {
     setIsAnimate(false)
     if (type !== 'single_select') {
@@ -71,15 +79,19 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
     } else {
       setIsSubmit(true)
     }
+
     const uniqueQue = [...new Set(nextQue)];
     setRecNextQue(uniqueQue.sort());
+
     const existingResponseIndex = storedRes.findIndex(
-        (response) => response.question === que
+      (response) => response.question === que
     );
     const updatedResponses = [...storedRes];
+
     switch (type) {
       case "single_select":
         // Call function for type 1
+
         if (existingResponseIndex !== -1) {
           updatedResponses[existingResponseIndex] = {
             question: que,
@@ -92,21 +104,26 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
             { question: que, answer: key },
           ]);
         }
+
         break;
       case "multi_select":
         // Call function for type 2
+
         if (existingResponseIndex === -1) {
           updatedResponses.push({ question: que, answer: [] });
         }
+
         const updatedQuestionIndex = updatedResponses.findIndex(
-            (option) => option.question === que
+          (option) => option.question === que
         );
+
         const isOptionSelected =
-            updatedResponses[updatedQuestionIndex].answer.includes(key);
+          updatedResponses[updatedQuestionIndex].answer.includes(key);
+
         if (isOptionSelected) {
           updatedResponses[updatedQuestionIndex].answer = updatedResponses[
-              updatedQuestionIndex
-              ].answer.filter((item) => item !== key);
+            updatedQuestionIndex
+          ].answer.filter((item) => item !== key);
         } else {
           if (updatedResponses[updatedQuestionIndex].answer.length <= 2) {
             updatedResponses[updatedQuestionIndex].answer.push(key);
@@ -115,9 +132,11 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
           }
         }
         setStoredRes(updatedResponses);
+
         break;
       case "input":
         // Call function for type 3
+
         if (existingResponseIndex !== -1) {
           updatedResponses[existingResponseIndex] = {
             question: que,
@@ -130,17 +149,20 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
             { question: que, answer: Number(key) },
           ]);
         }
+
         break;
       default:
         console.log("Unknown type");
     }
     setUpdateInProgress(true)
   };
+
   const nextQueHandler = (val) => {
     setIsAnimate(true)
     setIsShowNext(false)
     setNext(null)
     scrollToDiv()
+
     let que;
     const targetKey = nextOrderIndex.length > 0 ? nextOrderIndex[0] : val;
     que = questions?.find((item) => item.key === targetKey);
@@ -148,6 +170,7 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
     if (queIndex !== -1) {
       setStoredRes(storedRes.slice(0, queIndex));
     }
+
     nextOrderIndex.shift();
     const updatedIndex = [...orderIndex];
     if (que) {
@@ -163,15 +186,18 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
     setIsShowPrev(true);
     existMatchQue.shift();
   };
+
   useEffect(() => {
     // const handleClick = (event) => {
     //   console.log("Target clicked", event.target);
     //   // nextQueHandler(nextRecQue)
     // };
+
     // const targetElement = document.getElementById("single_select");
     // if (targetElement) {
     //   targetElement.addEventListener("click", handleClick);
     // }
+
     // return () => {
     //   if (targetElement) {
     //     targetElement.removeEventListener("click", handleClick);
@@ -180,11 +206,14 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
     if (isNextCall && nextRecQue && question.type === 'single_select') {
       nextQueHandler(nextRecQue)
     }
+
   }, [isNextCall, nextRecQue]);
+
   const prevQue = () => {
     setIsAnimate(false)
     setNext(null)
     scrollToDiv()
+
     setIsShowNext(true);
     const lastOrderIndex = orderIndex[orderIndex.length - 1];
     const nextOrder = [...nextOrderIndex, lastOrderIndex].sort();
@@ -199,6 +228,8 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
       setIsShowPrev(false);
     }
   };
+
+
   function validateEmail(mail) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (emailRegex.test(mail)) {
@@ -206,23 +237,26 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
     }
     return false;
   }
+
+
   const submitUserData = async () => {
     setIsLoading(true);
     if (userDetails.name !== null && userDetails.email !== null && validateEmail(userDetails.email)) {
       try {
         const response = await fetch(
-            `https://us-central1-nutra-nourish.cloudfunctions.net/saveUserDataFunction`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                userDetails: userDetails,
-                response: storedRes,
-              }),
-            }
+          `https://us-central1-nutra-nourish.cloudfunctions.net/saveUserDataFunction`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              userDetails: userDetails,
+              response: storedRes,
+            }),
+          }
         );
+
         if (response.ok) {
           setIsLoading(false);
           const data = await response.json();
@@ -237,14 +271,19 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
       setIsLoading(false);
     }
   };
+
   useEffect(() => {
     if (responseData?.recommendations?.length > 0) {
       addToCart();
     }
   }, [responseData.recommendations])
+
+
   const addToCart = async () => {
+
     // Construct form data
     const formData = new URLSearchParams();
+
     responseData?.recommendations?.forEach(product => {
       if (product.variant_id) {
         formData.append('id[]', product.variant_id);
@@ -252,6 +291,7 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
         formData.append('productId[]', product.product_id);
       }
     });
+
     try {
       const response = await fetch("https://nutranourish.shop/cart/add.js", {
         method: 'POST',
@@ -260,6 +300,7 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
           'Content-Type': 'application/x-www-form-urlencoded' // Set the correct content type
         }
       });
+
       if (response.ok) {
         alert('Product added to cart!');
       } else {
@@ -269,215 +310,229 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
       console.error(error);
     }
   }
+
   const restartQuiz = () => {
     setQuestions(null)
+    setResponseData([])
     scrollToDiv()
   }
+
   return (
-      <>
-        {responseData.length <= 0 ? (
-            <>
-              {!isSubmit ? (
-                  <div className="text-center p-5 lg:p-16 quizBox">
-                    <div className={` ${isAnimate ? "animate__animated animate__fadeIn animate__delay-0.5s" : ''}`}>
-                      <div className="text-lg md:text-5xl font-bold">{question?.question}</div>
-                      {
-                          question.type === 'multi_select' && <div className="flex justify-center items-center text-md font-bold text-warning mt-3">Choose Up to Three Options</div>
-                      }
-                      <div className="mt-5 md:mt-9">
-                        {question.type === "single_select" && (
-                            <div
-                                className={`${question.options.length <= 2
-                                    ? "flex justify-center gap-x-10"
-                                    : "grid md:grid-cols-2 gap-2.5"
-                                }`}
-                            >
-                              {question?.options?.map((item) => (
-                                  <div key={item.key}>
-                                    <div
-                                        id="single_select"
-                                        onClick={() => {
-                                          handleInputChange(question.type, question.key, item.key, item.nextQuestion);
-                                          setIsNextCall(true);
-                                        }}
-                                        className={`${question.options.length > 2
-                                            ? "multiSelectCard rounded-md"
-                                            : "rounded-full inline-block border border-borderGreen"
-                                        } md:hover:bg-hover md:hover:text-nutraWhite cursor-pointer md:text-lg py-1.5 px-5 md:py-2.5 md:px-10 flex items-center justify-center ${storedRes.find(
-                                            (obj) =>
-                                                obj.question === question.key &&
-                                                obj.answer === item.key
-                                        )
-                                            ? "bg-btnBg text-nutraWhite"
-                                            : "bg-cardBg"
-                                        }`}
-                                    >
-                                      {/* <div className="bg-borderGreen p-4 font-bold"> {item.nextQuestion}</div> <br></br><br></br> */}
-                                      {item.value}
-                                    </div>
-                                  </div>
-                              ))}
-                            </div>
-                        )}
-                        {question.type === "input" && (
-                            <>
-                              {question?.options?.map((item) => (
-                                  <div key={item.key}>
-                                    <input
-                                        onChange={(e) =>
-                                            handleInputChange(
-                                                question.type,
-                                                question.key,
-                                                e.target.value,
-                                                item.nextQuestion
-                                            )
-                                        }
-                                        className="quizInput rounded-full"
-                                        type="number"
-                                        placeholder={item.key === 'age' ? "enter your age" : "$"}
-                                        value={storedRes.find((obj) => obj.question === question.key ? obj.answer : '')?.answer || ''}
-                                    />
-                                    {/* <img
+    <>
+      {responseData.length <= 0 ? (
+        <>
+          {!isSubmit ? (
+            <div className="text-center p-5 lg:p-16 quizBox">
+              <div className={` ${isAnimate ? "animate__animated animate__fadeIn animate__delay-0.5s" : ''}`}>
+                <div className="text-lg md:text-5xl font-bold">{question?.question}</div>
+                {
+                  question.type === 'multi_select' && <div className="flex justify-center items-center text-md font-bold text-warning mt-3">Choose Up to Three Options</div>
+                }
+                <div className="mt-5 md:mt-9">
+                  {question.type === "single_select" && (
+                    <div
+                      className={`${question.options.length <= 2
+                        ? "flex justify-center gap-x-10"
+                        : "grid md:grid-cols-2 gap-2.5"
+                        }`}
+                    >
+                      {question?.options?.map((item) => (
+                        <div key={item.key}>
+                          <div
+                            id="single_select"
+                            onClick={() => {
+                              handleInputChange(question.type, question.key, item.key, item.nextQuestion);
+                              setIsNextCall(true);
+                            }}
+                            className={`${question.options.length > 2
+                              ? "multiSelectCard rounded-md"
+                              : "rounded-full inline-block border border-borderGreen"
+                              } md:hover:bg-hover md:hover:text-nutraWhite cursor-pointer md:text-lg py-1.5 px-5 md:py-2.5 md:px-10 flex items-center justify-center ${storedRes.find(
+                                (obj) =>
+                                  obj.question === question.key &&
+                                  obj.answer === item.key
+                              )
+                                ? "bg-btnBg text-nutraWhite"
+                                : "bg-cardBg"
+                              }`}
+                          >
+                            {/* <div className="bg-borderGreen p-4 font-bold"> {item.nextQuestion}</div> <br></br><br></br> */}
+                            {item.value}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {question.type === "input" && (
+                    <>
+                      {question?.options?.map((item) => (
+                        <div key={item.key}>
+                          <input
+                            onChange={(e) =>
+                              handleInputChange(
+                                question.type,
+                                question.key,
+                                e.target.value,
+                                item.nextQuestion
+                              )
+                            }
+                            className="quizInput rounded-full"
+                            type="number"
+                            placeholder={item.key === 'age' ? "enter your age" : "$"}
+                            value={storedRes.find((obj) => obj.question === question.key ? obj.answer : '')?.answer || ''}
+                          />
+                          {/* <img
                                                 onClick={() => nextQue(nextRecQue)}
                                                 className='absolute cursor-pointer'
                                                 style={{ right: "40px" }}
                                                 src='/images/rightArrow-rr.svg'
                                                 alt=''
                                             /> */}
-                                  </div>
-                              ))}
-                            </>
-                        )}
-                        {question.type === "multi_select" && (
-                            <div className={question?.options?.length > 5 ? 'optionsGrid' : 'optionsGridSmall'}>
-                              {question?.options?.map((item) => (
-                                  <div
-                                      className={`multiSelectCard cursor-pointer md:hover:bg-hover md:hover:text-nutraWhite flex justify-center items-center rounded-md ${storedRes.find(
-                                          (obj) =>
-                                              obj.question === question.key &&
-                                              obj.answer.includes(item.key)
-                                      )
-                                          ? "bg-btnBg text-nutraWhite"
-                                          : "bg-cardBg"
-                                      }`}
-                                      key={item.key}
-                                      onClick={() =>
-                                          handleInputChange(
-                                              question.type,
-                                              question.key,
-                                              item.key,
-                                              item.nextQuestion
-                                          )
-                                      }
-                                  >
-                                    {/* <div className="bg-borderGreen p-4 font-bold"> {item.nextQuestion}</div> <br></br><br></br> */}
-                                    {item.value}
-                                  </div>
-                              ))}
-                            </div>
-                        )}
-                      </div>
-                      <div
-                          div
-                          className={`flex ${(isShowPrev) ? "justify-between" : "justify-end"
-                          } md:text-lg font-bold mt-5 md:mt-20`}
-                      >
-                        {isShowPrev && (
-                            <button
-                                className="py-1.5 px-4 md:py-3 md:px-8 bg-cardBg md:hover:bg-hover md:hover:text-nutraWhite rounded-md"
-                                onClick={() => prevQue()}
-                            >
-                              Previous
-                            </button>
-                        )}
-                        {isShowNext && (
-                            <button
-                                className="py-1.5 px-4 md:py-3 md:px-8 bg-cardBg md:hover:bg-hover md:hover:text-nutraWhite rounded-md"
-                                onClick={() => nextQueHandler(nextRecQue)}
-                            >
-                              Next
-                            </button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-              ) : (
-                  <div className="min-w-full">
-                    <div className="md:w-690 justify-center mx-auto">
-                      <div className="">
-                        <input
-                            onChange={(e) =>
-                                setUserDetails({ ...userDetails, name: e.target.value })
-                            }
-                            className="formInput text-xl pl-5 py-5 mt-3"
-                            type="text"
-                            placeholder="Enter Name"
-                            disabled={isLoading}
-                            required
-                        />
-                        <input
-                            onChange={(e) =>
-                                setUserDetails({ ...userDetails, email: e.target.value })
-                            }
-                            className="formInput text-xl pl-5 py-5 mt-3"
-                            type="email"
-                            placeholder="Enter Email"
-                            disabled={isLoading}
-                        />
-                      </div>
-                      {/* Bottom Border */}
-                      <div className="border-b border-borderGreen mt-10"></div>
-                      <div className="flex justify-center mt-4">
-                        <button
-                            disabled={isLoading}
-                            onClick={() => submitUserData()}
-                            className={`bg-btnBg inline-block px-9 py-5 rounded-full ${isLoading && "cursor-not-allowed"
+                        </div>
+                      ))}
+                    </>
+                  )}
+
+                  {question.type === "multi_select" && (
+                    <div className={question?.options?.length > 5 ? 'optionsGrid' : 'optionsGridSmall'}>
+                      {question?.options?.map((item) => (
+                        <div
+                          className={`multiSelectCard cursor-pointer md:hover:bg-hover md:hover:text-nutraWhite flex justify-center items-center rounded-md ${storedRes.find(
+                            (obj) =>
+                              obj.question === question.key &&
+                              obj.answer.includes(item.key)
+                          )
+                            ? "bg-btnBg text-nutraWhite"
+                            : "bg-cardBg"
                             }`}
+                          key={item.key}
+                          onClick={() =>
+                            handleInputChange(
+                              question.type,
+                              question.key,
+                              item.key,
+                              item.nextQuestion
+                            )
+                          }
                         >
-                          <div className="flex gap-4">
-                            <div className="font-bold text-lg text-nutraWhite">
-                              {isLoading ? <div className="loaderRes">Hold on...</div> : "Submit Form"}
-                            </div>
-                            {
-                                !isLoading &&
-                                <img
-                                    src="https://cdn.shopify.com/s/files/1/0606/0703/7648/files/btnArrow-rr.svg"
-                                    alt=""
-                                />
-                            }
-                          </div>
-                        </button>
-                      </div>
+                          {/* <div className="bg-borderGreen p-4 font-bold"> {item.nextQuestion}</div> <br></br><br></br> */}
+                          {item.value}
+                        </div>
+                      ))}
                     </div>
-                  </div>
-              )}
-            </>
-        ) : (
-            <div className={`${responseData.recommendations.length > 0 ? "" : " md:w-874"}`}>
-              <div className="flex flex-col lg:flex-row justify-between items-center mb-10 gap-5 lg:gap-0">
-                <div className="text-4xl md:text-5xl xl:text-6xl font-bold text-center md:text-left">
-                  Response based on your answer
+                  )}
                 </div>
-                <a href="https://nutranourish.shop/cart" target="_blank" rel="noreferrer">
-                  <Button text={"Go To Cart"} />
-                </a>
+                <div
+                  div
+                  className={`flex ${(isShowPrev) ? "justify-between" : "justify-end"
+                    } md:text-lg font-bold mt-5 md:mt-20`}
+                >
+                  {isShowPrev && (
+                    <button
+                      className="py-1.5 px-4 md:py-3 md:px-8 bg-cardBg md:hover:bg-hover md:hover:text-nutraWhite rounded-md"
+                      onClick={() => prevQue()}
+                    >
+                      Previous
+                    </button>
+                  )}
+                  {isShowNext && (
+                    <button
+                      className="py-1.5 px-4 md:py-3 md:px-8 bg-cardBg md:hover:bg-hover md:hover:text-nutraWhite rounded-md"
+                      onClick={() => nextQueHandler(nextRecQue)}
+                    >
+                      Next
+                    </button>
+                  )}
+                </div>
               </div>
-              <p className="md:text-lg font-bold text-warning text-center mb-5">
-                {responseData?.message?.[0]?.disclaimer}
-              </p>
-              <div className="">
-                {responseData?.recommendations?.map((item) => (
-                    <div key={item?.key}>
-                      <ResponseGrid response={item} />
+            </div>
+          ) : (
+            <div className="min-w-full">
+              <div className="md:w-690 justify-center mx-auto">
+                <div className="">
+                  <input
+                    onChange={(e) =>
+                      setUserDetails({ ...userDetails, name: e.target.value })
+                    }
+                    className="formInput text-xl pl-5 py-5 mt-3"
+                    type="text"
+                    placeholder="Enter Name"
+                    disabled={isLoading}
+                    required
+                  />
+                  <input
+                    onChange={(e) =>
+                      setUserDetails({ ...userDetails, email: e.target.value })
+                    }
+                    className="formInput text-xl pl-5 py-5 mt-3"
+                    type="email"
+                    placeholder="Enter Email"
+                    disabled={isLoading}
+                  />
+                </div>
+                {/* Bottom Border */}
+                <div className="border-b border-borderGreen mt-10"></div>
+                <div className="flex justify-center mt-4">
+                  <button
+                    disabled={isLoading}
+                    onClick={() => submitUserData()}
+                    className={`bg-btnBg inline-block px-9 py-5 rounded-full ${isLoading && "cursor-not-allowed"
+                      }`}
+                  >
+                    <div className="flex gap-4">
+                      <div className="font-bold text-lg text-nutraWhite">
+                        {isLoading ? <div className="loaderRes">Hold on...</div> : "Submit Form"}
+                      </div>
+                      {
+                        !isLoading &&
+                        <img
+                          src="https://cdn.shopify.com/s/files/1/0606/0703/7648/files/btnArrow-rr.svg"
+                          alt=""
+                        />
+                      }
                     </div>
-                ))}
+                  </button>
+                </div>
               </div>
-              <div className="flex justify-center items-center mt-10">
-                <Button onClick={restartQuiz} text={"Restart Quiz"} />
+            </div>
+          )}
+        </>
+      ) : (
+        <div className={`${responseData.recommendations.length > 0 ? "" : " md:w-874"}`}>
+          <div className="flex flex-col lg:flex-row justify-between items-center mb-10 gap-5 lg:gap-0">
+            <div className="text-4xl md:text-5xl xl:text-6xl font-bold text-center md:text-left">
+              Response based on your answer
+            </div>
+            <a href="https://nutranourish.shop/cart" target="_blank" rel="noreferrer">
+              <Button text={"Go To Cart"} />
+            </a>
+          </div>
+          <div>
+            {
+              responseData?.message?.disclaimer?.map((res, index) => (
+                <p key={index} className="md:text-lg font-bold text-warning text-center mb-5">{res}</p>
+              ))
+            }
+            {
+              responseData?.message?.budget?.map((res, index) => (
+                <p key={index} className="md:text-lg font-bold text-warning text-center mb-5">{res}</p>
+              ))
+            }
+          </div>
+          <div className="">
+            {responseData?.recommendations?.map((item) => (
+              <div key={item?.key}>
+                <ResponseGrid response={item} />
               </div>
-            </div >
-        )}
-      </>
+            ))}
+          </div>
+          <div className="flex justify-center items-center mt-10">
+            <Button onClick={restartQuiz} text={"Restart Quiz"} />
+          </div>
+        </div >
+      )}
+    </>
   );
 };
+
 export default QuizCard;

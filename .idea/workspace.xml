@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="30fc42ad-9889-4a4b-ba70-c298cbcd284b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/molecule/QuizCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecule/QuizCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +74,8 @@
       <workItem from="1708682250836" duration="186000" />
       <workItem from="1708755172331" duration="210000" />
       <workItem from="1708797003966" duration="531000" />
-      <workItem from="1709011772359" duration="248000" />
+      <workItem from="1709011772359" duration="574000" />
+      <workItem from="1709037036559" duration="1046000" />
     </task>
     <servers />
   </component>
