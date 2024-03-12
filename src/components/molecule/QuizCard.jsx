@@ -313,6 +313,7 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
 
   const restartQuiz = () => {
     setQuestions(null)
+    setResponseData([])
     scrollToDiv()
   }
 
@@ -506,11 +507,18 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
               <Button text={"Go To Cart"} />
             </a>
           </div>
-          <p className="md:text-lg font-bold text-warning text-center mb-5">
+          <div>
             {
-              responseData?.message?.map(res => res?.disclaimer)
+              responseData?.message?.disclaimer?.map((res, index) => (
+                <p key={index} className="md:text-lg font-bold text-warning text-center mb-5">{res}</p>
+              ))
             }
-          </p>
+            {
+              responseData?.message?.budget?.map((res, index) => (
+                <p key={index} className="md:text-lg font-bold text-warning text-center mb-5">{res}</p>
+              ))
+            }
+          </div>
           <div className="">
             {responseData?.recommendations?.map((item) => (
               <div key={item?.key}>
