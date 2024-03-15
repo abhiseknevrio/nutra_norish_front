@@ -68,8 +68,8 @@ const BlogSection = () => {
             date: "July 23, 2023",
             by: "Dr Menka Gupta",
             title: "HEALING A LEAKY GUT: A STEP-BY-STEP GUIDE",
-            image: "https://nutranourish.com/wp-content/uploads/2023/07/Embrace-Gut-Friendly-Food-1-scaled.jpg",
-            // image: "/images/Embrace-Gut-Friendly-Food-1-scaled.jpg",
+            image: "https://cdn.shopify.com/s/files/1/0606/0703/7648/files/Embrace-Gut-Friendly-Food-1-scaled.jpg?v=1710501170",
+            // image: "https://nutranourish.com/wp-content/uploads/2023/07/Embrace-Gut-Friendly-Food-1-scaled.jpg",
             bgColor: "#E3E3E3",
             redirectTo: "https://nutranourish.com/blog/healing-a-leaky-gut-a-step-by-step-guide-functional-medicine"
         },

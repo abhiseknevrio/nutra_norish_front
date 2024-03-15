@@ -526,8 +526,13 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
               </div>
             ))}
           </div>
-          <div className="flex justify-center items-center mt-10">
+          <div className="flex flex-col md:flex-row justify-center gap-y-5 md:justify-between items-center mt-10">
             <Button onClick={restartQuiz} text={"Restart Quiz"} />
+            <div>
+              <a href="https://nutranourish.shop/cart" target="_blank" rel="noreferrer">
+                <Button text={"Go To Cart"} />
+              </a>
+            </div>
           </div>
         </div >
       )}
