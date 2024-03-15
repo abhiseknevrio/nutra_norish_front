@@ -302,7 +302,7 @@ const QuizCard = ({ questions, scrollToDiv, setQuestions }) => {
       });
 
       if (response.ok) {
-        alert('Product added to cart!');
+        // alert('Product added to cart!');
       } else {
         throw new Error('Failed to add product to cart');
       }
