@@ -13,8 +13,11 @@ const Footer = () => {
             <div>
                 <div className='flex flex-col md:flex-row justify-between mt-16'>
                     <div className='w-40per mb-10 md:mb-0'>
-                        <p className='text-xl font-medium'>
-                            Subscribe and receive latest on health and <br /> exclusive offers
+                        <p className='text-xl font-medium hidden md:block'>
+                            Subscribe And Receive Latest On Health And  <br></br> Exclusive Offers
+                        </p>
+                        <p className='text-xl font-medium md:hidden'>
+                            Subscribe And Receive Latest On Health And Exclusive Offers
                         </p>
                         <div className='my-5'>
                             <input type="text" placeholder={'Subscribe Now'} className={'customInput'} />

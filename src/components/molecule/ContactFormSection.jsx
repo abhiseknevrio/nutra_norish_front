@@ -13,7 +13,7 @@ const ContactFormSection = () => {
                 <div className='grid grid-col-1 md:grid-cols-2 gap-5'>
                     <Input type={"text"} label={"Your Name"} placeholder={"Enter Name"} />
                     <Input type={"email"} label={"Your Email"} placeholder={"Enter Email"} />
-                    <Input type={"text"} label={"Phone Number"} placeholder={"Enter Phone"} />
+                    <Input type={"text"} label={"Phone Number"} placeholder={"Enter Phone Number"} />
                     <Input type={"text"} label={"Question"} placeholder={"Enter Your Quetion"} />
                 </div>
                 {/* Bottom Border */}
